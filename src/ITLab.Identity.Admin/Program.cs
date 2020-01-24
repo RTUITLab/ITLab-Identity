@@ -7,8 +7,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Serilog;
 using ITLab.Identity.Admin.EntityFramework.Shared.DbContexts;
-using ITLab.Identity.Admin.EntityFramework.Shared.Entities.Identity;
 using ITLab.Identity.Admin.Helpers;
+using BackEnd.DataBase;
+using Models.People;
+using Models.People.Roles;
 
 namespace ITLab.Identity.Admin
 {
@@ -34,9 +36,9 @@ namespace ITLab.Identity.Admin
                 if (seed)
                 {
                     await DbMigrationHelpers
-                        .EnsureSeedData<IdentityServerConfigurationDbContext, AdminIdentityDbContext,
+                        .EnsureSeedData<IdentityServerConfigurationDbContext, DataBaseContext,
                             IdentityServerPersistedGrantDbContext, AdminLogDbContext, AdminAuditLogDbContext,
-                            UserIdentity, UserIdentityRole>(host);
+                            User, Role>(host);
                 }
 
                 host.Run();

@@ -8,7 +8,9 @@ using Microsoft.Extensions.DependencyInjection;
 using ITLab.Identity.Admin.Api.Helpers;
 using ITLab.Identity.Admin.Api.Middlewares;
 using ITLab.Identity.Admin.EntityFramework.Shared.DbContexts;
-using ITLab.Identity.Admin.EntityFramework.Shared.Entities.Identity;
+using BackEnd.DataBase;
+using Models.People;
+using Models.People.Roles;
 
 namespace ITLab.Identity.Admin.Api.Configuration.Test
 {
@@ -20,13 +22,13 @@ namespace ITLab.Identity.Admin.Api.Configuration.Test
 
         public override void RegisterDbContexts(IServiceCollection services)
         {
-            services.RegisterDbContextsStaging<AdminIdentityDbContext, IdentityServerConfigurationDbContext, IdentityServerPersistedGrantDbContext, AdminLogDbContext, AdminAuditLogDbContext>();
+            services.RegisterDbContextsStaging<DataBaseContext, IdentityServerConfigurationDbContext, IdentityServerPersistedGrantDbContext, AdminLogDbContext, AdminAuditLogDbContext>();
         }
 
         public override void RegisterAuthentication(IServiceCollection services)
         {
-            services.AddIdentity<UserIdentity, UserIdentityRole>(options => { options.User.RequireUniqueEmail = true; })
-                .AddEntityFrameworkStores<AdminIdentityDbContext>()
+            services.AddIdentity<User, Role>(options => { options.User.RequireUniqueEmail = true; })
+                .AddEntityFrameworkStores<DataBaseContext>()
                 .AddDefaultTokenProviders();
 
             services.AddAuthentication(options =>

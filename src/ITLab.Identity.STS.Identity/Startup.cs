@@ -6,11 +6,14 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using ITLab.Identity.Admin.EntityFramework.Shared.DbContexts;
-using ITLab.Identity.Admin.EntityFramework.Shared.Entities.Identity;
 using ITLab.Identity.STS.Identity.Configuration;
 using ITLab.Identity.STS.Identity.Configuration.Constants;
 using ITLab.Identity.STS.Identity.Configuration.Interfaces;
 using ITLab.Identity.STS.Identity.Helpers;
+using Models.People;
+using System;
+using BackEnd.DataBase;
+using Models.People.Roles;
 
 namespace ITLab.Identity.STS.Identity
 {
@@ -42,12 +45,12 @@ namespace ITLab.Identity.STS.Identity
             // Add all dependencies for Asp.Net Core Identity in MVC - these dependencies are injected into generic Controllers
             // Including settings for MVC and Localization
             // If you want to change primary keys or use another db model for Asp.Net Core Identity:
-            services.AddMvcWithLocalization<UserIdentity, string>(Configuration);
+            services.AddMvcWithLocalization<User, Guid>(Configuration);
 
             // Add authorization policies for MVC
             RegisterAuthorization(services);
 
-            services.AddIdSHealthChecks<IdentityServerConfigurationDbContext, IdentityServerPersistedGrantDbContext, AdminIdentityDbContext>(Configuration);
+            services.AddIdSHealthChecks<IdentityServerConfigurationDbContext, IdentityServerPersistedGrantDbContext, DataBaseContext>(Configuration);
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -78,13 +81,13 @@ namespace ITLab.Identity.STS.Identity
 
         public virtual void RegisterDbContexts(IServiceCollection services)
         {
-            services.RegisterDbContexts<AdminIdentityDbContext, IdentityServerConfigurationDbContext, IdentityServerPersistedGrantDbContext>(Configuration);
+            services.RegisterDbContexts<DataBaseContext, IdentityServerConfigurationDbContext, IdentityServerPersistedGrantDbContext>(Configuration);
         }
 
         public virtual void RegisterAuthentication(IServiceCollection services)
         {
-            services.AddAuthenticationServices<AdminIdentityDbContext, UserIdentity, UserIdentityRole>(Configuration);
-            services.AddIdentityServer<IdentityServerConfigurationDbContext, IdentityServerPersistedGrantDbContext, UserIdentity>(Configuration);
+            services.AddAuthenticationServices<DataBaseContext, User, Role>(Configuration);
+            services.AddIdentityServer<IdentityServerConfigurationDbContext, IdentityServerPersistedGrantDbContext, User>(Configuration);
         }
 
         public virtual void RegisterAuthorization(IServiceCollection services)

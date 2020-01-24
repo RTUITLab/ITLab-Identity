@@ -11,11 +11,11 @@ services:
     container_name: skoruba-identityserver4-admin
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - "ConnectionStrings__ConfigurationDbConnection=Server=db;Database=IdentityServer4Admin;User Id=sa;Password=${DB_PASSWORD:-Password_123};MultipleActiveResultSets=true"
-      - "ConnectionStrings__PersistedGrantDbConnection=Server=db;Database=IdentityServer4Admin;User Id=sa;Password=${DB_PASSWORD:-Password_123};MultipleActiveResultSets=true"
-      - "ConnectionStrings__IdentityDbConnection=Server=db;Database=IdentityServer4Admin;User Id=sa;Password=${DB_PASSWORD:-Password_123};MultipleActiveResultSets=true"
-      - "ConnectionStrings__AdminLogDbConnection=Server=db;Database=IdentityServer4Admin;User Id=sa;Password=${DB_PASSWORD:-Password_123};MultipleActiveResultSets=true"
-      - "ConnectionStrings__AdminAuditLogDbConnection=Server=db;Database=IdentityServer4Admin;User Id=sa;Password=${DB_PASSWORD:-Password_123};MultipleActiveResultSets=true"
+      - "ConnectionStrings__ConfigurationDbConnection=User ID=postgres;Password=password;Server=db;Port=5432;Database=itlab-identity-db;Integrated Security=true;"
+      - "ConnectionStrings__PersistedGrantDbConnection=User ID=postgres;Password=password;Server=db;Port=5432;Database=itlab-identity-db;Integrated Security=true;"
+      - "ConnectionStrings__IdentityDbConnection=User ID=postgres;Password=password;Server=db;Port=5432;Database=itlab-identity-db;Integrated Security=true;"
+      - "ConnectionStrings__AdminLogDbConnection=User ID=postgres;Password=password;Server=db;Port=5432;Database=itlab-identity-db;Integrated Security=true;"
+      - "ConnectionStrings__AdminAuditLogDbConnection=User ID=postgres;Password=password;Server=db;Port=5432;Database=itlab-identity-db;Integrated Security=true;"
       - "AdminConfiguration__IdentityAdminBaseUrl=http://127.0.0.1.xip.io:9000"
       - "AdminConfiguration__IdentityAdminRedirectUri=http://127.0.0.1.xip.io:9000/signin-oidc"
       - "AdminConfiguration__IdentityServerBaseUrl=http://127.0.0.1.xip.io"
@@ -26,7 +26,7 @@ services:
       - "IdentityServerData__Clients__0__PostLogoutRedirectUris__0=http://127.0.0.1.xip.io:9000/signout-callback-oidc"
       - "IdentityServerData__Clients__0__AllowedCorsOrigins__0=http://127.0.0.1.xip.io:9000"
       - "IdentityServerData__Clients__1__RedirectUris__0=http://127.0.0.1.xip.io:5000/swagger/oauth2-redirect.html"
-      - "Serilog__WriteTo__1__Args__connectionString=Server=db;Database=IdentityServer4Admin;User Id=sa;Password=${DB_PASSWORD:-Password_123};MultipleActiveResultSets=true"
+      - "Serilog__WriteTo__1__Args__connectionString=User ID=postgres;Password=password;Server=db;Port=5432;Database=itlab-identity-db;Integrated Security=true;"
     command: dotnet ITLab.Identity.Admin.dll /seed
     depends_on:
       - db
@@ -47,11 +47,11 @@ services:
       - "AdminApiConfiguration__RequireHttpsMetadata=false"
       - "AdminApiConfiguration__ApiBaseUrl=http://127.0.0.1.xip.io:5000"
       - "AdminApiConfiguration__IdentityServerBaseUrl=http://127.0.0.1.xip.io"
-      - "ConnectionStrings__ConfigurationDbConnection=Server=db;Database=IdentityServer4Admin;User Id=sa;Password=${DB_PASSWORD:-Password_123};MultipleActiveResultSets=true"
-      - "ConnectionStrings__PersistedGrantDbConnection=Server=db;Database=IdentityServer4Admin;User Id=sa;Password=${DB_PASSWORD:-Password_123};MultipleActiveResultSets=true"
-      - "ConnectionStrings__IdentityDbConnection=Server=db;Database=IdentityServer4Admin;User Id=sa;Password=${DB_PASSWORD:-Password_123};MultipleActiveResultSets=true"
-      - "ConnectionStrings__AdminLogDbConnection=Server=db;Database=IdentityServer4Admin;User Id=sa;Password=${DB_PASSWORD:-Password_123};MultipleActiveResultSets=true"
-      - "ConnectionStrings__AdminAuditLogDbConnection=Server=db;Database=IdentityServer4Admin;User Id=sa;Password=${DB_PASSWORD:-Password_123};MultipleActiveResultSets=true"
+      - "ConnectionStrings__ConfigurationDbConnection=User ID=postgres;Password=password;Server=db;Port=5432;Database=itlab-identity-db;Integrated Security=true;"
+      - "ConnectionStrings__PersistedGrantDbConnection=User ID=postgres;Password=password;Server=db;Port=5432;Database=itlab-identity-db;Integrated Security=true;"
+      - "ConnectionStrings__IdentityDbConnection=User ID=postgres;Password=password;Server=db;Port=5432;Database=itlab-identity-db;Integrated Security=true;"
+      - "ConnectionStrings__AdminLogDbConnection=User ID=postgres;Password=password;Server=db;Port=5432;Database=itlab-identity-db;Integrated Security=true;"
+      - "ConnectionStrings__AdminAuditLogDbConnection=User ID=postgres;Password=password;Server=db;Port=5432;Database=itlab-identity-db;Integrated Security=true;"
     container_name: skoruba-identityserver4-admin-api
     volumes:
       - "./shared/serilog.json:/app/serilog.json"
@@ -66,9 +66,9 @@ services:
     container_name: skoruba-identityserver4-sts-identity
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - "ConnectionStrings__ConfigurationDbConnection=Server=db;Database=IdentityServer4Admin;User Id=sa;Password=${DB_PASSWORD:-Password_123};MultipleActiveResultSets=true"
-      - "ConnectionStrings__PersistedGrantDbConnection=Server=db;Database=IdentityServer4Admin;User Id=sa;Password=${DB_PASSWORD:-Password_123};MultipleActiveResultSets=true"
-      - "ConnectionStrings__IdentityDbConnection=Server=db;Database=IdentityServer4Admin;User Id=sa;Password=${DB_PASSWORD:-Password_123};MultipleActiveResultSets=true"
+      - "ConnectionStrings__ConfigurationDbConnection=User ID=postgres;Password=password;Server=db;Port=5432;Database=itlab-identity-db;Integrated Security=true;"
+      - "ConnectionStrings__PersistedGrantDbConnection=User ID=postgres;Password=password;Server=db;Port=5432;Database=itlab-identity-db;Integrated Security=true;"
+      - "ConnectionStrings__IdentityDbConnection=User ID=postgres;Password=password;Server=db;Port=5432;Database=itlab-identity-db;Integrated Security=true;"
       - "AdminConfiguration__IdentityAdminBaseUrl=http://127.0.0.1.xip.io:9000"
     depends_on:
       - db
@@ -79,17 +79,18 @@ services:
         aliases:
           - 127.0.0.1.xip.io
   db:
-    image: "mcr.microsoft.com/mssql/server"
+    image: "postgres:11"
     ports:
-      - 1433:1433
+      - 5433:5432
     container_name: skoruba-identityserver4-db
     environment:
-      SA_PASSWORD: "${DB_PASSWORD:-Password_123}"
-      ACCEPT_EULA: "Y"
+      POSTGRES_PASSWORD: "password"
     volumes:
-      - dbdata:/var/opt/mssql
+      - dbdataps:/var/lib/postgresql/data
 
 volumes:
+  dbdataps:
+    driver: local
   dbdata:
     driver: local
 

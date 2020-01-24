@@ -3,6 +3,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using ITLab.Identity.Admin.EntityFramework.Shared.DbContexts;
 using ITLab.Identity.STS.Identity.Helpers;
+using BackEnd.DataBase;
 
 namespace ITLab.Identity.STS.Identity.Configuration.Test
 {
@@ -14,7 +15,7 @@ namespace ITLab.Identity.STS.Identity.Configuration.Test
 
         public override void RegisterDbContexts(IServiceCollection services)
         {
-            services.RegisterDbContextsStaging<AdminIdentityDbContext, IdentityServerConfigurationDbContext, IdentityServerPersistedGrantDbContext>();
+            services.RegisterDbContextsStaging<DataBaseContext, IdentityServerConfigurationDbContext, IdentityServerPersistedGrantDbContext>();
         }
     }
 }

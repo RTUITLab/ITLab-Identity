@@ -29,9 +29,3 @@ namespace ITLab.Identity.STS.Identity.Helpers
         }
     }
 }
-
-
-
-
-
-

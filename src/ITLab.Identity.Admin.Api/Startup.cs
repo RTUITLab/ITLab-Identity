@@ -17,7 +17,10 @@ using ITLab.Identity.Admin.Api.Mappers;
 using ITLab.Identity.Admin.Api.Resources;
 using Skoruba.IdentityServer4.Admin.BusinessLogic.Identity.Dtos.Identity;
 using ITLab.Identity.Admin.EntityFramework.Shared.DbContexts;
-using ITLab.Identity.Admin.EntityFramework.Shared.Entities.Identity;
+using BackEnd.DataBase;
+using Models.People;
+using Models.People.Roles;
+using Models.Identity;
 
 namespace ITLab.Identity.Admin.Api
 {
@@ -52,26 +55,26 @@ namespace ITLab.Identity.Admin.Api
 
             var profileTypes = new HashSet<Type>
             {
-                typeof(IdentityMapperProfile<RoleDto<string>, string, UserRolesDto<RoleDto<string>, string, string>, string, UserClaimsDto<string>, UserClaimDto<string>, UserProviderDto<string>, UserProvidersDto<string>, UserChangePasswordDto<string>,RoleClaimDto<string>, RoleClaimsDto<string>>)
+                typeof(IdentityMapperProfile<RoleDto<Guid>, Guid, UserRolesDto<RoleDto<Guid>, Guid, Guid>, Guid, UserClaimsDto<Guid>, UserClaimDto<Guid>, UserProviderDto<Guid>, UserProvidersDto<Guid>, UserChangePasswordDto<Guid>,RoleClaimDto<Guid>, RoleClaimsDto<Guid>>)
             };
 
-            services.AddAdminAspNetIdentityServices<AdminIdentityDbContext, IdentityServerPersistedGrantDbContext, UserDto<string>, string, RoleDto<string>, string, string, string,
-                UserIdentity, UserIdentityRole, string, UserIdentityUserClaim, UserIdentityUserRole,
+            services.AddAdminAspNetIdentityServices<DataBaseContext, IdentityServerPersistedGrantDbContext, UserDto<Guid>, Guid, RoleDto<Guid>, Guid, Guid, Guid,
+                User, Role, Guid, UserIdentityUserClaim, UserIdentityUserRole,
                 UserIdentityUserLogin, UserIdentityRoleClaim, UserIdentityUserToken,
-                UsersDto<UserDto<string>, string>, RolesDto<RoleDto<string>, string>, UserRolesDto<RoleDto<string>, string, string>,
-                UserClaimsDto<string>, UserProviderDto<string>, UserProvidersDto<string>, UserChangePasswordDto<string>,
-                RoleClaimsDto<string>, UserClaimDto<string>, RoleClaimDto<string>>(profileTypes);
+                UsersDto<UserDto<Guid>, Guid>, RolesDto<RoleDto<Guid>, Guid>, UserRolesDto<RoleDto<Guid>, Guid, Guid>,
+                UserClaimsDto<Guid>, UserProviderDto<Guid>, UserProvidersDto<Guid>, UserChangePasswordDto<Guid>,
+                RoleClaimsDto<Guid>, UserClaimDto<Guid>, RoleClaimDto<Guid>>(profileTypes);
 
             services.AddAdminServices<IdentityServerConfigurationDbContext, IdentityServerPersistedGrantDbContext, AdminLogDbContext>();
 
             services.AddAdminApiCors(adminApiConfiguration);
 
-            services.AddMvcServices<UserDto<string>, string, RoleDto<string>, string, string, string,
-                UserIdentity, UserIdentityRole, string, UserIdentityUserClaim, UserIdentityUserRole,
+            services.AddMvcServices<UserDto<Guid>, Guid, RoleDto<Guid>, Guid, Guid, Guid,
+                User, Role, Guid, UserIdentityUserClaim, UserIdentityUserRole,
                 UserIdentityUserLogin, UserIdentityRoleClaim, UserIdentityUserToken,
-                UsersDto<UserDto<string>, string>, RolesDto<RoleDto<string>, string>, UserRolesDto<RoleDto<string>, string, string>,
-                UserClaimsDto<string>, UserProviderDto<string>, UserProvidersDto<string>, UserChangePasswordDto<string>,
-                RoleClaimsDto<string>>();
+                UsersDto<UserDto<Guid>, Guid>, RolesDto<RoleDto<Guid>, Guid>, UserRolesDto<RoleDto<Guid>, Guid, Guid>,
+                UserClaimsDto<Guid>, UserProviderDto<Guid>, UserProvidersDto<Guid>, UserChangePasswordDto<Guid>,
+                RoleClaimsDto<Guid>>();
 
             services.AddSwaggerGen(options =>
             {
@@ -96,7 +99,7 @@ namespace ITLab.Identity.Admin.Api
 
             services.AddAuditEventLogging<AdminAuditLogDbContext, AuditLog>(Configuration);
 
-            services.AddIdSHealthChecks<IdentityServerConfigurationDbContext, IdentityServerPersistedGrantDbContext, AdminIdentityDbContext, AdminLogDbContext, AdminAuditLogDbContext>(Configuration, adminApiConfiguration);
+            services.AddIdSHealthChecks<IdentityServerConfigurationDbContext, IdentityServerPersistedGrantDbContext, DataBaseContext, AdminLogDbContext, AdminAuditLogDbContext>(Configuration, adminApiConfiguration);
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, AdminApiConfiguration adminApiConfiguration)
@@ -131,13 +134,13 @@ namespace ITLab.Identity.Admin.Api
 
         public virtual void RegisterDbContexts(IServiceCollection services)
         {
-            services.AddDbContexts<AdminIdentityDbContext, IdentityServerConfigurationDbContext, IdentityServerPersistedGrantDbContext, AdminLogDbContext, AdminAuditLogDbContext>(Configuration);
+            services.AddDbContexts<DataBaseContext, IdentityServerConfigurationDbContext, IdentityServerPersistedGrantDbContext, AdminLogDbContext, AdminAuditLogDbContext>(Configuration);
         }
 
         public virtual void RegisterAuthentication(IServiceCollection services)
         {
             var adminApiConfiguration = Configuration.GetSection(nameof(AdminApiConfiguration)).Get<AdminApiConfiguration>();
-            services.AddApiAuthentication<AdminIdentityDbContext, UserIdentity, UserIdentityRole>(adminApiConfiguration);
+            services.AddApiAuthentication<DataBaseContext, User, Role>(adminApiConfiguration);
         }
 
         public virtual void RegisterAuthorization(IServiceCollection services)

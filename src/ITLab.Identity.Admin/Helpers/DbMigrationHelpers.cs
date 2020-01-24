@@ -28,8 +28,8 @@ namespace ITLab.Identity.Admin.Helpers
             where TPersistedGrantDbContext : DbContext, IAdminPersistedGrantDbContext
             where TLogDbContext : DbContext, IAdminLogDbContext
             where TAuditLogDbContext: DbContext, IAuditLoggingDbContext<AuditLog>
-            where TUser : IdentityUser, new()
-            where TRole : IdentityRole, new()
+            where TUser : IdentityUser<Guid>, new()
+            where TRole : IdentityRole<Guid>, new()
         {
             using (var serviceScope = host.Services.CreateScope())
             {
@@ -77,8 +77,8 @@ namespace ITLab.Identity.Admin.Helpers
 
         public static async Task EnsureSeedData<TIdentityServerDbContext, TUser, TRole>(IServiceProvider serviceProvider)
         where TIdentityServerDbContext : DbContext, IAdminConfigurationDbContext
-        where TUser : IdentityUser, new()
-        where TRole : IdentityRole, new()
+        where TUser : IdentityUser<Guid>, new()
+        where TRole : IdentityRole<Guid>, new()
         {
             using (var scope = serviceProvider.GetRequiredService<IServiceScopeFactory>().CreateScope())
             {
@@ -97,8 +97,8 @@ namespace ITLab.Identity.Admin.Helpers
         /// </summary>
         private static async Task EnsureSeedIdentityData<TUser, TRole>(UserManager<TUser> userManager,
             RoleManager<TRole> roleManager, IdentityDataConfiguration identityDataConfiguration)
-            where TUser : IdentityUser, new()
-            where TRole : IdentityRole, new()
+            where TUser : IdentityUser<Guid>, new()
+            where TRole : IdentityRole<Guid>, new()
         {
             if (!await roleManager.Roles.AnyAsync())
             {

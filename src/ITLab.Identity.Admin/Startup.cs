@@ -11,10 +11,14 @@ using Skoruba.AuditLogging.EntityFramework.Entities;
 using Skoruba.IdentityServer4.Admin.BusinessLogic.Identity.Dtos.Identity;
 using ITLab.Identity.Admin.Configuration.Interfaces;
 using ITLab.Identity.Admin.EntityFramework.Shared.DbContexts;
-using ITLab.Identity.Admin.EntityFramework.Shared.Entities.Identity;
 using ITLab.Identity.Admin.Helpers;
 using ITLab.Identity.Admin.Configuration;
 using ITLab.Identity.Admin.Configuration.Constants;
+using BackEnd.DataBase;
+using Models.People;
+using Models.People.Roles;
+using System;
+using Models.Identity;
 
 namespace ITLab.Identity.Admin
 {
@@ -50,22 +54,22 @@ namespace ITLab.Identity.Admin
 
             // Add all dependencies for Asp.Net Core Identity
             // If you want to change primary keys or use another db model for Asp.Net Core Identity:
-            services.AddAdminAspNetIdentityServices<AdminIdentityDbContext, IdentityServerPersistedGrantDbContext, UserDto<string>, string, RoleDto<string>, string, string, string,
-                                UserIdentity, UserIdentityRole, string, UserIdentityUserClaim, UserIdentityUserRole,
+            services.AddAdminAspNetIdentityServices<DataBaseContext, IdentityServerPersistedGrantDbContext, UserDto<Guid>, Guid, RoleDto<Guid>, Guid, Guid, Guid,
+                                User, Role, Guid, UserIdentityUserClaim, UserIdentityUserRole,
                                 UserIdentityUserLogin, UserIdentityRoleClaim, UserIdentityUserToken,
-                                UsersDto<UserDto<string>, string>, RolesDto<RoleDto<string>, string>, UserRolesDto<RoleDto<string>, string, string>,
-                                UserClaimsDto<string>, UserProviderDto<string>, UserProvidersDto<string>, UserChangePasswordDto<string>,
-                                RoleClaimsDto<string>, UserClaimDto<string>, RoleClaimDto<string>>();
+                                UsersDto<UserDto<Guid>, Guid>, RolesDto<RoleDto<Guid>, Guid>, UserRolesDto<RoleDto<Guid>, Guid, Guid>,
+                                UserClaimsDto<Guid>, UserProviderDto<Guid>, UserProvidersDto<Guid>, UserChangePasswordDto<Guid>,
+                                RoleClaimsDto<Guid>, UserClaimDto<Guid>, RoleClaimDto<Guid>>();
             
             // Add all dependencies for Asp.Net Core Identity in MVC - these dependencies are injected into generic Controllers
             // Including settings for MVC and Localization
             // If you want to change primary keys or use another db model for Asp.Net Core Identity:
-            services.AddMvcWithLocalization<UserDto<string>, string, RoleDto<string>, string, string, string,
-                UserIdentity, UserIdentityRole, string, UserIdentityUserClaim, UserIdentityUserRole,
+            services.AddMvcWithLocalization<UserDto<Guid>, Guid, RoleDto<Guid>, Guid, Guid, Guid,
+                User, Role, Guid, UserIdentityUserClaim, UserIdentityUserRole,
                 UserIdentityUserLogin, UserIdentityRoleClaim, UserIdentityUserToken,
-                UsersDto<UserDto<string>, string>, RolesDto<RoleDto<string>, string>, UserRolesDto<RoleDto<string>, string, string>,
-                UserClaimsDto<string>, UserProviderDto<string>, UserProvidersDto<string>, UserChangePasswordDto<string>,
-                RoleClaimsDto<string>>(Configuration);
+                UsersDto<UserDto<Guid>, Guid>, RolesDto<RoleDto<Guid>, Guid>, UserRolesDto<RoleDto<Guid>, Guid, Guid>,
+                UserClaimsDto<Guid>, UserProviderDto<Guid>, UserProvidersDto<Guid>, UserChangePasswordDto<Guid>,
+                RoleClaimsDto<Guid>>(Configuration);
 
             // Add authorization policies for MVC
             RegisterAuthorization(services);
@@ -73,7 +77,7 @@ namespace ITLab.Identity.Admin
             // Add audit logging
             services.AddAuditEventLogging<AdminAuditLogDbContext, AuditLog>(Configuration);
 
-            services.AddIdSHealthChecks<IdentityServerConfigurationDbContext, IdentityServerPersistedGrantDbContext, AdminIdentityDbContext, AdminLogDbContext, AdminAuditLogDbContext>(Configuration, rootConfiguration.AdminConfiguration);
+            services.AddIdSHealthChecks<IdentityServerConfigurationDbContext, IdentityServerPersistedGrantDbContext, DataBaseContext, AdminLogDbContext, AdminAuditLogDbContext>(Configuration, rootConfiguration.AdminConfiguration);
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory)
@@ -111,13 +115,13 @@ namespace ITLab.Identity.Admin
 
         public virtual void RegisterDbContexts(IServiceCollection services)
         {
-            services.RegisterDbContexts<AdminIdentityDbContext, IdentityServerConfigurationDbContext, IdentityServerPersistedGrantDbContext, AdminLogDbContext, AdminAuditLogDbContext>(Configuration);
+            services.RegisterDbContexts<DataBaseContext, IdentityServerConfigurationDbContext, IdentityServerPersistedGrantDbContext, AdminLogDbContext, AdminAuditLogDbContext>(Configuration);
         }
 
         public virtual void RegisterAuthentication(IServiceCollection services)
         {
             var rootConfiguration = CreateRootConfiguration();
-            services.AddAuthenticationServices<AdminIdentityDbContext, UserIdentity, UserIdentityRole>(rootConfiguration.AdminConfiguration);
+            services.AddAuthenticationServices<DataBaseContext, User, Role>(rootConfiguration.AdminConfiguration);
         }
 
         public virtual void RegisterAuthorization(IServiceCollection services)

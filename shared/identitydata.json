@@ -8,7 +8,7 @@
     "Users": [
       {
         "Username": "admin",
-        "Password": "PaSkoruba.IdentityServer4.Admin.Templates::1.0.0-rc1-update1word123",
+        "Password": "Pa$$word1243",
         "Email": "admin@skoruba.com",
         "Roles": [
           "MyRole"

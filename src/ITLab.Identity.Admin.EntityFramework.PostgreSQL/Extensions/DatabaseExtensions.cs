@@ -1,5 +1,6 @@
 using System;
 using System.Reflection;
+using BackEnd.DataBase;
 using IdentityServer4.EntityFramework.Storage;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -39,9 +40,11 @@ namespace ITLab.Identity.Admin.EntityFramework.PostgreSQL.Extensions
         {
             var migrationsAssembly = typeof(DatabaseExtensions).GetTypeInfo().Assembly.GetName().Name;
 
+            var identityMigrationsAssembly = typeof(DataBaseContext).GetTypeInfo().Assembly.GetName().Name;
+
             // Config DB for identity
             services.AddDbContext<TIdentityDbContext>(options =>
-                options.UseNpgsql(identityConnectionString, sql => sql.MigrationsAssembly(migrationsAssembly)));
+                options.UseNpgsql(identityConnectionString, sql => sql.MigrationsAssembly(identityMigrationsAssembly)));
 
             // Config DB from existing connection
             services.AddConfigurationDbContext<TConfigurationDbContext>(options =>

@@ -1,8 +1,8 @@
-@using IdentityServer4.Extensions
+﻿@using IdentityServer4.Extensions
 @using Microsoft.AspNetCore.Identity
 @using Microsoft.AspNetCore.Mvc.Localization
-@using ITLab.Identity.Admin.EntityFramework.Shared.Entities.Identity
 @using ITLab.Identity.STS.Identity.Configuration.Interfaces
+@using Models.People
 @inject IRootConfiguration RootConfiguration
 @inject IViewLocalizer Localizer
 @{
@@ -13,7 +13,7 @@
     }
 }
 
-@inject SignInManager<UserIdentity> SignInManager
+@inject SignInManager<User> SignInManager
 @{
     var hasExternalLogins = (await SignInManager.GetExternalAuthenticationSchemesAsync()).Any();
 }

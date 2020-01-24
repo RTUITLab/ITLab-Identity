@@ -7,19 +7,24 @@ Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-co
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{5FEA2D08-FBD5-4F53-8175-1E9D562579BC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ITLab.Identity.Admin", "src\ITLab.Identity.Admin\ITLab.Identity.Admin.csproj", "{FC243898-DA93-4EA0-9929-92692BA0BFA1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ITLab.Identity.Admin", "src\ITLab.Identity.Admin\ITLab.Identity.Admin.csproj", "{FC243898-DA93-4EA0-9929-92692BA0BFA1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ITLab.Identity.STS.Identity", "src\ITLab.Identity.STS.Identity\ITLab.Identity.STS.Identity.csproj", "{76CB27A4-221A-403E-94FC-02A60843CB8E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ITLab.Identity.STS.Identity", "src\ITLab.Identity.STS.Identity\ITLab.Identity.STS.Identity.csproj", "{76CB27A4-221A-403E-94FC-02A60843CB8E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ITLab.Identity.Admin.Api", "src\ITLab.Identity.Admin.Api\ITLab.Identity.Admin.Api.csproj", "{6B88608D-A6EE-47D5-8442-F3C82C5D279C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ITLab.Identity.Admin.Api", "src\ITLab.Identity.Admin.Api\ITLab.Identity.Admin.Api.csproj", "{6B88608D-A6EE-47D5-8442-F3C82C5D279C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ITLab.Identity.Admin.EntityFramework.Shared", "src\ITLab.Identity.Admin.EntityFramework.Shared\ITLab.Identity.Admin.EntityFramework.Shared.csproj", "{ECE4E76C-6FF1-46FB-9543-086A8C12C711}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ITLab.Identity.Admin.EntityFramework.Shared", "src\ITLab.Identity.Admin.EntityFramework.Shared\ITLab.Identity.Admin.EntityFramework.Shared.csproj", "{ECE4E76C-6FF1-46FB-9543-086A8C12C711}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ITLab.Identity.Admin.EntityFramework.MySql", "src\ITLab.Identity.Admin.EntityFramework.MySql\ITLab.Identity.Admin.EntityFramework.MySql.csproj", "{9BF94119-48DD-42C8-AB8F-5C2E396A25F3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ITLab.Identity.Admin.EntityFramework.MySql", "src\ITLab.Identity.Admin.EntityFramework.MySql\ITLab.Identity.Admin.EntityFramework.MySql.csproj", "{9BF94119-48DD-42C8-AB8F-5C2E396A25F3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ITLab.Identity.Admin.EntityFramework.PostgreSQL", "src\ITLab.Identity.Admin.EntityFramework.PostgreSQL\ITLab.Identity.Admin.EntityFramework.PostgreSQL.csproj", "{8B54EC26-7F23-4BD5-8BD2-ACC47873CE5B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ITLab.Identity.Admin.EntityFramework.PostgreSQL", "src\ITLab.Identity.Admin.EntityFramework.PostgreSQL\ITLab.Identity.Admin.EntityFramework.PostgreSQL.csproj", "{8B54EC26-7F23-4BD5-8BD2-ACC47873CE5B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ITLab.Identity.Admin.EntityFramework.SqlServer", "src\ITLab.Identity.Admin.EntityFramework.SqlServer\ITLab.Identity.Admin.EntityFramework.SqlServer.csproj", "{BA809D05-5DFC-4539-B7E7-0DC14F3D2286}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ITLab.Identity.Admin.EntityFramework.SqlServer", "src\ITLab.Identity.Admin.EntityFramework.SqlServer\ITLab.Identity.Admin.EntityFramework.SqlServer.csproj", "{BA809D05-5DFC-4539-B7E7-0DC14F3D2286}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{9FF8A949-454D-434E-A7F4-99F7C82A7F16}"
+	ProjectSection(SolutionItems) = preProject
+		nuget.config = nuget.config
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -131,9 +136,6 @@ Global
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
-	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {549F6BA2-7BF0-4104-9088-47D242078F31}
-	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{FC243898-DA93-4EA0-9929-92692BA0BFA1} = {5FEA2D08-FBD5-4F53-8175-1E9D562579BC}
 		{76CB27A4-221A-403E-94FC-02A60843CB8E} = {5FEA2D08-FBD5-4F53-8175-1E9D562579BC}
@@ -142,5 +144,8 @@ Global
 		{9BF94119-48DD-42C8-AB8F-5C2E396A25F3} = {5FEA2D08-FBD5-4F53-8175-1E9D562579BC}
 		{8B54EC26-7F23-4BD5-8BD2-ACC47873CE5B} = {5FEA2D08-FBD5-4F53-8175-1E9D562579BC}
 		{BA809D05-5DFC-4539-B7E7-0DC14F3D2286} = {5FEA2D08-FBD5-4F53-8175-1E9D562579BC}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {549F6BA2-7BF0-4104-9088-47D242078F31}
 	EndGlobalSection
 EndGlobal
