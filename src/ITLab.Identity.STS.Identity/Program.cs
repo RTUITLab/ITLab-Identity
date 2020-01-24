@@ -1,9 +1,12 @@
 using System;
 using System.IO;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Hosting.Server;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Serilog;
+using Microsoft.AspNetCore.Hosting.Server.Features;
 
 namespace ITLab.Identity.STS.Identity
 {
@@ -16,7 +19,11 @@ namespace ITLab.Identity.STS.Identity
                 .CreateLogger();
             try
             {
-                CreateHostBuilder(args).Build().Run();
+                var host = CreateHostBuilder(args).Build();
+                host.Start();
+                var listenUrls = string.Join(',', host.Services.GetService<IServer>().Features.Get<IServerAddressesFeature>().Addresses);
+                Log.Information($"Listening on: {listenUrls}");
+                host.WaitForShutdown();
             }
             catch (Exception ex)
             {
