@@ -1,0 +1,1591 @@
+[2020-01-23T08:58:09.3884430+00:00][INFO][1][Microsoft.EntityFrameworkCore.Infrastructure] Entity Framework Core "3.1.0" initialized '"IdentityServerPersistedGrantDbContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "MigrationsAssembly=ITLab.Identity.Admin.EntityFramework.SqlServer "
+[2020-01-23T08:58:12.2080209+00:00][INFO][8][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("1,105"ms) [Parameters=[""], CommandType='Text', CommandTimeout='60']"
+""CREATE DATABASE [IdentityServer4Admin];"
+[2020-01-23T08:58:12.6168584+00:00][INFO][6][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("403"ms) [Parameters=[""], CommandType='Text', CommandTimeout='60']"
+""IF SERVERPROPERTY('EngineEdition') <> 5
+BEGIN
+    ALTER DATABASE [IdentityServer4Admin] SET READ_COMMITTED_SNAPSHOT ON;
+END;"
+[2020-01-23T08:58:12.6806013+00:00][INFO][4][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("17"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT 1"
+[2020-01-23T08:58:12.8060592+00:00][INFO][18][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("19"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""CREATE TABLE [__EFMigrationsHistory] (
+    [MigrationId] nvarchar(150) NOT NULL,
+    [ProductVersion] nvarchar(32) NOT NULL,
+    CONSTRAINT [PK___EFMigrationsHistory] PRIMARY KEY ([MigrationId])
+);"
+[2020-01-23T08:58:12.8136954+00:00][INFO][14][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("2"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT 1"
+[2020-01-23T08:58:12.8578327+00:00][INFO][14][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("39"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT OBJECT_ID(N'[__EFMigrationsHistory]');"
+[2020-01-23T08:58:12.8674057+00:00][INFO][15][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("4"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT [MigrationId], [ProductVersion]
+FROM [__EFMigrationsHistory]
+ORDER BY [MigrationId];"
+[2020-01-23T08:58:12.8903210+00:00][INFO][15][Microsoft.EntityFrameworkCore.Migrations] Applying migration '"20191119164007_DbInit"'.
+[2020-01-23T08:58:12.9290034+00:00][INFO][14][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("3"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""CREATE TABLE [DeviceCodes] (
+    [UserCode] nvarchar(200) NOT NULL,
+    [DeviceCode] nvarchar(200) NOT NULL,
+    [SubjectId] nvarchar(200) NULL,
+    [ClientId] nvarchar(200) NOT NULL,
+    [CreationTime] datetime2 NOT NULL,
+    [Expiration] datetime2 NOT NULL,
+    [Data] nvarchar(max) NOT NULL,
+    CONSTRAINT [PK_DeviceCodes] PRIMARY KEY ([UserCode])
+);"
+[2020-01-23T08:58:12.9317777+00:00][INFO][14][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("3"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""CREATE TABLE [PersistedGrants] (
+    [Key] nvarchar(200) NOT NULL,
+    [Type] nvarchar(50) NOT NULL,
+    [SubjectId] nvarchar(200) NULL,
+    [ClientId] nvarchar(200) NOT NULL,
+    [CreationTime] datetime2 NOT NULL,
+    [Expiration] datetime2 NULL,
+    [Data] nvarchar(max) NOT NULL,
+    CONSTRAINT [PK_PersistedGrants] PRIMARY KEY ([Key])
+);"
+[2020-01-23T08:58:12.9339555+00:00][INFO][15][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("2"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""CREATE UNIQUE INDEX [IX_DeviceCodes_DeviceCode] ON [DeviceCodes] ([DeviceCode]);"
+[2020-01-23T08:58:12.9363939+00:00][INFO][14][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("2"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""CREATE INDEX [IX_DeviceCodes_Expiration] ON [DeviceCodes] ([Expiration]);"
+[2020-01-23T08:58:12.9589265+00:00][INFO][14][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("2"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""CREATE INDEX [IX_PersistedGrants_Expiration] ON [PersistedGrants] ([Expiration]);"
+[2020-01-23T08:58:12.9819984+00:00][INFO][14][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("2"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""CREATE INDEX [IX_PersistedGrants_SubjectId_ClientId_Type] ON [PersistedGrants] ([SubjectId], [ClientId], [Type]);"
+[2020-01-23T08:58:12.9857537+00:00][INFO][15][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("3"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
+VALUES (N'20191119164007_DbInit', N'3.1.0');"
+[2020-01-23T08:58:13.0040074+00:00][INFO][15][Microsoft.EntityFrameworkCore.Infrastructure] Entity Framework Core "3.1.0" initialized '"AdminIdentityDbContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "MigrationsAssembly=ITLab.Identity.Admin.EntityFramework.SqlServer "
+[2020-01-23T08:58:13.0096106+00:00][INFO][14][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("4"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT 1"
+[2020-01-23T08:58:13.0338836+00:00][INFO][14][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("22"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT OBJECT_ID(N'[__EFMigrationsHistory]');"
+[2020-01-23T08:58:13.0369522+00:00][INFO][15][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("2"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT 1"
+[2020-01-23T08:58:13.0394389+00:00][INFO][14][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("1"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT OBJECT_ID(N'[__EFMigrationsHistory]');"
+[2020-01-23T08:58:13.0431011+00:00][INFO][15][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("2"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT [MigrationId], [ProductVersion]
+FROM [__EFMigrationsHistory]
+ORDER BY [MigrationId];"
+[2020-01-23T08:58:13.0455382+00:00][INFO][15][Microsoft.EntityFrameworkCore.Migrations] Applying migration '"20191119163918_DbInit"'.
+[2020-01-23T08:58:13.0776761+00:00][INFO][14][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("3"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""CREATE TABLE [Roles] (
+    [Id] nvarchar(450) NOT NULL,
+    [Name] nvarchar(256) NULL,
+    [NormalizedName] nvarchar(256) NULL,
+    [ConcurrencyStamp] nvarchar(max) NULL,
+    CONSTRAINT [PK_Roles] PRIMARY KEY ([Id])
+);"
+[2020-01-23T08:58:13.0812924+00:00][INFO][14][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("3"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""CREATE TABLE [Users] (
+    [Id] nvarchar(450) NOT NULL,
+    [UserName] nvarchar(256) NULL,
+    [NormalizedUserName] nvarchar(256) NULL,
+    [Email] nvarchar(256) NULL,
+    [NormalizedEmail] nvarchar(256) NULL,
+    [EmailConfirmed] bit NOT NULL,
+    [PasswordHash] nvarchar(max) NULL,
+    [SecurityStamp] nvarchar(max) NULL,
+    [ConcurrencyStamp] nvarchar(max) NULL,
+    [PhoneNumber] nvarchar(max) NULL,
+    [PhoneNumberConfirmed] bit NOT NULL,
+    [TwoFactorEnabled] bit NOT NULL,
+    [LockoutEnd] datetimeoffset NULL,
+    [LockoutEnabled] bit NOT NULL,
+    [AccessFailedCount] int NOT NULL,
+    CONSTRAINT [PK_Users] PRIMARY KEY ([Id])
+);"
+[2020-01-23T08:58:13.1050577+00:00][INFO][15][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("3"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""CREATE TABLE [RoleClaims] (
+    [Id] int NOT NULL IDENTITY,
+    [RoleId] nvarchar(450) NOT NULL,
+    [ClaimType] nvarchar(max) NULL,
+    [ClaimValue] nvarchar(max) NULL,
+    CONSTRAINT [PK_RoleClaims] PRIMARY KEY ([Id]),
+    CONSTRAINT [FK_RoleClaims_Roles_RoleId] FOREIGN KEY ([RoleId]) REFERENCES [Roles] ([Id]) ON DELETE CASCADE
+);"
+[2020-01-23T08:58:13.1087824+00:00][INFO][15][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("3"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""CREATE TABLE [UserClaims] (
+    [Id] int NOT NULL IDENTITY,
+    [UserId] nvarchar(450) NOT NULL,
+    [ClaimType] nvarchar(max) NULL,
+    [ClaimValue] nvarchar(max) NULL,
+    CONSTRAINT [PK_UserClaims] PRIMARY KEY ([Id]),
+    CONSTRAINT [FK_UserClaims_Users_UserId] FOREIGN KEY ([UserId]) REFERENCES [Users] ([Id]) ON DELETE CASCADE
+);"
+[2020-01-23T08:58:13.1335835+00:00][INFO][15][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("24"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""CREATE TABLE [UserLogins] (
+    [LoginProvider] nvarchar(450) NOT NULL,
+    [ProviderKey] nvarchar(450) NOT NULL,
+    [ProviderDisplayName] nvarchar(max) NULL,
+    [UserId] nvarchar(450) NOT NULL,
+    CONSTRAINT [PK_UserLogins] PRIMARY KEY ([LoginProvider], [ProviderKey]),
+    CONSTRAINT [FK_UserLogins_Users_UserId] FOREIGN KEY ([UserId]) REFERENCES [Users] ([Id]) ON DELETE CASCADE
+);"
+[2020-01-23T08:58:13.1375748+00:00][INFO][15][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("4"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""CREATE TABLE [UserRoles] (
+    [UserId] nvarchar(450) NOT NULL,
+    [RoleId] nvarchar(450) NOT NULL,
+    CONSTRAINT [PK_UserRoles] PRIMARY KEY ([UserId], [RoleId]),
+    CONSTRAINT [FK_UserRoles_Roles_RoleId] FOREIGN KEY ([RoleId]) REFERENCES [Roles] ([Id]) ON DELETE CASCADE,
+    CONSTRAINT [FK_UserRoles_Users_UserId] FOREIGN KEY ([UserId]) REFERENCES [Users] ([Id]) ON DELETE CASCADE
+);"
+[2020-01-23T08:58:13.1420393+00:00][INFO][15][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("3"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""CREATE TABLE [UserTokens] (
+    [UserId] nvarchar(450) NOT NULL,
+    [LoginProvider] nvarchar(450) NOT NULL,
+    [Name] nvarchar(450) NOT NULL,
+    [Value] nvarchar(max) NULL,
+    CONSTRAINT [PK_UserTokens] PRIMARY KEY ([UserId], [LoginProvider], [Name]),
+    CONSTRAINT [FK_UserTokens_Users_UserId] FOREIGN KEY ([UserId]) REFERENCES [Users] ([Id]) ON DELETE CASCADE
+);"
+[2020-01-23T08:58:13.1446547+00:00][INFO][15][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("2"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""CREATE INDEX [IX_RoleClaims_RoleId] ON [RoleClaims] ([RoleId]);"
+[2020-01-23T08:58:13.1469170+00:00][INFO][15][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("2"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""CREATE UNIQUE INDEX [RoleNameIndex] ON [Roles] ([NormalizedName]) WHERE [NormalizedName] IS NOT NULL;"
+[2020-01-23T08:58:13.1689970+00:00][INFO][14][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("1"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""CREATE INDEX [IX_UserClaims_UserId] ON [UserClaims] ([UserId]);"
+[2020-01-23T08:58:13.1708625+00:00][INFO][15][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("2"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""CREATE INDEX [IX_UserLogins_UserId] ON [UserLogins] ([UserId]);"
+[2020-01-23T08:58:13.2151436+00:00][INFO][14][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("23"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""CREATE INDEX [IX_UserRoles_RoleId] ON [UserRoles] ([RoleId]);"
+[2020-01-23T08:58:13.2172763+00:00][INFO][15][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("2"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""CREATE INDEX [EmailIndex] ON [Users] ([NormalizedEmail]);"
+[2020-01-23T08:58:13.2399394+00:00][INFO][14][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("2"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""CREATE UNIQUE INDEX [UserNameIndex] ON [Users] ([NormalizedUserName]) WHERE [NormalizedUserName] IS NOT NULL;"
+[2020-01-23T08:58:13.2410691+00:00][INFO][15][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("1"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
+VALUES (N'20191119163918_DbInit', N'3.1.0');"
+[2020-01-23T08:58:13.2736303+00:00][INFO][15][Microsoft.EntityFrameworkCore.Infrastructure] Entity Framework Core "3.1.0" initialized '"IdentityServerConfigurationDbContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "MigrationsAssembly=ITLab.Identity.Admin.EntityFramework.SqlServer "
+[2020-01-23T08:58:13.2837841+00:00][INFO][15][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("2"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT 1"
+[2020-01-23T08:58:13.2853090+00:00][INFO][15][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("1"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT OBJECT_ID(N'[__EFMigrationsHistory]');"
+[2020-01-23T08:58:13.2886317+00:00][INFO][14][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("3"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT 1"
+[2020-01-23T08:58:13.2912489+00:00][INFO][15][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("1"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT OBJECT_ID(N'[__EFMigrationsHistory]');"
+[2020-01-23T08:58:13.2961571+00:00][INFO][15][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("2"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT [MigrationId], [ProductVersion]
+FROM [__EFMigrationsHistory]
+ORDER BY [MigrationId];"
+[2020-01-23T08:58:13.2970309+00:00][INFO][15][Microsoft.EntityFrameworkCore.Migrations] Applying migration '"20191119163952_DbInit"'.
+[2020-01-23T08:58:13.3636729+00:00][INFO][15][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("2"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""CREATE TABLE [ApiResources] (
+    [Id] int NOT NULL IDENTITY,
+    [Enabled] bit NOT NULL,
+    [Name] nvarchar(200) NOT NULL,
+    [DisplayName] nvarchar(200) NULL,
+    [Description] nvarchar(1000) NULL,
+    [Created] datetime2 NOT NULL,
+    [Updated] datetime2 NULL,
+    [LastAccessed] datetime2 NULL,
+    [NonEditable] bit NOT NULL,
+    CONSTRAINT [PK_ApiResources] PRIMARY KEY ([Id])
+);"
+[2020-01-23T08:58:13.3668482+00:00][INFO][14][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("3"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""CREATE TABLE [Clients] (
+    [Id] int NOT NULL IDENTITY,
+    [Enabled] bit NOT NULL,
+    [ClientId] nvarchar(200) NOT NULL,
+    [ProtocolType] nvarchar(200) NOT NULL,
+    [RequireClientSecret] bit NOT NULL,
+    [ClientName] nvarchar(200) NULL,
+    [Description] nvarchar(1000) NULL,
+    [ClientUri] nvarchar(2000) NULL,
+    [LogoUri] nvarchar(2000) NULL,
+    [RequireConsent] bit NOT NULL,
+    [AllowRememberConsent] bit NOT NULL,
+    [AlwaysIncludeUserClaimsInIdToken] bit NOT NULL,
+    [RequirePkce] bit NOT NULL,
+    [AllowPlainTextPkce] bit NOT NULL,
+    [AllowAccessTokensViaBrowser] bit NOT NULL,
+    [FrontChannelLogoutUri] nvarchar(2000) NULL,
+    [FrontChannelLogoutSessionRequired] bit NOT NULL,
+    [BackChannelLogoutUri] nvarchar(2000) NULL,
+    [BackChannelLogoutSessionRequired] bit NOT NULL,
+    [AllowOfflineAccess] bit NOT NULL,
+    [IdentityTokenLifetime] int NOT NULL,
+    [AccessTokenLifetime] int NOT NULL,
+    [AuthorizationCodeLifetime] int NOT NULL,
+    [ConsentLifetime] int NULL,
+    [AbsoluteRefreshTokenLifetime] int NOT NULL,
+    [SlidingRefreshTokenLifetime] int NOT NULL,
+    [RefreshTokenUsage] int NOT NULL,
+    [UpdateAccessTokenClaimsOnRefresh] bit NOT NULL,
+    [RefreshTokenExpiration] int NOT NULL,
+    [AccessTokenType] int NOT NULL,
+    [EnableLocalLogin] bit NOT NULL,
+    [IncludeJwtId] bit NOT NULL,
+    [AlwaysSendClientClaims] bit NOT NULL,
+    [ClientClaimsPrefix] nvarchar(200) NULL,
+    [PairWiseSubjectSalt] nvarchar(200) NULL,
+    [Created] datetime2 NOT NULL,
+    [Updated] datetime2 NULL,
+    [LastAccessed] datetime2 NULL,
+    [UserSsoLifetime] int NULL,
+    [UserCodeType] nvarchar(100) NULL,
+    [DeviceCodeLifetime] int NOT NULL,
+    [NonEditable] bit NOT NULL,
+    CONSTRAINT [PK_Clients] PRIMARY KEY ([Id])
+);"
+[2020-01-23T08:58:13.4102481+00:00][INFO][14][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("43"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""CREATE TABLE [IdentityResources] (
+    [Id] int NOT NULL IDENTITY,
+    [Enabled] bit NOT NULL,
+    [Name] nvarchar(200) NOT NULL,
+    [DisplayName] nvarchar(200) NULL,
+    [Description] nvarchar(1000) NULL,
+    [Required] bit NOT NULL,
+    [Emphasize] bit NOT NULL,
+    [ShowInDiscoveryDocument] bit NOT NULL,
+    [Created] datetime2 NOT NULL,
+    [Updated] datetime2 NULL,
+    [NonEditable] bit NOT NULL,
+    CONSTRAINT [PK_IdentityResources] PRIMARY KEY ([Id])
+);"
+[2020-01-23T08:58:13.4340049+00:00][INFO][14][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("23"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""CREATE TABLE [ApiClaims] (
+    [Id] int NOT NULL IDENTITY,
+    [Type] nvarchar(200) NOT NULL,
+    [ApiResourceId] int NOT NULL,
+    CONSTRAINT [PK_ApiClaims] PRIMARY KEY ([Id]),
+    CONSTRAINT [FK_ApiClaims_ApiResources_ApiResourceId] FOREIGN KEY ([ApiResourceId]) REFERENCES [ApiResources] ([Id]) ON DELETE CASCADE
+);"
+[2020-01-23T08:58:13.4377852+00:00][INFO][14][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("2"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""CREATE TABLE [ApiProperties] (
+    [Id] int NOT NULL IDENTITY,
+    [Key] nvarchar(250) NOT NULL,
+    [Value] nvarchar(2000) NOT NULL,
+    [ApiResourceId] int NOT NULL,
+    CONSTRAINT [PK_ApiProperties] PRIMARY KEY ([Id]),
+    CONSTRAINT [FK_ApiProperties_ApiResources_ApiResourceId] FOREIGN KEY ([ApiResourceId]) REFERENCES [ApiResources] ([Id]) ON DELETE CASCADE
+);"
+[2020-01-23T08:58:13.4615904+00:00][INFO][15][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("3"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""CREATE TABLE [ApiScopes] (
+    [Id] int NOT NULL IDENTITY,
+    [Name] nvarchar(200) NOT NULL,
+    [DisplayName] nvarchar(200) NULL,
+    [Description] nvarchar(1000) NULL,
+    [Required] bit NOT NULL,
+    [Emphasize] bit NOT NULL,
+    [ShowInDiscoveryDocument] bit NOT NULL,
+    [ApiResourceId] int NOT NULL,
+    CONSTRAINT [PK_ApiScopes] PRIMARY KEY ([Id]),
+    CONSTRAINT [FK_ApiScopes_ApiResources_ApiResourceId] FOREIGN KEY ([ApiResourceId]) REFERENCES [ApiResources] ([Id]) ON DELETE CASCADE
+);"
+[2020-01-23T08:58:13.4643462+00:00][INFO][14][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("3"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""CREATE TABLE [ApiSecrets] (
+    [Id] int NOT NULL IDENTITY,
+    [Description] nvarchar(1000) NULL,
+    [Value] nvarchar(4000) NOT NULL,
+    [Expiration] datetime2 NULL,
+    [Type] nvarchar(250) NOT NULL,
+    [Created] datetime2 NOT NULL,
+    [ApiResourceId] int NOT NULL,
+    CONSTRAINT [PK_ApiSecrets] PRIMARY KEY ([Id]),
+    CONSTRAINT [FK_ApiSecrets_ApiResources_ApiResourceId] FOREIGN KEY ([ApiResourceId]) REFERENCES [ApiResources] ([Id]) ON DELETE CASCADE
+);"
+[2020-01-23T08:58:13.4669860+00:00][INFO][14][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("2"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""CREATE TABLE [ClientClaims] (
+    [Id] int NOT NULL IDENTITY,
+    [Type] nvarchar(250) NOT NULL,
+    [Value] nvarchar(250) NOT NULL,
+    [ClientId] int NOT NULL,
+    CONSTRAINT [PK_ClientClaims] PRIMARY KEY ([Id]),
+    CONSTRAINT [FK_ClientClaims_Clients_ClientId] FOREIGN KEY ([ClientId]) REFERENCES [Clients] ([Id]) ON DELETE CASCADE
+);"
+[2020-01-23T08:58:13.4906319+00:00][INFO][15][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("23"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""CREATE TABLE [ClientCorsOrigins] (
+    [Id] int NOT NULL IDENTITY,
+    [Origin] nvarchar(150) NOT NULL,
+    [ClientId] int NOT NULL,
+    CONSTRAINT [PK_ClientCorsOrigins] PRIMARY KEY ([Id]),
+    CONSTRAINT [FK_ClientCorsOrigins_Clients_ClientId] FOREIGN KEY ([ClientId]) REFERENCES [Clients] ([Id]) ON DELETE CASCADE
+);"
+[2020-01-23T08:58:13.4939523+00:00][INFO][14][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("3"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""CREATE TABLE [ClientGrantTypes] (
+    [Id] int NOT NULL IDENTITY,
+    [GrantType] nvarchar(250) NOT NULL,
+    [ClientId] int NOT NULL,
+    CONSTRAINT [PK_ClientGrantTypes] PRIMARY KEY ([Id]),
+    CONSTRAINT [FK_ClientGrantTypes_Clients_ClientId] FOREIGN KEY ([ClientId]) REFERENCES [Clients] ([Id]) ON DELETE CASCADE
+);"
+[2020-01-23T08:58:13.4980261+00:00][INFO][15][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("3"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""CREATE TABLE [ClientIdPRestrictions] (
+    [Id] int NOT NULL IDENTITY,
+    [Provider] nvarchar(200) NOT NULL,
+    [ClientId] int NOT NULL,
+    CONSTRAINT [PK_ClientIdPRestrictions] PRIMARY KEY ([Id]),
+    CONSTRAINT [FK_ClientIdPRestrictions_Clients_ClientId] FOREIGN KEY ([ClientId]) REFERENCES [Clients] ([Id]) ON DELETE CASCADE
+);"
+[2020-01-23T08:58:13.5018810+00:00][INFO][14][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("3"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""CREATE TABLE [ClientPostLogoutRedirectUris] (
+    [Id] int NOT NULL IDENTITY,
+    [PostLogoutRedirectUri] nvarchar(2000) NOT NULL,
+    [ClientId] int NOT NULL,
+    CONSTRAINT [PK_ClientPostLogoutRedirectUris] PRIMARY KEY ([Id]),
+    CONSTRAINT [FK_ClientPostLogoutRedirectUris_Clients_ClientId] FOREIGN KEY ([ClientId]) REFERENCES [Clients] ([Id]) ON DELETE CASCADE
+);"
+[2020-01-23T08:58:13.5054523+00:00][INFO][14][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("3"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""CREATE TABLE [ClientProperties] (
+    [Id] int NOT NULL IDENTITY,
+    [Key] nvarchar(250) NOT NULL,
+    [Value] nvarchar(2000) NOT NULL,
+    [ClientId] int NOT NULL,
+    CONSTRAINT [PK_ClientProperties] PRIMARY KEY ([Id]),
+    CONSTRAINT [FK_ClientProperties_Clients_ClientId] FOREIGN KEY ([ClientId]) REFERENCES [Clients] ([Id]) ON DELETE CASCADE
+);"
+[2020-01-23T08:58:13.5285276+00:00][INFO][15][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("2"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""CREATE TABLE [ClientRedirectUris] (
+    [Id] int NOT NULL IDENTITY,
+    [RedirectUri] nvarchar(2000) NOT NULL,
+    [ClientId] int NOT NULL,
+    CONSTRAINT [PK_ClientRedirectUris] PRIMARY KEY ([Id]),
+    CONSTRAINT [FK_ClientRedirectUris_Clients_ClientId] FOREIGN KEY ([ClientId]) REFERENCES [Clients] ([Id]) ON DELETE CASCADE
+);"
+[2020-01-23T08:58:13.5526628+00:00][INFO][14][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("3"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""CREATE TABLE [ClientScopes] (
+    [Id] int NOT NULL IDENTITY,
+    [Scope] nvarchar(200) NOT NULL,
+    [ClientId] int NOT NULL,
+    CONSTRAINT [PK_ClientScopes] PRIMARY KEY ([Id]),
+    CONSTRAINT [FK_ClientScopes_Clients_ClientId] FOREIGN KEY ([ClientId]) REFERENCES [Clients] ([Id]) ON DELETE CASCADE
+);"
+[2020-01-23T08:58:13.5620564+00:00][INFO][14][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("9"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""CREATE TABLE [ClientSecrets] (
+    [Id] int NOT NULL IDENTITY,
+    [Description] nvarchar(2000) NULL,
+    [Value] nvarchar(4000) NOT NULL,
+    [Expiration] datetime2 NULL,
+    [Type] nvarchar(250) NOT NULL,
+    [Created] datetime2 NOT NULL,
+    [ClientId] int NOT NULL,
+    CONSTRAINT [PK_ClientSecrets] PRIMARY KEY ([Id]),
+    CONSTRAINT [FK_ClientSecrets_Clients_ClientId] FOREIGN KEY ([ClientId]) REFERENCES [Clients] ([Id]) ON DELETE CASCADE
+);"
+[2020-01-23T08:58:13.5660669+00:00][INFO][14][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("3"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""CREATE TABLE [IdentityClaims] (
+    [Id] int NOT NULL IDENTITY,
+    [Type] nvarchar(200) NOT NULL,
+    [IdentityResourceId] int NOT NULL,
+    CONSTRAINT [PK_IdentityClaims] PRIMARY KEY ([Id]),
+    CONSTRAINT [FK_IdentityClaims_IdentityResources_IdentityResourceId] FOREIGN KEY ([IdentityResourceId]) REFERENCES [IdentityResources] ([Id]) ON DELETE CASCADE
+);"
+[2020-01-23T08:58:13.5703836+00:00][INFO][14][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("3"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""CREATE TABLE [IdentityProperties] (
+    [Id] int NOT NULL IDENTITY,
+    [Key] nvarchar(250) NOT NULL,
+    [Value] nvarchar(2000) NOT NULL,
+    [IdentityResourceId] int NOT NULL,
+    CONSTRAINT [PK_IdentityProperties] PRIMARY KEY ([Id]),
+    CONSTRAINT [FK_IdentityProperties_IdentityResources_IdentityResourceId] FOREIGN KEY ([IdentityResourceId]) REFERENCES [IdentityResources] ([Id]) ON DELETE CASCADE
+);"
+[2020-01-23T08:58:13.5760552+00:00][INFO][14][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("5"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""CREATE TABLE [ApiScopeClaims] (
+    [Id] int NOT NULL IDENTITY,
+    [Type] nvarchar(200) NOT NULL,
+    [ApiScopeId] int NOT NULL,
+    CONSTRAINT [PK_ApiScopeClaims] PRIMARY KEY ([Id]),
+    CONSTRAINT [FK_ApiScopeClaims_ApiScopes_ApiScopeId] FOREIGN KEY ([ApiScopeId]) REFERENCES [ApiScopes] ([Id]) ON DELETE CASCADE
+);"
+[2020-01-23T08:58:13.5804267+00:00][INFO][14][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("3"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""CREATE INDEX [IX_ApiClaims_ApiResourceId] ON [ApiClaims] ([ApiResourceId]);"
+[2020-01-23T08:58:13.5844809+00:00][INFO][14][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("3"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""CREATE INDEX [IX_ApiProperties_ApiResourceId] ON [ApiProperties] ([ApiResourceId]);"
+[2020-01-23T08:58:13.5883918+00:00][INFO][14][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("3"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""CREATE UNIQUE INDEX [IX_ApiResources_Name] ON [ApiResources] ([Name]);"
+[2020-01-23T08:58:13.5911130+00:00][INFO][14][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("2"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""CREATE INDEX [IX_ApiScopeClaims_ApiScopeId] ON [ApiScopeClaims] ([ApiScopeId]);"
+[2020-01-23T08:58:13.5939985+00:00][INFO][14][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("2"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""CREATE INDEX [IX_ApiScopes_ApiResourceId] ON [ApiScopes] ([ApiResourceId]);"
+[2020-01-23T08:58:13.5979784+00:00][INFO][14][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("3"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""CREATE UNIQUE INDEX [IX_ApiScopes_Name] ON [ApiScopes] ([Name]);"
+[2020-01-23T08:58:13.6028789+00:00][INFO][14][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("4"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""CREATE INDEX [IX_ApiSecrets_ApiResourceId] ON [ApiSecrets] ([ApiResourceId]);"
+[2020-01-23T08:58:13.6068764+00:00][INFO][14][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("3"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""CREATE INDEX [IX_ClientClaims_ClientId] ON [ClientClaims] ([ClientId]);"
+[2020-01-23T08:58:13.6109210+00:00][INFO][14][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("3"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""CREATE INDEX [IX_ClientCorsOrigins_ClientId] ON [ClientCorsOrigins] ([ClientId]);"
+[2020-01-23T08:58:13.6134806+00:00][INFO][14][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("2"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""CREATE INDEX [IX_ClientGrantTypes_ClientId] ON [ClientGrantTypes] ([ClientId]);"
+[2020-01-23T08:58:13.6168433+00:00][INFO][14][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("3"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""CREATE INDEX [IX_ClientIdPRestrictions_ClientId] ON [ClientIdPRestrictions] ([ClientId]);"
+[2020-01-23T08:58:13.6219114+00:00][INFO][14][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("4"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""CREATE INDEX [IX_ClientPostLogoutRedirectUris_ClientId] ON [ClientPostLogoutRedirectUris] ([ClientId]);"
+[2020-01-23T08:58:13.6258644+00:00][INFO][14][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("3"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""CREATE INDEX [IX_ClientProperties_ClientId] ON [ClientProperties] ([ClientId]);"
+[2020-01-23T08:58:13.6298747+00:00][INFO][14][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("3"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""CREATE INDEX [IX_ClientRedirectUris_ClientId] ON [ClientRedirectUris] ([ClientId]);"
+[2020-01-23T08:58:13.6349131+00:00][INFO][14][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("4"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""CREATE UNIQUE INDEX [IX_Clients_ClientId] ON [Clients] ([ClientId]);"
+[2020-01-23T08:58:13.6394182+00:00][INFO][14][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("3"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""CREATE INDEX [IX_ClientScopes_ClientId] ON [ClientScopes] ([ClientId]);"
+[2020-01-23T08:58:13.6448707+00:00][INFO][14][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("5"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""CREATE INDEX [IX_ClientSecrets_ClientId] ON [ClientSecrets] ([ClientId]);"
+[2020-01-23T08:58:13.6478232+00:00][INFO][14][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("2"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""CREATE INDEX [IX_IdentityClaims_IdentityResourceId] ON [IdentityClaims] ([IdentityResourceId]);"
+[2020-01-23T08:58:13.6500514+00:00][INFO][14][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("2"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""CREATE INDEX [IX_IdentityProperties_IdentityResourceId] ON [IdentityProperties] ([IdentityResourceId]);"
+[2020-01-23T08:58:13.6524540+00:00][INFO][14][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("2"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""CREATE UNIQUE INDEX [IX_IdentityResources_Name] ON [IdentityResources] ([Name]);"
+[2020-01-23T08:58:13.6552088+00:00][INFO][14][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("1"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
+VALUES (N'20191119163952_DbInit', N'3.1.0');"
+[2020-01-23T08:58:13.7038378+00:00][INFO][14][Microsoft.EntityFrameworkCore.Infrastructure] Entity Framework Core "3.1.0" initialized '"AdminLogDbContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "MigrationsAssembly=ITLab.Identity.Admin.EntityFramework.SqlServer "
+[2020-01-23T08:58:13.7088488+00:00][INFO][15][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("3"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT 1"
+[2020-01-23T08:58:13.7111200+00:00][INFO][15][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("2"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT OBJECT_ID(N'[__EFMigrationsHistory]');"
+[2020-01-23T08:58:13.7138063+00:00][INFO][14][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("2"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT 1"
+[2020-01-23T08:58:13.7368702+00:00][INFO][14][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("1"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT OBJECT_ID(N'[__EFMigrationsHistory]');"
+[2020-01-23T08:58:13.7451715+00:00][INFO][15][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("1"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT [MigrationId], [ProductVersion]
+FROM [__EFMigrationsHistory]
+ORDER BY [MigrationId];"
+[2020-01-23T08:58:13.7465326+00:00][INFO][15][Microsoft.EntityFrameworkCore.Migrations] Applying migration '"20191119163936_DbInit"'.
+[2020-01-23T08:58:13.7567380+00:00][INFO][15][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("2"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""CREATE TABLE [Log] (
+    [Id] bigint NOT NULL IDENTITY,
+    [Message] nvarchar(max) NULL,
+    [MessageTemplate] nvarchar(max) NULL,
+    [Level] nvarchar(128) NULL,
+    [TimeStamp] datetimeoffset NOT NULL,
+    [Exception] nvarchar(max) NULL,
+    [LogEvent] nvarchar(max) NULL,
+    [Properties] nvarchar(max) NULL,
+    CONSTRAINT [PK_Log] PRIMARY KEY ([Id])
+);"
+[2020-01-23T08:58:13.7579790+00:00][INFO][15][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("1"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
+VALUES (N'20191119163936_DbInit', N'3.1.0');"
+[2020-01-23T08:58:13.7680088+00:00][INFO][15][Microsoft.EntityFrameworkCore.Infrastructure] Entity Framework Core "3.1.0" initialized '"AdminAuditLogDbContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "MigrationsAssembly=ITLab.Identity.Admin.EntityFramework.SqlServer "
+[2020-01-23T08:58:13.7711001+00:00][INFO][14][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("3"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT 1"
+[2020-01-23T08:58:13.7727377+00:00][INFO][15][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("1"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT OBJECT_ID(N'[__EFMigrationsHistory]');"
+[2020-01-23T08:58:13.8171255+00:00][INFO][14][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("1"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT 1"
+[2020-01-23T08:58:13.8434349+00:00][INFO][14][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("3"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT OBJECT_ID(N'[__EFMigrationsHistory]');"
+[2020-01-23T08:58:13.8703031+00:00][INFO][15][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("22"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT [MigrationId], [ProductVersion]
+FROM [__EFMigrationsHistory]
+ORDER BY [MigrationId];"
+[2020-01-23T08:58:13.8711721+00:00][INFO][15][Microsoft.EntityFrameworkCore.Migrations] Applying migration '"20191119164022_DbInit"'.
+[2020-01-23T08:58:13.8826033+00:00][INFO][15][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("3"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""CREATE TABLE [AuditLog] (
+    [Id] int NOT NULL IDENTITY,
+    [Event] nvarchar(max) NULL,
+    [Source] nvarchar(max) NULL,
+    [Category] nvarchar(max) NULL,
+    [SubjectIdentifier] nvarchar(max) NULL,
+    [SubjectName] nvarchar(max) NULL,
+    [SubjectType] nvarchar(max) NULL,
+    [SubjectAdditionalData] nvarchar(max) NULL,
+    [Action] nvarchar(max) NULL,
+    [Data] nvarchar(max) NULL,
+    [Created] datetime2 NOT NULL,
+    CONSTRAINT [PK_AuditLog] PRIMARY KEY ([Id])
+);"
+[2020-01-23T08:58:13.9042616+00:00][INFO][15][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("1"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
+VALUES (N'20191119164022_DbInit', N'3.1.0');"
+[2020-01-23T08:58:13.9328245+00:00][WARN][15][Microsoft.AspNetCore.DataProtection.Repositories.FileSystemXmlRepository] Storing keys in a directory '"/root/.aspnet/DataProtection-Keys"' that may not be persisted outside of the container. Protected data will be unavailable when container is destroyed.
+[2020-01-23T08:58:13.9332576+00:00][INFO][15][Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager] User profile is available. Using '"/root/.aspnet/DataProtection-Keys"' as key repository; keys will not be encrypted at rest.
+[2020-01-23T08:58:13.9522867+00:00][INFO][15][Microsoft.EntityFrameworkCore.Infrastructure] Entity Framework Core "3.1.0" initialized '"IdentityServerConfigurationDbContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "MigrationsAssembly=ITLab.Identity.Admin.EntityFramework.SqlServer "
+[2020-01-23T08:58:14.1042468+00:00][INFO][15][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("2"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [IdentityResources] AS [i]) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END"
+[2020-01-23T08:58:14.5425322+00:00][INFO][14][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("51"ms) [Parameters=["@p0='?' (DbType = DateTime2), @p1='?' (Size = 1000), @p2='?' (Size = 200), @p3='?' (DbType = Boolean), @p4='?' (DbType = Boolean), @p5='?' (Size = 200), @p6='?' (DbType = Boolean), @p7='?' (DbType = Boolean), @p8='?' (DbType = Boolean), @p9='?' (DbType = DateTime2), @p10='?' (DbType = DateTime2), @p11='?' (Size = 1000), @p12='?' (Size = 200), @p13='?' (DbType = Boolean), @p14='?' (DbType = Boolean), @p15='?' (Size = 200), @p16='?' (DbType = Boolean), @p17='?' (DbType = Boolean), @p18='?' (DbType = Boolean), @p19='?' (DbType = DateTime2), @p20='?' (DbType = DateTime2), @p21='?' (Size = 1000), @p22='?' (Size = 200), @p23='?' (DbType = Boolean), @p24='?' (DbType = Boolean), @p25='?' (Size = 200), @p26='?' (DbType = Boolean), @p27='?' (DbType = Boolean), @p28='?' (DbType = Boolean), @p29='?' (DbType = DateTime2), @p30='?' (DbType = DateTime2), @p31='?' (Size = 1000), @p32='?' (Size = 200), @p33='?' (DbType = Boolean), @p34='?' (DbType = Boolean), @p35='?' (Size = 200), @p36='?' (DbType = Boolean), @p37='?' (DbType = Boolean), @p38='?' (DbType = Boolean), @p39='?' (DbType = DateTime2), @p40='?' (DbType = DateTime2), @p41='?' (Size = 1000), @p42='?' (Size = 200), @p43='?' (DbType = Boolean), @p44='?' (DbType = Boolean), @p45='?' (Size = 200), @p46='?' (DbType = Boolean), @p47='?' (DbType = Boolean), @p48='?' (DbType = Boolean), @p49='?' (DbType = DateTime2)"], CommandType='Text', CommandTimeout='30']"
+""SET NOCOUNT ON;
+DECLARE @inserted0 TABLE ([Id] int, [_Position] [int]);
+MERGE [IdentityResources] USING (
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, 0),
+(@p10, @p11, @p12, @p13, @p14, @p15, @p16, @p17, @p18, @p19, 1),
+(@p20, @p21, @p22, @p23, @p24, @p25, @p26, @p27, @p28, @p29, 2),
+(@p30, @p31, @p32, @p33, @p34, @p35, @p36, @p37, @p38, @p39, 3),
+(@p40, @p41, @p42, @p43, @p44, @p45, @p46, @p47, @p48, @p49, 4)) AS i ([Created], [Description], [DisplayName], [Emphasize], [Enabled], [Name], [NonEditable], [Required], [ShowInDiscoveryDocument], [Updated], _Position) ON 1=0
+WHEN NOT MATCHED THEN
+INSERT ([Created], [Description], [DisplayName], [Emphasize], [Enabled], [Name], [NonEditable], [Required], [ShowInDiscoveryDocument], [Updated])
+VALUES (i.[Created], i.[Description], i.[DisplayName], i.[Emphasize], i.[Enabled], i.[Name], i.[NonEditable], i.[Required], i.[ShowInDiscoveryDocument], i.[Updated])
+OUTPUT INSERTED.[Id], i._Position
+INTO @inserted0;
+
+SELECT [t].[Id] FROM [IdentityResources] t
+INNER JOIN @inserted0 i ON ([t].[Id] = [i].[Id])
+ORDER BY [i].[_Position];"
+[2020-01-23T08:58:14.6211001+00:00][INFO][15][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("18"ms) [Parameters=["@p50='?' (DbType = Int32), @p51='?' (Size = 200), @p52='?' (DbType = Int32), @p53='?' (Size = 200), @p54='?' (DbType = Int32), @p55='?' (Size = 200), @p56='?' (DbType = Int32), @p57='?' (Size = 200), @p58='?' (DbType = Int32), @p59='?' (Size = 200), @p60='?' (DbType = Int32), @p61='?' (Size = 200), @p62='?' (DbType = Int32), @p63='?' (Size = 200), @p64='?' (DbType = Int32), @p65='?' (Size = 200), @p66='?' (DbType = Int32), @p67='?' (Size = 200), @p68='?' (DbType = Int32), @p69='?' (Size = 200), @p70='?' (DbType = Int32), @p71='?' (Size = 200), @p72='?' (DbType = Int32), @p73='?' (Size = 200), @p74='?' (DbType = Int32), @p75='?' (Size = 200), @p76='?' (DbType = Int32), @p77='?' (Size = 200), @p78='?' (DbType = Int32), @p79='?' (Size = 200), @p80='?' (DbType = Int32), @p81='?' (Size = 200), @p82='?' (DbType = Int32), @p83='?' (Size = 200), @p84='?' (DbType = Int32), @p85='?' (Size = 200), @p86='?' (DbType = Int32), @p87='?' (Size = 200)"], CommandType='Text', CommandTimeout='30']"
+""SET NOCOUNT ON;
+DECLARE @inserted0 TABLE ([Id] int, [_Position] [int]);
+MERGE [IdentityClaims] USING (
+VALUES (@p50, @p51, 0),
+(@p52, @p53, 1),
+(@p54, @p55, 2),
+(@p56, @p57, 3),
+(@p58, @p59, 4),
+(@p60, @p61, 5),
+(@p62, @p63, 6),
+(@p64, @p65, 7),
+(@p66, @p67, 8),
+(@p68, @p69, 9),
+(@p70, @p71, 10),
+(@p72, @p73, 11),
+(@p74, @p75, 12),
+(@p76, @p77, 13),
+(@p78, @p79, 14),
+(@p80, @p81, 15),
+(@p82, @p83, 16),
+(@p84, @p85, 17),
+(@p86, @p87, 18)) AS i ([IdentityResourceId], [Type], _Position) ON 1=0
+WHEN NOT MATCHED THEN
+INSERT ([IdentityResourceId], [Type])
+VALUES (i.[IdentityResourceId], i.[Type])
+OUTPUT INSERTED.[Id], i._Position
+INTO @inserted0;
+
+SELECT [t].[Id] FROM [IdentityClaims] t
+INNER JOIN @inserted0 i ON ([t].[Id] = [i].[Id])
+ORDER BY [i].[_Position];"
+[2020-01-23T08:58:14.6452974+00:00][INFO][15][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("2"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [ApiResources] AS [a]) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END"
+[2020-01-23T08:58:14.7524010+00:00][INFO][14][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("7"ms) [Parameters=["@p0='?' (DbType = DateTime2), @p1='?' (Size = 1000), @p2='?' (Size = 200), @p3='?' (DbType = Boolean), @p4='?' (DbType = DateTime2), @p5='?' (Size = 200), @p6='?' (DbType = Boolean), @p7='?' (DbType = DateTime2)"], CommandType='Text', CommandTimeout='30']"
+""SET NOCOUNT ON;
+INSERT INTO [ApiResources] ([Created], [Description], [DisplayName], [Enabled], [LastAccessed], [Name], [NonEditable], [Updated])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7);
+SELECT [Id]
+FROM [ApiResources]
+WHERE @@ROWCOUNT = 1 AND [Id] = scope_identity();"
+[2020-01-23T08:58:14.7637108+00:00][INFO][8][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("4"ms) [Parameters=["@p8='?' (DbType = Int32), @p9='?' (Size = 1000), @p10='?' (Size = 200), @p11='?' (DbType = Boolean), @p12='?' (Size = 200), @p13='?' (DbType = Boolean), @p14='?' (DbType = Boolean)"], CommandType='Text', CommandTimeout='30']"
+""SET NOCOUNT ON;
+INSERT INTO [ApiScopes] ([ApiResourceId], [Description], [DisplayName], [Emphasize], [Name], [Required], [ShowInDiscoveryDocument])
+VALUES (@p8, @p9, @p10, @p11, @p12, @p13, @p14);
+SELECT [Id]
+FROM [ApiScopes]
+WHERE @@ROWCOUNT = 1 AND [Id] = scope_identity();"
+[2020-01-23T08:58:14.7908372+00:00][INFO][14][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("3"ms) [Parameters=["@p0='?' (DbType = Int32), @p1='?' (Size = 200)"], CommandType='Text', CommandTimeout='30']"
+""SET NOCOUNT ON;
+INSERT INTO [ApiScopeClaims] ([ApiScopeId], [Type])
+VALUES (@p0, @p1);
+SELECT [Id]
+FROM [ApiScopeClaims]
+WHERE @@ROWCOUNT = 1 AND [Id] = scope_identity();"
+[2020-01-23T08:58:14.7943755+00:00][INFO][15][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("2"ms) [Parameters=["@p0='?' (DbType = Int32), @p1='?' (Size = 200)"], CommandType='Text', CommandTimeout='30']"
+""SET NOCOUNT ON;
+INSERT INTO [ApiScopeClaims] ([ApiScopeId], [Type])
+VALUES (@p0, @p1);
+SELECT [Id]
+FROM [ApiScopeClaims]
+WHERE @@ROWCOUNT = 1 AND [Id] = scope_identity();"
+[2020-01-23T08:58:14.8089133+00:00][INFO][15][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("2"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Clients] AS [c]) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END"
+[2020-01-23T08:58:15.0163864+00:00][INFO][14][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("4"ms) [Parameters=["@p0='?' (DbType = Int32), @p1='?' (DbType = Int32), @p2='?' (DbType = Int32), @p3='?' (DbType = Boolean), @p4='?' (DbType = Boolean), @p5='?' (DbType = Boolean), @p6='?' (DbType = Boolean), @p7='?' (DbType = Boolean), @p8='?' (DbType = Boolean), @p9='?' (DbType = Int32), @p10='?' (DbType = Boolean), @p11='?' (Size = 2000), @p12='?' (Size = 200), @p13='?' (Size = 200), @p14='?' (Size = 200), @p15='?' (Size = 2000), @p16='?' (DbType = Int32), @p17='?' (DbType = DateTime2), @p18='?' (Size = 1000), @p19='?' (DbType = Int32), @p20='?' (DbType = Boolean), @p21='?' (DbType = Boolean), @p22='?' (DbType = Boolean), @p23='?' (Size = 2000), @p24='?' (DbType = Int32), @p25='?' (DbType = Boolean), @p26='?' (DbType = DateTime2), @p27='?' (Size = 2000), @p28='?' (DbType = Boolean), @p29='?' (Size = 200), @p30='?' (Size = 200), @p31='?' (DbType = Int32), @p32='?' (DbType = Int32), @p33='?' (DbType = Boolean), @p34='?' (DbType = Boolean), @p35='?' (DbType = Boolean), @p36='?' (DbType = Int32), @p37='?' (DbType = Boolean), @p38='?' (DbType = DateTime2), @p39='?' (Size = 100), @p40='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SET NOCOUNT ON;
+INSERT INTO [Clients] ([AbsoluteRefreshTokenLifetime], [AccessTokenLifetime], [AccessTokenType], [AllowAccessTokensViaBrowser], [AllowOfflineAccess], [AllowPlainTextPkce], [AllowRememberConsent], [AlwaysIncludeUserClaimsInIdToken], [AlwaysSendClientClaims], [AuthorizationCodeLifetime], [BackChannelLogoutSessionRequired], [BackChannelLogoutUri], [ClientClaimsPrefix], [ClientId], [ClientName], [ClientUri], [ConsentLifetime], [Created], [Description], [DeviceCodeLifetime], [EnableLocalLogin], [Enabled], [FrontChannelLogoutSessionRequired], [FrontChannelLogoutUri], [IdentityTokenLifetime], [IncludeJwtId], [LastAccessed], [LogoUri], [NonEditable], [PairWiseSubjectSalt], [ProtocolType], [RefreshTokenExpiration], [RefreshTokenUsage], [RequireClientSecret], [RequireConsent], [RequirePkce], [SlidingRefreshTokenLifetime], [UpdateAccessTokenClaimsOnRefresh], [Updated], [UserCodeType], [UserSsoLifetime])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12, @p13, @p14, @p15, @p16, @p17, @p18, @p19, @p20, @p21, @p22, @p23, @p24, @p25, @p26, @p27, @p28, @p29, @p30, @p31, @p32, @p33, @p34, @p35, @p36, @p37, @p38, @p39, @p40);
+SELECT [Id]
+FROM [Clients]
+WHERE @@ROWCOUNT = 1 AND [Id] = scope_identity();"
+[2020-01-23T08:58:15.0259168+00:00][INFO][8][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("2"ms) [Parameters=["@p0='?' (DbType = Int32), @p1='?' (DbType = Int32), @p2='?' (DbType = Int32), @p3='?' (DbType = Boolean), @p4='?' (DbType = Boolean), @p5='?' (DbType = Boolean), @p6='?' (DbType = Boolean), @p7='?' (DbType = Boolean), @p8='?' (DbType = Boolean), @p9='?' (DbType = Int32), @p10='?' (DbType = Boolean), @p11='?' (Size = 2000), @p12='?' (Size = 200), @p13='?' (Size = 200), @p14='?' (Size = 200), @p15='?' (Size = 2000), @p16='?' (DbType = Int32), @p17='?' (DbType = DateTime2), @p18='?' (Size = 1000), @p19='?' (DbType = Int32), @p20='?' (DbType = Boolean), @p21='?' (DbType = Boolean), @p22='?' (DbType = Boolean), @p23='?' (Size = 2000), @p24='?' (DbType = Int32), @p25='?' (DbType = Boolean), @p26='?' (DbType = DateTime2), @p27='?' (Size = 2000), @p28='?' (DbType = Boolean), @p29='?' (Size = 200), @p30='?' (Size = 200), @p31='?' (DbType = Int32), @p32='?' (DbType = Int32), @p33='?' (DbType = Boolean), @p34='?' (DbType = Boolean), @p35='?' (DbType = Boolean), @p36='?' (DbType = Int32), @p37='?' (DbType = Boolean), @p38='?' (DbType = DateTime2), @p39='?' (Size = 100), @p40='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SET NOCOUNT ON;
+INSERT INTO [Clients] ([AbsoluteRefreshTokenLifetime], [AccessTokenLifetime], [AccessTokenType], [AllowAccessTokensViaBrowser], [AllowOfflineAccess], [AllowPlainTextPkce], [AllowRememberConsent], [AlwaysIncludeUserClaimsInIdToken], [AlwaysSendClientClaims], [AuthorizationCodeLifetime], [BackChannelLogoutSessionRequired], [BackChannelLogoutUri], [ClientClaimsPrefix], [ClientId], [ClientName], [ClientUri], [ConsentLifetime], [Created], [Description], [DeviceCodeLifetime], [EnableLocalLogin], [Enabled], [FrontChannelLogoutSessionRequired], [FrontChannelLogoutUri], [IdentityTokenLifetime], [IncludeJwtId], [LastAccessed], [LogoUri], [NonEditable], [PairWiseSubjectSalt], [ProtocolType], [RefreshTokenExpiration], [RefreshTokenUsage], [RequireClientSecret], [RequireConsent], [RequirePkce], [SlidingRefreshTokenLifetime], [UpdateAccessTokenClaimsOnRefresh], [Updated], [UserCodeType], [UserSsoLifetime])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12, @p13, @p14, @p15, @p16, @p17, @p18, @p19, @p20, @p21, @p22, @p23, @p24, @p25, @p26, @p27, @p28, @p29, @p30, @p31, @p32, @p33, @p34, @p35, @p36, @p37, @p38, @p39, @p40);
+SELECT [Id]
+FROM [Clients]
+WHERE @@ROWCOUNT = 1 AND [Id] = scope_identity();"
+[2020-01-23T08:58:15.0681371+00:00][INFO][14][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("38"ms) [Parameters=["@p41='?' (DbType = Int32), @p42='?' (Size = 150), @p43='?' (DbType = Int32), @p44='?' (Size = 250), @p45='?' (DbType = Int32), @p46='?' (Size = 250), @p47='?' (DbType = Int32), @p48='?' (Size = 2000), @p49='?' (DbType = Int32), @p50='?' (Size = 2000), @p51='?' (DbType = Int32), @p52='?' (Size = 2000), @p53='?' (DbType = Int32), @p54='?' (Size = 200), @p55='?' (DbType = Int32), @p56='?' (Size = 200), @p57='?' (DbType = Int32), @p58='?' (Size = 200), @p59='?' (DbType = Int32), @p60='?' (Size = 200), @p61='?' (DbType = Int32), @p62='?' (Size = 200), @p63='?' (DbType = Int32), @p64='?' (DbType = DateTime2), @p65='?' (Size = 2000), @p66='?' (DbType = DateTime2), @p67='?' (Size = 250), @p68='?' (Size = 4000)"], CommandType='Text', CommandTimeout='30']"
+""SET NOCOUNT ON;
+INSERT INTO [ClientCorsOrigins] ([ClientId], [Origin])
+VALUES (@p41, @p42);
+SELECT [Id]
+FROM [ClientCorsOrigins]
+WHERE @@ROWCOUNT = 1 AND [Id] = scope_identity();
+
+DECLARE @inserted1 TABLE ([Id] int, [_Position] [int]);
+MERGE [ClientGrantTypes] USING (
+VALUES (@p43, @p44, 0),
+(@p45, @p46, 1)) AS i ([ClientId], [GrantType], _Position) ON 1=0
+WHEN NOT MATCHED THEN
+INSERT ([ClientId], [GrantType])
+VALUES (i.[ClientId], i.[GrantType])
+OUTPUT INSERTED.[Id], i._Position
+INTO @inserted1;
+
+SELECT [t].[Id] FROM [ClientGrantTypes] t
+INNER JOIN @inserted1 i ON ([t].[Id] = [i].[Id])
+ORDER BY [i].[_Position];
+
+INSERT INTO [ClientPostLogoutRedirectUris] ([ClientId], [PostLogoutRedirectUri])
+VALUES (@p47, @p48);
+SELECT [Id]
+FROM [ClientPostLogoutRedirectUris]
+WHERE @@ROWCOUNT = 1 AND [Id] = scope_identity();
+
+DECLARE @inserted4 TABLE ([Id] int, [_Position] [int]);
+MERGE [ClientRedirectUris] USING (
+VALUES (@p49, @p50, 0),
+(@p51, @p52, 1)) AS i ([ClientId], [RedirectUri], _Position) ON 1=0
+WHEN NOT MATCHED THEN
+INSERT ([ClientId], [RedirectUri])
+VALUES (i.[ClientId], i.[RedirectUri])
+OUTPUT INSERTED.[Id], i._Position
+INTO @inserted4;
+
+SELECT [t].[Id] FROM [ClientRedirectUris] t
+INNER JOIN @inserted4 i ON ([t].[Id] = [i].[Id])
+ORDER BY [i].[_Position];
+
+DECLARE @inserted6 TABLE ([Id] int, [_Position] [int]);
+MERGE [ClientScopes] USING (
+VALUES (@p53, @p54, 0),
+(@p55, @p56, 1),
+(@p57, @p58, 2),
+(@p59, @p60, 3),
+(@p61, @p62, 4)) AS i ([ClientId], [Scope], _Position) ON 1=0
+WHEN NOT MATCHED THEN
+INSERT ([ClientId], [Scope])
+VALUES (i.[ClientId], i.[Scope])
+OUTPUT INSERTED.[Id], i._Position
+INTO @inserted6;
+
+SELECT [t].[Id] FROM [ClientScopes] t
+INNER JOIN @inserted6 i ON ([t].[Id] = [i].[Id])
+ORDER BY [i].[_Position];
+
+INSERT INTO [ClientSecrets] ([ClientId], [Created], [Description], [Expiration], [Type], [Value])
+VALUES (@p63, @p64, @p65, @p66, @p67, @p68);
+SELECT [Id]
+FROM [ClientSecrets]
+WHERE @@ROWCOUNT = 1 AND [Id] = scope_identity();"
+[2020-01-23T08:58:15.0926668+00:00][INFO][14][Microsoft.EntityFrameworkCore.Infrastructure] Entity Framework Core "3.1.0" initialized '"AdminIdentityDbContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "MigrationsAssembly=ITLab.Identity.Admin.EntityFramework.SqlServer "
+[2020-01-23T08:58:15.1078184+00:00][INFO][13][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("2"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Roles] AS [r]) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END"
+[2020-01-23T08:58:15.1990253+00:00][INFO][15][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("2"ms) [Parameters=["@__normalizedName_0='?' (Size = 256)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [r].[Id], [r].[ConcurrencyStamp], [r].[Name], [r].[NormalizedName]
+FROM [Roles] AS [r]
+WHERE [r].[NormalizedName] = @__normalizedName_0"
+[2020-01-23T08:58:15.2095400+00:00][INFO][8][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("1"ms) [Parameters=["@__normalizedName_0='?' (Size = 256)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [r].[Id], [r].[ConcurrencyStamp], [r].[Name], [r].[NormalizedName]
+FROM [Roles] AS [r]
+WHERE [r].[NormalizedName] = @__normalizedName_0"
+[2020-01-23T08:58:15.2850695+00:00][INFO][17][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("25"ms) [Parameters=["@p0='?' (Size = 450), @p1='?' (Size = 4000), @p2='?' (Size = 256), @p3='?' (Size = 256)"], CommandType='Text', CommandTimeout='30']"
+""SET NOCOUNT ON;
+INSERT INTO [Roles] ([Id], [ConcurrencyStamp], [Name], [NormalizedName])
+VALUES (@p0, @p1, @p2, @p3);"
+[2020-01-23T08:58:15.3407528+00:00][INFO][13][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("43"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Users] AS [u]) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END"
+[2020-01-23T08:58:15.4270214+00:00][INFO][14][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("24"ms) [Parameters=["@__normalizedUserName_0='?' (Size = 256)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [u].[Id], [u].[AccessFailedCount], [u].[ConcurrencyStamp], [u].[Email], [u].[EmailConfirmed], [u].[LockoutEnabled], [u].[LockoutEnd], [u].[NormalizedEmail], [u].[NormalizedUserName], [u].[PasswordHash], [u].[PhoneNumber], [u].[PhoneNumberConfirmed], [u].[SecurityStamp], [u].[TwoFactorEnabled], [u].[UserName]
+FROM [Users] AS [u]
+WHERE [u].[NormalizedUserName] = @__normalizedUserName_0"
+[2020-01-23T08:58:15.4433385+00:00][INFO][13][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("2"ms) [Parameters=["@__normalizedEmail_0='?' (Size = 256)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(2) [u].[Id], [u].[AccessFailedCount], [u].[ConcurrencyStamp], [u].[Email], [u].[EmailConfirmed], [u].[LockoutEnabled], [u].[LockoutEnd], [u].[NormalizedEmail], [u].[NormalizedUserName], [u].[PasswordHash], [u].[PhoneNumber], [u].[PhoneNumberConfirmed], [u].[SecurityStamp], [u].[TwoFactorEnabled], [u].[UserName]
+FROM [Users] AS [u]
+WHERE [u].[NormalizedEmail] = @__normalizedEmail_0"
+[2020-01-23T08:58:15.4727585+00:00][INFO][8][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("3"ms) [Parameters=["@p0='?' (Size = 450), @p1='?' (DbType = Int32), @p2='?' (Size = 4000), @p3='?' (Size = 256), @p4='?' (DbType = Boolean), @p5='?' (DbType = Boolean), @p6='?' (DbType = DateTimeOffset), @p7='?' (Size = 256), @p8='?' (Size = 256), @p9='?' (Size = 4000), @p10='?' (Size = 4000), @p11='?' (DbType = Boolean), @p12='?' (Size = 4000), @p13='?' (DbType = Boolean), @p14='?' (Size = 256)"], CommandType='Text', CommandTimeout='30']"
+""SET NOCOUNT ON;
+INSERT INTO [Users] ([Id], [AccessFailedCount], [ConcurrencyStamp], [Email], [EmailConfirmed], [LockoutEnabled], [LockoutEnd], [NormalizedEmail], [NormalizedUserName], [PasswordHash], [PhoneNumber], [PhoneNumberConfirmed], [SecurityStamp], [TwoFactorEnabled], [UserName])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12, @p13, @p14);"
+[2020-01-23T08:58:15.5062180+00:00][INFO][8][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("11"ms) [Parameters=["@__normalizedUserName_0='?' (Size = 256)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [u].[Id], [u].[AccessFailedCount], [u].[ConcurrencyStamp], [u].[Email], [u].[EmailConfirmed], [u].[LockoutEnabled], [u].[LockoutEnd], [u].[NormalizedEmail], [u].[NormalizedUserName], [u].[PasswordHash], [u].[PhoneNumber], [u].[PhoneNumberConfirmed], [u].[SecurityStamp], [u].[TwoFactorEnabled], [u].[UserName]
+FROM [Users] AS [u]
+WHERE [u].[NormalizedUserName] = @__normalizedUserName_0"
+[2020-01-23T08:58:15.5258548+00:00][INFO][8][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("10"ms) [Parameters=["@__normalizedEmail_0='?' (Size = 256)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(2) [u].[Id], [u].[AccessFailedCount], [u].[ConcurrencyStamp], [u].[Email], [u].[EmailConfirmed], [u].[LockoutEnabled], [u].[LockoutEnd], [u].[NormalizedEmail], [u].[NormalizedUserName], [u].[PasswordHash], [u].[PhoneNumber], [u].[PhoneNumberConfirmed], [u].[SecurityStamp], [u].[TwoFactorEnabled], [u].[UserName]
+FROM [Users] AS [u]
+WHERE [u].[NormalizedEmail] = @__normalizedEmail_0"
+[2020-01-23T08:58:15.5424484+00:00][INFO][14][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("3"ms) [Parameters=["@p0='?' (Size = 4000), @p1='?' (Size = 4000), @p2='?' (Size = 450)"], CommandType='Text', CommandTimeout='30']"
+""SET NOCOUNT ON;
+INSERT INTO [UserClaims] ([ClaimType], [ClaimValue], [UserId])
+VALUES (@p0, @p1, @p2);
+SELECT [Id]
+FROM [UserClaims]
+WHERE @@ROWCOUNT = 1 AND [Id] = scope_identity();"
+[2020-01-23T08:58:15.5940242+00:00][INFO][13][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("4"ms) [Parameters=["@p14='?' (Size = 450), @p0='?' (DbType = Int32), @p1='?' (Size = 4000), @p15='?' (Size = 4000), @p2='?' (Size = 256), @p3='?' (DbType = Boolean), @p4='?' (DbType = Boolean), @p5='?' (DbType = DateTimeOffset), @p6='?' (Size = 256), @p7='?' (Size = 256), @p8='?' (Size = 4000), @p9='?' (Size = 4000), @p10='?' (DbType = Boolean), @p11='?' (Size = 4000), @p12='?' (DbType = Boolean), @p13='?' (Size = 256)"], CommandType='Text', CommandTimeout='30']"
+""SET NOCOUNT ON;
+UPDATE [Users] SET [AccessFailedCount] = @p0, [ConcurrencyStamp] = @p1, [Email] = @p2, [EmailConfirmed] = @p3, [LockoutEnabled] = @p4, [LockoutEnd] = @p5, [NormalizedEmail] = @p6, [NormalizedUserName] = @p7, [PasswordHash] = @p8, [PhoneNumber] = @p9, [PhoneNumberConfirmed] = @p10, [SecurityStamp] = @p11, [TwoFactorEnabled] = @p12, [UserName] = @p13
+WHERE [Id] = @p14 AND [ConcurrencyStamp] = @p15;
+SELECT @@ROWCOUNT;"
+[2020-01-23T08:58:15.6230475+00:00][INFO][13][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("11"ms) [Parameters=["@__normalizedRoleName_0='?' (Size = 256)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(2) [r].[Id], [r].[ConcurrencyStamp], [r].[Name], [r].[NormalizedName]
+FROM [Roles] AS [r]
+WHERE [r].[NormalizedName] = @__normalizedRoleName_0"
+[2020-01-23T08:58:15.6408875+00:00][INFO][19][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("2"ms) [Parameters=["@__p_0='?' (Size = 450), @__p_1='?' (Size = 450)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [u].[UserId], [u].[RoleId]
+FROM [UserRoles] AS [u]
+WHERE ([u].[UserId] = @__p_0) AND ([u].[RoleId] = @__p_1)"
+[2020-01-23T08:58:15.6466122+00:00][INFO][19][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("1"ms) [Parameters=["@__normalizedRoleName_0='?' (Size = 256)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(2) [r].[Id], [r].[ConcurrencyStamp], [r].[Name], [r].[NormalizedName]
+FROM [Roles] AS [r]
+WHERE [r].[NormalizedName] = @__normalizedRoleName_0"
+[2020-01-23T08:58:15.6582101+00:00][INFO][17][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("3"ms) [Parameters=["@__normalizedUserName_0='?' (Size = 256)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [u].[Id], [u].[AccessFailedCount], [u].[ConcurrencyStamp], [u].[Email], [u].[EmailConfirmed], [u].[LockoutEnabled], [u].[LockoutEnd], [u].[NormalizedEmail], [u].[NormalizedUserName], [u].[PasswordHash], [u].[PhoneNumber], [u].[PhoneNumberConfirmed], [u].[SecurityStamp], [u].[TwoFactorEnabled], [u].[UserName]
+FROM [Users] AS [u]
+WHERE [u].[NormalizedUserName] = @__normal[2020-01-23T09:12:49.3754226+00:00][INFO][1][Microsoft.EntityFrameworkCore.Infrastructure] Entity Framework Core "3.1.0" initialized '"IdentityServerPersistedGrantDbContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "MigrationsAssembly=ITLab.Identity.Admin.EntityFramework.SqlServer "
+[2020-01-23T09:12:51.2195831+00:00][INFO][8][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("78"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT 1"
+[2020-01-23T09:12:51.3699765+00:00][INFO][8][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("122"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT OBJECT_ID(N'[__EFMigrationsHistory]');"
+[2020-01-23T09:12:51.3913321+00:00][INFO][6][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("6"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT 1"
+[2020-01-23T09:12:51.4253801+00:00][INFO][6][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("28"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT OBJECT_ID(N'[__EFMigrationsHistory]');"
+[2020-01-23T09:12:51.4697273+00:00][INFO][8][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("6"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT [MigrationId], [ProductVersion]
+FROM [__EFMigrationsHistory]
+ORDER BY [MigrationId];"
+[2020-01-23T09:12:51.5299716+00:00][INFO][8][Microsoft.EntityFrameworkCore.Migrations] No migrations were applied. The database is already up to date.
+[2020-01-23T09:12:51.5348520+00:00][INFO][8][Microsoft.EntityFrameworkCore.Infrastructure] Entity Framework Core "3.1.0" initialized '"AdminIdentityDbContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "MigrationsAssembly=ITLab.Identity.Admin.EntityFramework.SqlServer "
+[2020-01-23T09:12:51.5804781+00:00][INFO][4][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("23"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT 1"
+[2020-01-23T09:12:51.6051832+00:00][INFO][4][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("23"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT OBJECT_ID(N'[__EFMigrationsHistory]');"
+[2020-01-23T09:12:51.6304536+00:00][INFO][8][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("24"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT 1"
+[2020-01-23T09:12:51.6344469+00:00][INFO][4][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("3"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT OBJECT_ID(N'[__EFMigrationsHistory]');"
+[2020-01-23T09:12:51.6505517+00:00][INFO][4][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("9"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT [MigrationId], [ProductVersion]
+FROM [__EFMigrationsHistory]
+ORDER BY [MigrationId];"
+[2020-01-23T09:12:51.6527600+00:00][INFO][4][Microsoft.EntityFrameworkCore.Migrations] No migrations were applied. The database is already up to date.
+[2020-01-23T09:12:51.6552554+00:00][INFO][4][Microsoft.EntityFrameworkCore.Infrastructure] Entity Framework Core "3.1.0" initialized '"IdentityServerConfigurationDbContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "MigrationsAssembly=ITLab.Identity.Admin.EntityFramework.SqlServer "
+[2020-01-23T09:12:51.7013964+00:00][INFO][8][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("2"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT 1"
+[2020-01-23T09:12:51.7049766+00:00][INFO][8][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("3"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT OBJECT_ID(N'[__EFMigrationsHistory]');"
+[2020-01-23T09:12:51.7504391+00:00][INFO][4][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("24"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT 1"
+[2020-01-23T09:12:51.7793064+00:00][INFO][4][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("7"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT OBJECT_ID(N'[__EFMigrationsHistory]');"
+[2020-01-23T09:12:51.8211092+00:00][INFO][4][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("3"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT [MigrationId], [ProductVersion]
+FROM [__EFMigrationsHistory]
+ORDER BY [MigrationId];"
+[2020-01-23T09:12:51.8312201+00:00][INFO][4][Microsoft.EntityFrameworkCore.Migrations] No migrations were applied. The database is already up to date.
+[2020-01-23T09:12:51.8366165+00:00][INFO][4][Microsoft.EntityFrameworkCore.Infrastructure] Entity Framework Core "3.1.0" initialized '"AdminLogDbContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "MigrationsAssembly=ITLab.Identity.Admin.EntityFramework.SqlServer "
+[2020-01-23T09:12:51.8476673+00:00][INFO][4][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("7"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT 1"
+[2020-01-23T09:12:51.8621369+00:00][INFO][4][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("6"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT OBJECT_ID(N'[__EFMigrationsHistory]');"
+[2020-01-23T09:12:51.8709999+00:00][INFO][8][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("6"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT 1"
+[2020-01-23T09:12:51.8795088+00:00][INFO][8][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("3"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT OBJECT_ID(N'[__EFMigrationsHistory]');"
+[2020-01-23T09:12:51.8915465+00:00][INFO][4][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("1"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT [MigrationId], [ProductVersion]
+FROM [__EFMigrationsHistory]
+ORDER BY [MigrationId];"
+[2020-01-23T09:12:51.8944793+00:00][INFO][4][Microsoft.EntityFrameworkCore.Migrations] No migrations were applied. The database is already up to date.
+[2020-01-23T09:12:51.8979583+00:00][INFO][4][Microsoft.EntityFrameworkCore.Infrastructure] Entity Framework Core "3.1.0" initialized '"AdminAuditLogDbContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "MigrationsAssembly=ITLab.Identity.Admin.EntityFramework.SqlServer "
+[2020-01-23T09:12:51.9038299+00:00][INFO][8][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("5"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT 1"
+[2020-01-23T09:12:51.9135095+00:00][INFO][4][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("3"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT OBJECT_ID(N'[__EFMigrationsHistory]');"
+[2020-01-23T09:12:51.9201041+00:00][INFO][4][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("6"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT 1"
+[2020-01-23T09:12:51.9233786+00:00][INFO][4][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("2"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT OBJECT_ID(N'[__EFMigrationsHistory]');"
+[2020-01-23T09:12:51.9316742+00:00][INFO][8][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("3"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT [MigrationId], [ProductVersion]
+FROM [__EFMigrationsHistory]
+ORDER BY [MigrationId];"
+[2020-01-23T09:12:51.9330229+00:00][INFO][8][Microsoft.EntityFrameworkCore.Migrations] No migrations were applied. The database is already up to date.
+[2020-01-23T09:12:51.9930209+00:00][WARN][8][Microsoft.AspNetCore.DataProtection.Repositories.FileSystemXmlRepository] Storing keys in a directory '"/root/.aspnet/DataProtection-Keys"' that may not be persisted outside of the container. Protected data will be unavailable when container is destroyed.
+[2020-01-23T09:12:51.9952716+00:00][INFO][8][Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager] User profile is available. Using '"/root/.aspnet/DataProtection-Keys"' as key repository; keys will not be encrypted at rest.
+[2020-01-23T09:12:52.0311959+00:00][INFO][8][Microsoft.EntityFrameworkCore.Infrastructure] Entity Framework Core "3.1.0" initialized '"IdentityServerConfigurationDbContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "MigrationsAssembly=ITLab.Identity.Admin.EntityFramework.SqlServer "
+[2020-01-23T09:12:52.4194528+00:00][INFO][8][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("5"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [IdentityResources] AS [i]) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END"
+[2020-01-23T09:12:52.4341484+00:00][INFO][8][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("3"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [ApiResources] AS [a]) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END"
+[2020-01-23T09:12:52.4658200+00:00][INFO][8][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("25"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Clients] AS [c]) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END"
+[2020-01-23T09:12:52.4751598+00:00][INFO][8][Microsoft.EntityFrameworkCore.Infrastructure] Entity Framework Core "3.1.0" initialized '"AdminIdentityDbContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "MigrationsAssembly=ITLab.Identity.Admin.EntityFramework.SqlServer "
+[2020-01-23T09:12:52.5131447+00:00][INFO][4][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("5"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Roles] AS [r]) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END"
+[2020-01-23T09:12:52.5584668+00:00][INFO][4][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("4"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Users] AS [u]) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END"
+[2020-01-23T09:12:53.4238264+00:00][INFO][4][Microsoft.Hosting.Lifetime] Now listening on: "http://[::]:80"
+[2020-01-23T09:12:53.4263254+00:00][INFO][4][Microsoft.Hosting.Lifetime] Application started. Press Ctrl+C to shut down.
+[2020-01-23T09:12:53.4312303+00:00][INFO][4][Microsoft.Hosting.Lifetime] Hosting environment: "Development"
+[2020-01-23T09:12:53.4334583+00:00][INFO][4][Microsoft.Hosting.Lifetime] Content root path: "/app"
+[2020-01-23T09:12:54.2572714+00:00][INFO][6][Microsoft.AspNetCore.Hosting.Diagnostics] Request starting HTTP/1.1 GET http://localhost:32773/  
+[2020-01-23T09:12:54.2573419+00:00][INFO][14][Microsoft.AspNetCore.Hosting.Diagnostics] Request starting HTTP/1.1 GET http://localhost:32773/  
+[2020-01-23T09:12:54.2572830+00:00][INFO][13][Microsoft.AspNetCore.Hosting.Diagnostics] Request starting HTTP/1.1 GET http://localhost:32773/  
+[2020-01-23T09:12:54.4027310+00:00][INFO][8][Microsoft.AspNetCore.Hosting.Diagnostics] Request starting HTTP/1.1 GET http://localhost:32773/  
+[2020-01-23T09:12:54.5791777+00:00][INFO][10][Microsoft.AspNetCore.Hosting.Diagnostics] Request starting HTTP/1.1 GET http://localhost:32773/  
+[2020-01-23T09:12:54.7387018+00:00][INFO][10][Microsoft.AspNetCore.Hosting.Diagnostics] Request starting HTTP/1.1 GET http://localhost:32773/  
+[2020-01-23T09:12:54.8188939+00:00][INFO][15][Microsoft.AspNetCore.Authorization.DefaultAuthorizationService] Authorization failed.
+[2020-01-23T09:12:54.8200837+00:00][INFO][13][Microsoft.AspNetCore.Authorization.DefaultAuthorizationService] Authorization failed.
+[2020-01-23T09:12:54.8301095+00:00][INFO][6][Microsoft.AspNetCore.Authorization.DefaultAuthorizationService] Authorization failed.
+[2020-01-23T09:12:54.8307020+00:00][INFO][14][Microsoft.AspNetCore.Authorization.DefaultAuthorizationService] Authorization failed.
+[2020-01-23T09:12:54.8380877+00:00][INFO][10][Microsoft.AspNetCore.Authorization.DefaultAuthorizationService] Authorization failed.
+[2020-01-23T09:12:54.8301135+00:00][INFO][8][Microsoft.AspNetCore.Authorization.DefaultAuthorizationService] Authorization failed.
+[2020-01-23T09:12:54.8689541+00:00][INFO][16][Microsoft.AspNetCore.Hosting.Diagnostics] Request starting HTTP/1.1 GET http://localhost:32773/  
+[2020-01-23T09:12:54.8706257+00:00][INFO][16][Microsoft.AspNetCore.Authorization.DefaultAuthorizationService] Authorization failed.
+[2020-01-23T09:12:55.0300809+00:00][INFO][12][Microsoft.AspNetCore.Hosting.Diagnostics] Request starting HTTP/1.1 GET http://localhost:32773/  
+[2020-01-23T09:12:55.0304765+00:00][INFO][12][Microsoft.AspNetCore.Authorization.DefaultAuthorizationService] Authorization failed.
+[2020-01-23T09:12:54.9520674+00:00][EROR][8][Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware] An unhandled exception has occurred while executing the request.
+System.Threading.Tasks.TaskCanceledException: A task was canceled.
+   at Microsoft.IdentityModel.Protocols.ConfigurationManager`1.GetConfigurationAsync(CancellationToken cancel)
+   at Microsoft.AspNetCore.Authentication.OpenIdConnect.OpenIdConnectHandler.HandleChallengeAsyncInternal(AuthenticationProperties properties)
+   at Microsoft.AspNetCore.Authentication.OpenIdConnect.OpenIdConnectHandler.HandleChallengeAsync(AuthenticationProperties properties)
+   at Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.ChallengeAsync(AuthenticationProperties properties)
+   at Microsoft.AspNetCore.Authentication.AuthenticationService.ChallengeAsync(HttpContext context, String scheme, AuthenticationProperties properties)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Routing.EndpointRoutingMiddleware.<Invoke>g__AwaitMatcher|8_0(EndpointRoutingMiddleware middleware, HttpContext httpContext, Task`1 matcherTask)
+   at Microsoft.AspNetCore.Localization.RequestLocalizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at NWebsec.AspNetCore.Middleware.Middleware.CspMiddleware.Invoke(HttpContext context)
+   at NWebsec.AspNetCore.Middleware.Middleware.MiddlewareBase.Invoke(HttpContext context)
+   at NWebsec.AspNetCore.Middleware.Middleware.MiddlewareBase.Invoke(HttpContext context)
+   at NWebsec.AspNetCore.Middleware.Middleware.MiddlewareBase.Invoke(HttpContext context)
+   at NWebsec.AspNetCore.Middleware.Middleware.MiddlewareBase.Invoke(HttpContext context)
+   at NWebsec.AspNetCore.Middleware.Middleware.MiddlewareBase.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+[2020-01-23T09:12:54.9556079+00:00][EROR][15][Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware] An unhandled exception has occurred while executing the request.
+System.Threading.Tasks.TaskCanceledException: A task was canceled.
+   at Microsoft.IdentityModel.Protocols.ConfigurationManager`1.GetConfigurationAsync(CancellationToken cancel)
+   at Microsoft.AspNetCore.Authentication.OpenIdConnect.OpenIdConnectHandler.HandleChallengeAsyncInternal(AuthenticationProperties properties)
+   at Microsoft.AspNetCore.Authentication.OpenIdConnect.OpenIdConnectHandler.HandleChallengeAsync(AuthenticationProperties properties)
+   at Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.ChallengeAsync(AuthenticationProperties properties)
+   at Microsoft.AspNetCore.Authentication.AuthenticationService.ChallengeAsync(HttpContext context, String scheme, AuthenticationProperties properties)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Routing.EndpointRoutingMiddleware.<Invoke>g__AwaitMatcher|8_0(EndpointRoutingMiddleware middleware, HttpContext httpContext, Task`1 matcherTask)
+   at Microsoft.AspNetCore.Localization.RequestLocalizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at NWebsec.AspNetCore.Middleware.Middleware.CspMiddleware.Invoke(HttpContext context)
+   at NWebsec.AspNetCore.Middleware.Middleware.MiddlewareBase.Invoke(HttpContext context)
+   at NWebsec.AspNetCore.Middleware.Middleware.MiddlewareBase.Invoke(HttpContext context)
+   at NWebsec.AspNetCore.Middleware.Middleware.MiddlewareBase.Invoke(HttpContext context)
+   at NWebsec.AspNetCore.Middleware.Middleware.MiddlewareBase.Invoke(HttpContext context)
+   at NWebsec.AspNetCore.Middleware.Middleware.MiddlewareBase.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+[2020-01-23T09:12:54.8974336+00:00][EROR][6][Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware] An unhandled exception has occurred while executing the request.
+System.Threading.Tasks.TaskCanceledException: A task was canceled.
+   at Microsoft.IdentityModel.Protocols.ConfigurationManager`1.GetConfigurationAsync(CancellationToken cancel)
+   at Microsoft.AspNetCore.Authentication.OpenIdConnect.OpenIdConnectHandler.HandleChallengeAsyncInternal(AuthenticationProperties properties)
+   at Microsoft.AspNetCore.Authentication.OpenIdConnect.OpenIdConnectHandler.HandleChallengeAsync(AuthenticationProperties properties)
+   at Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.ChallengeAsync(AuthenticationProperties properties)
+   at Microsoft.AspNetCore.Authentication.AuthenticationService.ChallengeAsync(HttpContext context, String scheme, AuthenticationProperties properties)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Localization.RequestLocalizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at NWebsec.AspNetCore.Middleware.Middleware.CspMiddleware.Invoke(HttpContext context)
+   at NWebsec.AspNetCore.Middleware.Middleware.MiddlewareBase.Invoke(HttpContext context)
+   at NWebsec.AspNetCore.Middleware.Middleware.MiddlewareBase.Invoke(HttpContext context)
+   at NWebsec.AspNetCore.Middleware.Middleware.MiddlewareBase.Invoke(HttpContext context)
+   at NWebsec.AspNetCore.Middleware.Middleware.MiddlewareBase.Invoke(HttpContext context)
+   at NWebsec.AspNetCore.Middleware.Middleware.MiddlewareBase.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+[2020-01-23T09:12:54.9520571+00:00][EROR][13][Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware] An unhandled exception has occurred while executing the request.
+System.Threading.Tasks.TaskCanceledException: A task was canceled.
+   at Microsoft.IdentityModel.Protocols.ConfigurationManager`1.GetConfigurationAsync(CancellationToken cancel)
+   at Microsoft.AspNetCore.Authentication.OpenIdConnect.OpenIdConnectHandler.HandleChallengeAsyncInternal(AuthenticationProperties properties)
+   at Microsoft.AspNetCore.Authentication.OpenIdConnect.OpenIdConnectHandler.HandleChallengeAsync(AuthenticationProperties properties)
+   at Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.ChallengeAsync(AuthenticationProperties properties)
+   at Microsoft.AspNetCore.Authentication.AuthenticationService.ChallengeAsync(HttpContext context, String scheme, AuthenticationProperties properties)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Routing.EndpointRoutingMiddleware.<Invoke>g__AwaitMatcher|8_0(EndpointRoutingMiddleware middleware, HttpContext httpContext, Task`1 matcherTask)
+   at Microsoft.AspNetCore.Localization.RequestLocalizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at NWebsec.AspNetCore.Middleware.Middleware.CspMiddleware.Invoke(HttpContext context)
+   at NWebsec.AspNetCore.Middleware.Middleware.MiddlewareBase.Invoke(HttpContext context)
+   at NWebsec.AspNetCore.Middleware.Middleware.MiddlewareBase.Invoke(HttpContext context)
+   at NWebsec.AspNetCore.Middleware.Middleware.MiddlewareBase.Invoke(HttpContext context)
+   at NWebsec.AspNetCore.Middleware.Middleware.MiddlewareBase.Invoke(HttpContext context)
+   at NWebsec.AspNetCore.Middleware.Middleware.MiddlewareBase.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+[2020-01-23T09:12:54.9498989+00:00][EROR][10][Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware] An unhandled exception has occurred while executing the request.
+System.Threading.Tasks.TaskCanceledException: A task was canceled.
+   at Microsoft.IdentityModel.Protocols.ConfigurationManager`1.GetConfigurationAsync(CancellationToken cancel)
+   at Microsoft.AspNetCore.Authentication.OpenIdConnect.OpenIdConnectHandler.HandleChallengeAsyncInternal(AuthenticationProperties properties)
+   at Microsoft.AspNetCore.Authentication.OpenIdConnect.OpenIdConnectHandler.HandleChallengeAsync(AuthenticationProperties properties)
+   at Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.ChallengeAsync(AuthenticationProperties properties)
+   at Microsoft.AspNetCore.Authentication.AuthenticationService.ChallengeAsync(HttpContext context, String scheme, AuthenticationProperties properties)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Routing.EndpointRoutingMiddleware.<Invoke>g__AwaitMatcher|8_0(EndpointRoutingMiddleware middleware, HttpContext httpContext, Task`1 matcherTask)
+   at Microsoft.AspNetCore.Localization.RequestLocalizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at NWebsec.AspNetCore.Middleware.Middleware.CspMiddleware.Invoke(HttpContext context)
+   at NWebsec.AspNetCore.Middleware.Middleware.MiddlewareBase.Invoke(HttpContext context)
+   at NWebsec.AspNetCore.Middleware.Middleware.MiddlewareBase.Invoke(HttpContext context)
+   at NWebsec.AspNetCore.Middleware.Middleware.MiddlewareBase.Invoke(HttpContext context)
+   at NWebsec.AspNetCore.Middleware.Middleware.MiddlewareBase.Invoke(HttpContext context)
+   at NWebsec.AspNetCore.Middleware.Middleware.MiddlewareBase.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+[2020-01-23T09:12:54.9534064+00:00][EROR][14][Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware] An unhandled exception has occurred while executing the request.
+System.Threading.Tasks.TaskCanceledException: A task was canceled.
+   at Microsoft.IdentityModel.Protocols.ConfigurationManager`1.GetConfigurationAsync(CancellationToken cancel)
+   at Microsoft.AspNetCore.Authentication.OpenIdConnect.OpenIdConnectHandler.HandleChallengeAsyncInternal(AuthenticationProperties properties)
+   at Microsoft.AspNetCore.Authentication.OpenIdConnect.OpenIdConnectHandler.HandleChallengeAsync(AuthenticationProperties properties)
+   at Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.ChallengeAsync(AuthenticationProperties properties)
+   at Microsoft.AspNetCore.Authentication.AuthenticationService.ChallengeAsync(HttpContext context, String scheme, AuthenticationProperties properties)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Routing.EndpointRoutingMiddleware.<Invoke>g__AwaitMatcher|8_0(EndpointRoutingMiddleware middleware, HttpContext httpContext, Task`1 matcherTask)
+   at Microsoft.AspNetCore.Localization.RequestLocalizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at NWebsec.AspNetCore.Middleware.Middleware.CspMiddleware.Invoke(HttpContext context)
+   at NWebsec.AspNetCore.Middleware.Middleware.MiddlewareBase.Invoke(HttpContext context)
+   at NWebsec.AspNetCore.Middleware.Middleware.MiddlewareBase.Invoke(HttpContext context)
+   at NWebsec.AspNetCore.Middleware.Middleware.MiddlewareBase.Invoke(HttpContext context)
+   at NWebsec.AspNetCore.Middleware.Middleware.MiddlewareBase.Invoke(HttpContext context)
+   at NWebsec.AspNetCore.Middleware.Middleware.MiddlewareBase.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+[2020-01-23T09:12:55.5322773+00:00][INFO][6][Microsoft.AspNetCore.Hosting.Diagnostics] Request finished in 1279.9041ms 500 text/html; charset=utf-8
+[2020-01-23T09:12:55.5343143+00:00][INFO][15][Microsoft.AspNetCore.Hosting.Diagnostics] Request finished in 795.2898ms 500 text/html; charset=utf-8
+[2020-01-23T09:12:55.5441418+00:00][INFO][8][Microsoft.AspNetCore.Hosting.Diagnostics] Request finished in 1284.4668ms 500 text/html; charset=utf-8
+[2020-01-23T09:12:55.5469958+00:00][INFO][13][Microsoft.AspNetCore.Hosting.Diagnostics] Request finished in 950.9236ms 500 text/html; charset=utf-8
+[2020-01-23T09:12:55.5609434+00:00][INFO][10][Microsoft.AspNetCore.Hosting.Diagnostics] Request finished in 1277.3003ms 500 text/html; charset=utf-8
+[2020-01-23T09:12:55.5478108+00:00][INFO][14][Microsoft.AspNetCore.Hosting.Diagnostics] Request finished in 1127.1234ms 500 text/html; charset=utf-8
+[2020-01-23T09:12:58.5948165+00:00][EROR][12][Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware] An unhandled exception has occurred while executing the request.
+System.OperationCanceledException: The operation was canceled.
+   at System.Threading.CancellationToken.ThrowOperationCanceledException()
+   at System.Threading.SemaphoreSlim.WaitUntilCountOrTimeoutAsync(TaskNode asyncWaiter, Int32 millisecondsTimeout, CancellationToken cancellationToken)
+   at Microsoft.IdentityModel.Protocols.ConfigurationManager`1.GetConfigurationAsync(CancellationToken cancel)
+   at Microsoft.AspNetCore.Authentication.OpenIdConnect.OpenIdConnectHandler.HandleChallengeAsyncInternal(AuthenticationProperties properties)
+   at Microsoft.AspNetCore.Authentication.OpenIdConnect.OpenIdConnectHandler.HandleChallengeAsync(AuthenticationProperties properties)
+   at Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.ChallengeAsync(AuthenticationProperties properties)
+   at Microsoft.AspNetCore.Authentication.AuthenticationService.ChallengeAsync(HttpContext context, String scheme, AuthenticationProperties properties)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Localization.RequestLocalizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at NWebsec.AspNetCore.Middleware.Middleware.CspMiddleware.Invoke(HttpContext context)
+   at NWebsec.AspNetCore.Middleware.Middleware.MiddlewareBase.Invoke(HttpContext context)
+   at NWebsec.AspNetCore.Middleware.Middleware.MiddlewareBase.Invoke(HttpContext context)
+   at NWebsec.AspNetCore.Middleware.Middleware.MiddlewareBase.Invoke(HttpContext context)
+   at NWebsec.AspNetCore.Middleware.Middleware.MiddlewareBase.Invoke(HttpContext context)
+   at NWebsec.AspNetCore.Middleware.Middleware.MiddlewareBase.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+[2020-01-23T09:12:58.6671337+00:00][INFO][12][Microsoft.AspNetCore.Hosting.Diagnostics] Request finished in 3636.9151ms 500 text/html; charset=utf-8
+[2020-01-23T09:12:58.6703252+00:00][INFO][8][Microsoft.AspNetCore.Hosting.Diagnostics] Request starting HTTP/1.1 GET http://localhost:32773/  
+[2020-01-23T09:12:58.6978408+00:00][INFO][8][Microsoft.AspNetCore.Authorization.DefaultAuthorizationService] Authorization failed.
+[2020-01-23T09:12:59.8613357+00:00][INFO][12][Microsoft.AspNetCore.Authentication.OpenIdConnect.OpenIdConnectHandler] AuthenticationScheme: "oidc" was challenged.
+[2020-01-23T09:12:59.8613368+00:00][INFO][8][Microsoft.AspNetCore.Authenticati[2020-01-23T09:20:17.0493718+00:00][INFO][1][Microsoft.EntityFrameworkCore.Infrastructure] Entity Framework Core "3.1.0" initialized '"IdentityServerPersistedGrantDbContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "MigrationsAssembly=ITLab.Identity.Admin.EntityFramework.SqlServer "
+[2020-01-23T09:20:18.4426930+00:00][INFO][10][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("55"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT 1"
+[2020-01-23T09:20:18.6325446+00:00][INFO][10][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("141"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT OBJECT_ID(N'[__EFMigrationsHistory]');"
+[2020-01-23T09:20:18.6688442+00:00][INFO][4][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("9"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT 1"
+[2020-01-23T09:20:18.6974700+00:00][INFO][13][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("8"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT OBJECT_ID(N'[__EFMigrationsHistory]');"
+[2020-01-23T09:20:18.8264409+00:00][INFO][16][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("61"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT [MigrationId], [ProductVersion]
+FROM [__EFMigrationsHistory]
+ORDER BY [MigrationId];"
+[2020-01-23T09:20:18.9559917+00:00][INFO][16][Microsoft.EntityFrameworkCore.Migrations] No migrations were applied. The database is already up to date.
+[2020-01-23T09:20:18.9690673+00:00][INFO][16][Microsoft.EntityFrameworkCore.Infrastructure] Entity Framework Core "3.1.0" initialized '"AdminIdentityDbContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "MigrationsAssembly=ITLab.Identity.Admin.EntityFramework.SqlServer "
+[2020-01-23T09:20:18.9871083+00:00][INFO][14][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("10"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT 1"
+[2020-01-23T09:20:19.0151367+00:00][INFO][13][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("27"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT OBJECT_ID(N'[__EFMigrationsHistory]');"
+[2020-01-23T09:20:19.0320717+00:00][INFO][16][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("15"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT 1"
+[2020-01-23T09:20:19.0623287+00:00][INFO][16][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("26"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT OBJECT_ID(N'[__EFMigrationsHistory]');"
+[2020-01-23T09:20:19.1010404+00:00][INFO][16][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("27"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT [MigrationId], [ProductVersion]
+FROM [__EFMigrationsHistory]
+ORDER BY [MigrationId];"
+[2020-01-23T09:20:19.1074691+00:00][INFO][16][Microsoft.EntityFrameworkCore.Migrations] No migrations were applied. The database is already up to date.
+[2020-01-23T09:20:19.1099422+00:00][INFO][16][Microsoft.EntityFrameworkCore.Infrastructure] Entity Framework Core "3.1.0" initialized '"IdentityServerConfigurationDbContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "MigrationsAssembly=ITLab.Identity.Admin.EntityFramework.SqlServer "
+[2020-01-23T09:20:19.1610167+00:00][INFO][4][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("5"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT 1"
+[2020-01-23T09:20:19.1878188+00:00][INFO][16][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("25"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT OBJECT_ID(N'[__EFMigrationsHistory]');"
+[2020-01-23T09:20:19.2134304+00:00][INFO][16][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("4"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT 1"
+[2020-01-23T09:20:19.2194110+00:00][INFO][16][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("3"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT OBJECT_ID(N'[__EFMigrationsHistory]');"
+[2020-01-23T09:20:19.2300790+00:00][INFO][16][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("4"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT [MigrationId], [ProductVersion]
+FROM [__EFMigrationsHistory]
+ORDER BY [MigrationId];"
+[2020-01-23T09:20:19.2318507+00:00][INFO][16][Microsoft.EntityFrameworkCore.Migrations] No migrations were applied. The database is already up to date.
+[2020-01-23T09:20:19.2344295+00:00][INFO][16][Microsoft.EntityFrameworkCore.Infrastructure] Entity Framework Core "3.1.0" initialized '"AdminLogDbContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "MigrationsAssembly=ITLab.Identity.Admin.EntityFramework.SqlServer "
+[2020-01-23T09:20:19.2632617+00:00][INFO][4][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("27"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT 1"
+[2020-01-23T09:20:19.2768203+00:00][INFO][4][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("7"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT OBJECT_ID(N'[__EFMigrationsHistory]');"
+[2020-01-23T09:20:19.3129616+00:00][INFO][16][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("35"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT 1"
+[2020-01-23T09:20:19.3438026+00:00][INFO][4][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("25"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT OBJECT_ID(N'[__EFMigrationsHistory]');"
+[2020-01-23T09:20:19.3538548+00:00][INFO][4][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("3"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT [MigrationId], [ProductVersion]
+FROM [__EFMigrationsHistory]
+ORDER BY [MigrationId];"
+[2020-01-23T09:20:19.3551971+00:00][INFO][4][Microsoft.EntityFrameworkCore.Migrations] No migrations were applied. The database is already up to date.
+[2020-01-23T09:20:19.3572440+00:00][INFO][4][Microsoft.EntityFrameworkCore.Infrastructure] Entity Framework Core "3.1.0" initialized '"AdminAuditLogDbContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "MigrationsAssembly=ITLab.Identity.Admin.EntityFramework.SqlServer "
+[2020-01-23T09:20:19.3630703+00:00][INFO][16][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("4"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT 1"
+[2020-01-23T09:20:19.4130813+00:00][INFO][16][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("24"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT OBJECT_ID(N'[__EFMigrationsHistory]');"
+[2020-01-23T09:20:19.4213945+00:00][INFO][4][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("7"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT 1"
+[2020-01-23T09:20:19.4720511+00:00][INFO][16][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("3"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT OBJECT_ID(N'[__EFMigrationsHistory]');"
+[2020-01-23T09:20:19.4834031+00:00][INFO][4][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("4"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT [MigrationId], [ProductVersion]
+FROM [__EFMigrationsHistory]
+ORDER BY [MigrationId];"
+[2020-01-23T09:20:19.4867893+00:00][INFO][4][Microsoft.EntityFrameworkCore.Migrations] No migrations were applied. The database is already up to date.
+[2020-01-23T09:20:19.5606892+00:00][WARN][4][Microsoft.AspNetCore.DataProtection.Repositories.FileSystemXmlRepository] Storing keys in a directory '"/root/.aspnet/DataProtection-Keys"' that may not be persisted outside of the container. Protected data will be unavailable when container is destroyed.
+[2020-01-23T09:20:19.5634509+00:00][INFO][4][Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager] User profile is available. Using '"/root/.aspnet/DataProtection-Keys"' as key repository; keys will not be encrypted at rest.
+[2020-01-23T09:20:19.6192367+00:00][INFO][4][Microsoft.EntityFrameworkCore.Infrastructure] Entity Framework Core "3.1.0" initialized '"IdentityServerConfigurationDbContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "MigrationsAssembly=ITLab.Identity.Admin.EntityFramework.SqlServer "
+[2020-01-23T09:20:20.1845019+00:00][INFO][4][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("5"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [IdentityResources] AS [i]) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END"
+[2020-01-23T09:20:20.2049325+00:00][INFO][4][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("2"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [ApiResources] AS [a]) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END"
+[2020-01-23T09:20:20.2233443+00:00][INFO][4][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("5"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Clients] AS [c]) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END"
+[2020-01-23T09:20:20.2540006+00:00][INFO][4][Microsoft.EntityFrameworkCore.Infrastructure] Entity Framework Core "3.1.0" initialized '"AdminIdentityDbContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "MigrationsAssembly=ITLab.Identity.Admin.EntityFramework.SqlServer "
+[2020-01-23T09:20:20.3426571+00:00][INFO][5][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("3"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Roles] AS [r]) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END"
+[2020-01-23T09:20:20.4177613+00:00][INFO][5][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("5"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Users] AS [u]) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END"
+[2020-01-23T09:20:21.7879317+00:00][INFO][16][Microsoft.Hosting.Lifetime] Now listening on: "http://[::]:80"
+[2020-01-23T09:20:21.7941814+00:00][INFO][16][Microsoft.Hosting.Lifetime] Application started. Press Ctrl+C to shut down.
+[2020-01-23T09:20:21.7952953+00:00][INFO][16][Microsoft.Hosting.Lifetime] Hosting environment: "Development"
+[2020-01-23T09:20:21.7959527+00:00][INFO][16][Microsoft.Hosting.Lifetime] Content root path: "/app"
+[2020-01-23T09:20:49.3759938+00:00][INFO][5][Microsoft.AspNetCore.Hosting.Diagnostics] Request starting HTTP/1.1 GET http://127.0.0.1.xip.io:9000/  
+[2020-01-23T09:20:49.7039420+00:00][INFO][5][Microsoft.AspNetCore.Authorization.DefaultAuthorizationService] Authorization failed.
+[2020-01-23T09:20:51.0368318+00:00][INFO][15][Microsoft.AspNetCore.Authentication.OpenIdConnect.OpenIdConnectHandler] AuthenticationScheme: "oidc" was challenged.
+[2020-01-23T09:20:51.0602782+00:00][INFO][15][Microsoft.AspNetCore.Hosting.Diagnostics] Request finished in 1686.7134ms 302 
+[2020-01-23T09:21:01.8999992+00:00][INFO][4][Microsoft.AspNetCore.Hosting.Diagnostics] Request starting HTTP/1.1 POST http://127.0.0.1.xip.io:9000/signin-oidc application/x-www-form-urlencoded 1484
+[2020-01-23T09:21:05.4808965+00:00][INFO][4][Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationHandler] AuthenticationScheme: "Cookies" signed in.
+[2020-01-23T09:21:05.4882043+00:00][INFO][4][Microsoft.AspNetCore.Hosting.Diagnostics] Request finished in 3588.1916ms 302 
+[2020-01-23T09:21:05.6204797+00:00][INFO][13][Microsoft.AspNetCore.Hosting.Diagnostics] Request starting HTTP/1.1 GET http://127.0.0.1.xip.io:9000/  
+[2020-01-23T09:21:05.6402550+00:00][INFO][13][Microsoft.AspNetCore.Authorization.DefaultAuthorizationService] Authorization was successful.
+[2020-01-23T09:21:05.6448528+00:00][INFO][13][Microsoft.AspNetCore.Routing.EndpointMiddleware] Executing endpoint '"ITLab.Identity.Admin.Controllers.HomeController.Index (ITLab.Identity.Admin)"'
+[2020-01-23T09:21:05.7611696+00:00][INFO][13][Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker] Route matched with "{action = \"Index\", controller = \"Home\"}". Executing controller action with signature "Microsoft.AspNetCore.Mvc.IActionResult Index()" on controller "ITLab.Identity.Admin.Controllers.HomeController" ("ITLab.Identity.Admin").
+[2020-01-23T09:21:05.8813873+00:00][INFO][13][Microsoft.AspNetCore.Mvc.ViewFeatures.ViewResultExecutor] Executing ViewResult, running view "Index".
+[2020-01-23T09:21:06.7123587+00:00][EROR][13][Microsoft.AspNetCore.Antiforgery.DefaultAntiforgery] An exception was thrown while deserializing the token.
+Microsoft.AspNetCore.Antiforgery.AntiforgeryValidationException: The antiforgery token could not be decrypted.
+ ---> System.Security.Cryptography.CryptographicException: The key {b4304e5a-faac-4303-b352-bb28b83a849c} was not found in the key ring.
+   at Microsoft.AspNetCore.DataProtection.KeyManagement.KeyRingBasedDataProtector.UnprotectCore(Byte[] protectedData, Boolean allowOperationsOnRevokedKeys, UnprotectStatus& status)
+   at Microsoft.AspNetCore.DataProtection.KeyManagement.KeyRingBasedDataProtector.DangerousUnprotect(Byte[] protectedData, Boolean ignoreRevocationErrors, Boolean& requiresMigration, Boolean& wasRevoked)
+   at Microsoft.AspNetCore.DataProtection.KeyManagement.KeyRingBasedDataProtector.Unprotect(Byte[] protectedData)
+   at Microsoft.AspNetCore.Antiforgery.DefaultAntiforgeryTokenSerializer.Deserialize(String serializedToken)
+   --- End of inner exception stack trace ---
+   at Microsoft.AspNetCore.Antiforgery.DefaultAntiforgeryTokenSerializer.Deserialize(String serializedToken)
+   at Microsoft.AspNetCore.Antiforgery.DefaultAntiforgery.GetCookieTokenDoesNotThrow(HttpContext httpContext)
+[2020-01-23T09:21:07.1543480+00:00][INFO][13][Microsoft.AspNetCore.Mvc.ViewFeatures.ViewResultExecutor] Executed ViewResult - view "Index" executed in 1280.5317ms.
+[2020-01-23T09:21:07.1568769+00:00][INFO][13][Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker] Executed action "ITLab.Identity.Admin.Controllers.HomeController.Index (ITLab.Identity.Admin)" in 1387.8828ms
+[2020-01-23T09:21:07.1577840+00:00][INFO][13][Microsoft.AspNetCore.Routing.EndpointMiddleware] Executed endpoint '"ITLab.Identity.Admin.Controllers.HomeController.Index (ITLab.Identity.Admin)"'
+[2020-01-23T09:21:07.1631337+00:00][INFO][13][Microsoft.AspNetCore.Hosting.Diagnostics] Request finished in 1542.9955ms 200 text/html; charset=utf-8
+[2020-01-23T09:21:07.2423282+00:00][INFO][15][Microsoft.AspNetCore.Hosting.Diagnostics] Request starting HTTP/1.1 GET http://127.0.0.1.xip.io:9000/dist/css/bundle.min.css?v=6M320d78nIfpBFUkLz-ZUXonqvvM-NjZXUbkHbIYB_w  
+[2020-01-23T09:21:07.3148280+00:00][INFO][15][Microsoft.AspNetCore.Hosting.Diagnostics] Request starting HTTP/1.1 GET http://127.0.0.1.xip.io:9000/dist/css/web.css?v=KmyZsn_VVTpjkvStGglSEk5quJLGCzQaCO-S5cM30-M  
+[2020-01-23T09:21:07.3555028+00:00][INFO][15][Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware] Sending file. Request path: '"/dist/css/web.css"'. Physical path: '"/app/wwwroot/dist/css/web.css"'
+[2020-01-23T09:21:07.3559744+00:00][INFO][15][Microsoft.AspNetCore.Hosting.Diagnostics] Request finished in 41.1635ms 200 text/css
+[2020-01-23T09:21:07.3570697+00:00][INFO][15][Microsoft.AspNetCore.Hosting.Diagnostics] Request starting HTTP/1.1 GET http://127.0.0.1.xip.io:9000/dist/js/bundle.min.js?v=lhjL2AFlbI-DTyxqApXVeI2sMf4klH8JB2nohgH9Kls  
+[2020-01-23T09:21:07.4068613+00:00][INFO][15][Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware] Sending file. Request path: '"/dist/css/bundle.min.css"'. Physical path: '"/app/wwwroot/dist/css/bundle.min.css"'
+[2020-01-23T09:21:07.4072568+00:00][INFO][15][Microsoft.AspNetCore.Hosting.Diagnostics] Request finished in 164.9453ms 200 text/css
+[2020-01-23T09:21:07.4301596+00:00][INFO][15][Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware] Sending file. Request path: '"/dist/js/bundle.min.js"'. Physical path: '"/app/wwwroot/dist/js/bundle.min.js"'
+[2020-01-23T09:21:07.4308927+00:00][INFO][15][Microsoft.AspNetCore.Hosting.Diagnostics] Request finished in 73.6954ms 200 application/javascript
+[2020-01-23T09:21:07.9711766+00:00][INFO][15][Microsoft.AspNetCore.Hosting.Diagnostics] Request starting HTTP/1.1 GET http://127.0.0.1.xip.io:9000/dist/fonts/open-iconic.woff  
+[2020-01-23T09:21:07.9963796+00:00][INFO][15][Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware] Sending file. Request path: '"/dist/fonts/open-iconic.woff"'. Physical path: '"/app/wwwroot/dist/fonts/open-iconic.woff"'
+[2020-01-23T09:21:07.9991110+00:00][INFO][15][Microsoft.AspNetCore.Hosting.Diagnostics] Request finished in 28.6005ms 200 application/font-woff
+[2020-01-23T09:21:08.1306287+00:00][INFO][15][Microsoft.AspNetCore.Hosting.Diagnostics] Request starting HTTP/1.1 GET http://127.0.0.1.xip.io:9000/favicon.ico  
+[2020-01-23T09:21:08.1567055+00:00][INFO][15][Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware] Sending file. Request path: '"/favicon.ico"'. Physical path: '"/app/wwwroot/favicon.ico"'
+[2020-01-23T09:21:08.1586430+00:00][INFO][15][Microsoft.AspNetCore.Hosting.Diagnostics] Request finished in 27.7919ms 200 image/x-icon
+[2020-01-23T09:21:12.2762994+00:00][INFO][11][Microsoft.AspNetCore.Hosting.Diagnostics] Request starting HTTP/1.1 GET http://127.0.0.1.xip.io:9000/Configuration/Clients  
+[2020-01-23T09:21:12.3308760+00:00][INFO][11][Microsoft.AspNetCore.Authorization.DefaultAuthorizationService] Authorization was successful.
+[2020-01-23T09:21:12.3330197+00:00][INFO][11][Microsoft.AspNetCore.Routing.EndpointMiddleware] Executing endpoint '"ITLab.Identity.Admin.Controllers.ConfigurationController.Clients (ITLab.Identity.Admin)"'
+[2020-01-23T09:21:12.4000297+00:00][INFO][11][Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker] Route matched with "{action = \"Clients\", controller = \"Configuration\"}". Executing controller action with signature "System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Clients(System.Nullable`1[System.Int32], System.String)" on controller "ITLab.Identity.Admin.Controllers.ConfigurationController" ("ITLab.Identity.Admin").
+[2020-01-23T09:21:12.4788031+00:00][INFO][11][Microsoft.EntityFrameworkCore.Infrastructure] Entity Framework Core "3.1.0" initialized '"IdentityServerConfigurationDbContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "MigrationsAssembly=ITLab.Identity.Admin.EntityFramework.SqlServer "
+[2020-01-23T09:21:12.9181969+00:00][INFO][13][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("213"ms) [Parameters=["@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [c].[Id], [c].[AbsoluteRefreshTokenLifetime], [c].[AccessTokenLifetime], [c].[AccessTokenType], [c].[AllowAccessTokensViaBrowser], [c].[AllowOfflineAccess], [c].[AllowPlainTextPkce], [c].[AllowRememberConsent], [c].[AlwaysIncludeUserClaimsInIdToken], [c].[AlwaysSendClientClaims], [c].[AuthorizationCodeLifetime], [c].[BackChannelLogoutSessionRequired], [c].[BackChannelLogoutUri], [c].[ClientClaimsPrefix], [c].[ClientId], [c].[ClientName], [c].[ClientUri], [c].[ConsentLifetime], [c].[Created], [c].[Description], [c].[DeviceCodeLifetime], [c].[EnableLocalLogin], [c].[Enabled], [c].[FrontChannelLogoutSessionRequired], [c].[FrontChannelLogoutUri], [c].[IdentityTokenLifetime], [c].[IncludeJwtId], [c].[LastAccessed], [c].[LogoUri], [c].[NonEditable], [c].[PairWiseSubjectSalt], [c].[ProtocolType], [c].[RefreshTokenExpiration], [c].[RefreshTokenUsage], [c].[RequireClientSecret], [c].[RequireConsent], [c].[RequirePkce], [c].[SlidingRefreshTokenLifetime], [c].[UpdateAccessTokenClaimsOnRefresh], [c].[Updated], [c].[UserCodeType], [c].[UserSsoLifetime]
+FROM [Clients] AS [c]
+ORDER BY [c].[Id] DESC
+OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY"
+[2020-01-23T09:21:13.5781432+00:00][INFO][14][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("9"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT COUNT(*)
+FROM [Clients] AS [c]"
+[2020-01-23T09:21:15.3849727+00:00][INFO][11][Microsoft.EntityFrameworkCore.Infrastructure] Entity Framework Core "3.1.0" initialized '"AdminAuditLogDbContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "MigrationsAssembly=ITLab.Identity.Admin.EntityFramework.SqlServer "
+[2020-01-23T09:21:15.6528900+00:00][INFO][14][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("16"ms) [Parameters=["@p0='?' (Size = 4000), @p1='?' (Size = 4000), @p2='?' (DbType = DateTime2), @p3='?' (Size = 4000), @p4='?' (Size = 4000), @p5='?' (Size = 4000), @p6='?' (Size = 4000), @p7='?' (Size = 4000), @p8='?' (Size = 4000), @p9='?' (Size = 4000)"], CommandType='Text', CommandTimeout='30']"
+""SET NOCOUNT ON;
+INSERT INTO [AuditLog] ([Action], [Category], [Created], [Data], [Event], [Source], [SubjectAdditionalData], [SubjectIdentifier], [SubjectName], [SubjectType])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9);
+SELECT [Id]
+FROM [AuditLog]
+WHERE @@ROWCOUNT = 1 AND [Id] = scope_identity();"
+[2020-01-23T09:21:15.8129523+00:00][INFO][14][Microsoft.AspNetCore.Mvc.ViewFeatures.ViewResultExecutor] Executing ViewResult, running view "Clients".
+[2020-01-23T09:21:15.9277509+00:00][INFO][14][Microsoft.AspNetCore.Mvc.ViewFeatures.ViewResultExecutor] Executed ViewResult - view "Clients" executed in 117.2066ms.
+[2020-01-23T09:21:15.9305334+00:00][INFO][14][Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker] Executed action "ITLab.Identity.Admin.Controllers.ConfigurationController.Clients (ITLab.Identity.Admin)" in 3529.8959ms
+[2020-01-23T09:21:15.9334954+00:00][INFO][14][Microsoft.AspNetCore.Routing.EndpointMiddleware] Executed endpoint '"ITLab.Identity.Admin.Controllers.ConfigurationController.Clients (ITLab.Identity.Admin)"'
+[2020-01-23T09:21:15.9388920+00:00][INFO][14][Microsoft.AspNetCore.Hosting.Diagnostics] Request finished in 3663.9713ms 200 text/html; charset=utf-8
+[2020-01-23T09:21:20.3966627+00:00][INFO][13][Microsoft.AspNetCore.Hosting.Diagnostics] Request starting HTTP/1.1 GET http://127.0.0.1.xip.io:9000/Configuration/Client/1  
+[2020-01-23T09:21:20.4909085+00:00][INFO][13][Microsoft.AspNetCore.Authorization.DefaultAuthorizationService] Authorization was successful.
+[2020-01-23T09:21:20.4926155+00:00][INFO][13][Microsoft.AspNetCore.Routing.EndpointMiddleware] Executing endpoint '"ITLab.Identity.Admin.Controllers.ConfigurationController.Client (ITLab.Identity.Admin)"'
+[2020-01-23T09:21:20.5097506+00:00][INFO][13][Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker] Route matched with "{action = \"Client\", controller = \"Configuration\"}". Executing controller action with signature "System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Client(Int32)" on controller "ITLab.Identity.Admin.Controllers.ConfigurationController" ("ITLab.Identity.Admin").
+[2020-01-23T09:21:20.5317722+00:00][INFO][13][Microsoft.EntityFrameworkCore.Infrastructure] Entity Framework Core "3.1.0" initialized '"IdentityServerConfigurationDbContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "MigrationsAssembly=ITLab.Identity.Admin.EntityFramework.SqlServer "
+[2020-01-23T09:21:20.8163582+00:00][INFO][13][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("24"ms) [Parameters=["@__clientId_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [t].[Id], [t].[AbsoluteRefreshTokenLifetime], [t].[AccessTokenLifetime], [t].[AccessTokenType], [t].[AllowAccessTokensViaBrowser], [t].[AllowOfflineAccess], [t].[AllowPlainTextPkce], [t].[AllowRememberConsent], [t].[AlwaysIncludeUserClaimsInIdToken], [t].[AlwaysSendClientClaims], [t].[AuthorizationCodeLifetime], [t].[BackChannelLogoutSessionRequired], [t].[BackChannelLogoutUri], [t].[ClientClaimsPrefix], [t].[ClientId], [t].[ClientName], [t].[ClientUri], [t].[ConsentLifetime], [t].[Created], [t].[Description], [t].[DeviceCodeLifetime], [t].[EnableLocalLogin], [t].[Enabled], [t].[FrontChannelLogoutSessionRequired], [t].[FrontChannelLogoutUri], [t].[IdentityTokenLifetime], [t].[IncludeJwtId], [t].[LastAccessed], [t].[LogoUri], [t].[NonEditable], [t].[PairWiseSubjectSalt], [t].[ProtocolType], [t].[RefreshTokenExpiration], [t].[RefreshTokenUsage], [t].[RequireClientSecret], [t].[RequireConsent], [t].[RequirePkce], [t].[SlidingRefreshTokenLifetime], [t].[UpdateAccessTokenClaimsOnRefresh], [t].[Updated], [t].[UserCodeType], [t].[UserSsoLifetime], [c0].[Id], [c0].[ClientId], [c0].[GrantType], [c1].[Id], [c1].[ClientId], [c1].[RedirectUri], [c2].[Id], [c2].[ClientId], [c2].[PostLogoutRedirectUri], [c3].[Id], [c3].[ClientId], [c3].[Scope], [c4].[Id], [c4].[ClientId], [c4].[Created], [c4].[Description], [c4].[Expiration], [c4].[Type], [c4].[Value], [c5].[Id], [c5].[ClientId], [c5].[Type], [c5].[Value], [c6].[Id], [c6].[ClientId], [c6].[Provider], [c7].[Id], [c7].[ClientId], [c7].[Origin], [c8].[Id], [c8].[ClientId], [c8].[Key], [c8].[Value]
+FROM (
+    SELECT TOP(2) [c].[Id], [c].[AbsoluteRefreshTokenLifetime], [c].[AccessTokenLifetime], [c].[AccessTokenType], [c].[AllowAccessTokensViaBrowser], [c].[AllowOfflineAccess], [c].[AllowPlainTextPkce], [c].[AllowRememberConsent], [c].[AlwaysIncludeUserClaimsInIdToken], [c].[AlwaysSendClientClaims], [c].[AuthorizationCodeLifetime], [c].[BackChannelLogoutSessionRequired], [c].[BackChannelLogoutUri], [c].[ClientClaimsPrefix], [c].[ClientId], [c].[ClientName], [c].[ClientUri], [c].[ConsentLifetime], [c].[Created], [c].[Description], [c].[DeviceCodeLifetime], [c].[EnableLocalLogin], [c].[Enabled], [c].[FrontChannelLogoutSessionRequired], [c].[FrontChannelLogoutUri], [c].[IdentityTokenLifetime], [c].[IncludeJwtId], [c].[LastAccessed], [c].[LogoUri], [c].[NonEditable], [c].[PairWiseSubjectSalt], [c].[ProtocolType], [c].[RefreshTokenExpiration], [c].[RefreshTokenUsage], [c].[RequireClientSecret], [c].[RequireConsent], [c].[RequirePkce], [c].[SlidingRefreshTokenLifetime], [c].[UpdateAccessTokenClaimsOnRefresh], [c].[Updated], [c].[UserCodeType], [c].[UserSsoLifetime]
+    FROM [Clients] AS [c]
+    WHERE [c].[Id] = @__clientId_0
+) AS [t]
+LEFT JOIN [ClientGrantTypes] AS [c0] ON [t].[Id] = [c0].[ClientId]
+LEFT JOIN [ClientRedirectUris] AS [c1] ON [t].[Id] = [c1].[ClientId]
+LEFT JOIN [ClientPostLogoutRedirectUris] AS [c2] ON [t].[Id] = [c2].[ClientId]
+LEFT JOIN [ClientScopes] AS [c3] ON [t].[Id] = [c3].[ClientId]
+LEFT JOIN [ClientSecrets] AS [c4] ON [t].[Id] = [c4].[ClientId]
+LEFT JOIN [ClientClaims] AS [c5] ON [t].[Id] = [c5].[ClientId]
+LEFT JOIN [ClientIdPRestrictions] AS [c6] ON [t].[Id] = [c6].[ClientId]
+LEFT JOIN [ClientCorsOrigins] AS [c7] ON [t].[Id] = [c7].[ClientId]
+LEFT JOIN [ClientProperties] AS [c8] ON [t].[Id] = [c8].[ClientId]
+ORDER BY [t].[Id], [c0].[Id], [c1].[Id], [c2].[Id], [c3].[Id], [c4].[Id], [c5].[Id], [c6].[Id], [c7].[Id], [c8].[Id]"
+[2020-01-23T09:21:20.8832641+00:00][INFO][13][Microsoft.EntityFrameworkCore.Infrastructure] Entity Framework Core "3.1.0" initialized '"AdminAuditLogDbContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "MigrationsAssembly=ITLab.Identity.Admin.EntityFramework.SqlServer "
+[2020-01-23T09:21:21.8153161+00:00][INFO][13][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("43"ms) [Parameters=["@p0='?' (Size = 4000), @p1='?' (Size = 4000), @p2='?' (DbType = DateTime2), @p3='?' (Size = 4000), @p4='?' (Size = 4000), @p5='?' (Size = 4000), @p6='?' (Size = 4000), @p7='?' (Size = 4000), @p8='?' (Size = 4000), @p9='?' (Size = 4000)"], CommandType='Text', CommandTimeout='30']"
+""SET NOCOUNT ON;
+INSERT INTO [AuditLog] ([Action], [Category], [Created], [Data], [Event], [Source], [SubjectAdditionalData], [SubjectIdentifier], [SubjectName], [SubjectType])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9);
+SELECT [Id]
+FROM [AuditLog]
+WHERE @@ROWCOUNT = 1 AND [Id] = scope_identity();"
+[2020-01-23T09:21:22.8590484+00:00][INFO][13][Microsoft.AspNetCore.Mvc.ViewFeatures.ViewResultExecutor] Executing ViewResult, running view "Client".
+[2020-01-23T09:21:23.7435263+00:00][INFO][13][Microsoft.AspNetCore.Mvc.ViewFeatures.ViewResultExecutor] Executed ViewResult - view "Client" executed in 887.3555ms.
+[2020-01-23T09:21:23.7457852+00:00][INFO][13][Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker] Executed action "ITLab.Identity.Admin.Controllers.ConfigurationController.Client (ITLab.Identity.Admin)" in 3235.0402ms
+[2020-01-23T09:21:23.7478251+00:00][INFO][13][Microsoft.AspNetCore.Routing.EndpointMiddleware] Executed endpoint '"ITLab.Identity.Admin.Controllers.ConfigurationController.Client (ITLab.Identity.Admin)"'
+[2020-01-23T09:21:23.7504093+00:00][INFO][13][Microsoft.AspNetCore.Hosting.Diagnostics] Request finished in 3354.4914ms 200 text/html; charset=utf-8
+[2020-01-23T09:21:24.3281944+00:00][INFO][5][Microsoft.AspNetCore.Hosting.Diagnostics] Request starting HTTP/1.1 GET http://127.0.0.1.xip.io:9000/Configuration/SearchScopes?scope&limit=5  
+[2020-01-23T09:21:24.3453612+00:00][INFO][5][Microsoft.AspNetCore.Authorization.DefaultAuthorizationService] Authorization was successful.
+[2020-01-23T09:21:24.3462696+00:00][INFO][5][Microsoft.AspNetCore.Routing.EndpointMiddleware] Executing endpoint '"ITLab.Identity.Admin.Controllers.ConfigurationController.SearchScopes (ITLab.Identity.Admin)"'
+[2020-01-23T09:21:24.3750003+00:00][INFO][5][Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker] Route matched with "{action = \"SearchScopes\", controller = \"Configuration\"}". Executing controller action with signature "System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] SearchScopes(System.String, Int32)" on controller "ITLab.Identity.Admin.Controllers.ConfigurationController" ("ITLab.Identity.Admin").
+[2020-01-23T09:21:24.3956348+00:00][INFO][13][Microsoft.AspNetCore.Hosting.Diagnostics] Request starting HTTP/1.1 GET http://127.0.0.1.xip.io:9000/Configuration/SearchGrantTypes?grant&limit=5  
+[2020-01-23T09:21:24.4068945+00:00][INFO][13][Microsoft.AspNetCore.Authorization.DefaultAuthorizationService] Authorization was successful.
+[2020-01-23T09:21:24.4106601+00:00][INFO][13][Microsoft.AspNetCore.Routing.EndpointMiddleware] Executing endpoint '"ITLab.Identity.Admin.Controllers.ConfigurationController.SearchGrantTypes (ITLab.Identity.Admin)"'
+[2020-01-23T09:21:24.4256986+00:00][INFO][13][Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker] Route matched with "{action = \"SearchGrantTypes\", controller = \"Configuration\"}". Executing controller action with signature "Microsoft.AspNetCore.Mvc.IActionResult SearchGrantTypes(System.String, Int32)" on controller "ITLab.Identity.Admin.Controllers.ConfigurationController" ("ITLab.Identity.Admin").
+[2020-01-23T09:21:24.4411575+00:00][INFO][15][Microsoft.AspNetCore.Hosting.Diagnostics] Request starting HTTP/1.1 GET http://127.0.0.1.xip.io:9000/images/loading.gif  
+[2020-01-23T09:21:24.5143206+00:00][INFO][14][Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware] Sending file. Request path: '"/images/loading.gif"'. Physical path: '"/app/wwwroot/images/loading.gif"'
+[2020-01-23T09:21:24.5390679+00:00][INFO][15][Microsoft.AspNetCore.Hosting.Diagnostics] Request finished in 97.8156ms 200 image/gif
+[2020-01-23T09:21:24.5433375+00:00][INFO][5][Microsoft.EntityFrameworkCore.Infrastructure] Entity Framework Core "3.1.0" initialized '"IdentityServerConfigurationDbContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "MigrationsAssembly=ITLab.Identity.Admin.EntityFramework.SqlServer "
+[2020-01-23T09:21:24.5551547+00:00][INFO][13][Microsoft.AspNetCore.Mvc.Infrastructure.ObjectResultExecutor] Executing ObjectResult, writing value of type '"System.Collections.Generic.List`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"'.
+[2020-01-23T09:21:24.6005078+00:00][INFO][17][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("32"ms) [Parameters=["@__p_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(@__p_0) [i].[Name]
+FROM [IdentityResources] AS [i]
+ORDER BY [i].[Id] DESC"
+[2020-01-23T09:21:24.7773257+00:00][INFO][13][Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker] Executed action "ITLab.Identity.Admin.Controllers.ConfigurationController.SearchGrantTypes (ITLab.Identity.Admin)" in 341.9879ms
+[2020-01-23T09:21:24.7857418+00:00][INFO][13][Microsoft.AspNetCore.Routing.EndpointMiddleware] Executed endpoint '"ITLab.Identity.Admin.Controllers.ConfigurationController.SearchGrantTypes (ITLab.Identity.Admin)"'
+[2020-01-23T09:21:24.8593183+00:00][INFO][13][Microsoft.AspNetCore.Hosting.Diagnostics] Request finished in 464.5274ms 200 application/json; charset=utf-8
+[2020-01-23T09:21:24.9977203+00:00][INFO][17][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("12"ms) [Parameters=["@__p_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(@__p_0) [a].[Name]
+FROM [ApiScopes] AS [a]
+ORDER BY [a].[Id] DESC"
+[2020-01-23T09:21:25.0268274+00:00][INFO][17][Microsoft.AspNetCore.Mvc.Infrastructure.ObjectResultExecutor] Executing ObjectResult, writing value of type '"System.Collections.Generic.List`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"'.
+[2020-01-23T09:21:25.0407713+00:00][INFO][17][Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker] Executed action "ITLab.Identity.Admin.Controllers.ConfigurationController.SearchScopes (ITLab.Identity.Admin)" in 662.5548ms
+[2020-01-23T09:21:25.0432998+00:00][INFO][17][Microsoft.AspNetCore.Routing.EndpointMiddleware] Executed endpoint '"ITLab.Identity.Admin.Controllers.ConfigurationController.SearchScopes (ITLab.Identity.Admin)"'
+[2020-01-23T09:21:25.0523553+00:00][INFO][17][Microsoft.AspNetCore.Hosting.Diagnostics] Request finished in 722.165ms 200 application/json; charset=utf-8
+[2020-01-23T09:22:19.7342991+00:00][INFO][13][Microsoft.AspNetCore.Hosting.Diagnostics] Request starting HTTP/1.1 GET http://127.0.0.1.xip.io:9000/Configuration/ClientProperties/1  
+[2020-01-23T09:22:19.7483399+00:00][INFO][13][Microsoft.AspNetCore.Authorization.DefaultAuthorizationService] Authorization was successful.
+[2020-01-23T09:22:19.7632677+00:00][INFO][13][Microsoft.AspNetCore.Routing.EndpointMiddleware] Executing endpoint '"ITLab.Identity.Admin.Controllers.ConfigurationController.ClientProperties (ITLab.Identity.Admin)"'
+[2020-01-23T09:22:19.8375120+00:00][INFO][13][Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker] Route matched with "{action = \"ClientProperties\", controller = \"Configuration\"}". Executing controller action with signature "System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] ClientProperties(Int32, System.Nullable`1[System.Int32])" on controller "ITLab.Identity.Admin.Controllers.ConfigurationController" ("ITLab.Identity.Admin").
+[2020-01-23T09:22:19.8887181+00:00][INFO][13][Microsoft.EntityFrameworkCore.Infrastructure] Entity Framework Core "3.1.0" initialized '"IdentityServerConfigurationDbContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "MigrationsAssembly=ITLab.Identity.Admin.EntityFramework.SqlServer "
+[2020-01-23T09:22:20.0013439+00:00][INFO][8][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("36"ms) [Parameters=["@__clientId_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(2) [c].[ClientId], [c].[ClientName]
+FROM [Clients] AS [c]
+WHERE [c].[Id] = @__clientId_0"
+[2020-01-23T09:22:20.2466183+00:00][INFO][8][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("16"ms) [Parameters=["@__clientId_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32), @__p_2='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [c].[Id], [c].[ClientId], [c].[Key], [c].[Value]
+FROM [ClientProperties] AS [c]
+INNER JOIN [Clients] AS [c0] ON [c].[ClientId] = [c0].[Id]
+WHERE [c0].[Id] = @__clientId_0
+ORDER BY [c].[Id] DESC
+OFFSET @__p_1 ROWS FETCH NEXT @__p_2 ROWS ONLY"
+[2020-01-23T09:22:20.2807509+00:00][INFO][8][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("12"ms) [Parameters=["@__clientId_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT COUNT(*)
+FROM [ClientProperties] AS [c]
+INNER JOIN [Clients] AS [c0] ON [c].[ClientId] = [c0].[Id]
+WHERE [c0].[Id] = @__clientId_0"
+[2020-01-23T09:22:20.3371885+00:00][INFO][8][Microsoft.EntityFrameworkCore.Infrastructure] Entity Framework Core "3.1.0" initialized '"AdminAuditLogDbContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "MigrationsAssembly=ITLab.Identity.Admin.EntityFramework.SqlServer "
+[2020-01-23T09:22:21.2991368+00:00][INFO][13][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("8"ms) [Parameters=["@p0='?' (Size = 4000), @p1='?' (Size = 4000), @p2='?' (DbType = DateTime2), @p3='?' (Size = 4000), @p4='?' (Size = 4000), @p5='?' (Size = 4000), @p6='?' (Size = 4000), @p7='?' (Size = 4000), @p8='?' (Size = 4000), @p9='?' (Size = 4000)"], CommandType='Text', CommandTimeout='30']"
+""SET NOCOUNT ON;
+INSERT INTO [AuditLog] ([Action], [Category], [Created], [Data], [Event], [Source], [SubjectAdditionalData], [SubjectIdentifier], [SubjectName], [SubjectType])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9);
+SELECT [Id]
+FROM [AuditLog]
+WHERE @@ROWCOUNT = 1 AND [Id] = scope_identity();"
+[2020-01-23T09:22:21.3653362+00:00][INFO][13][Microsoft.AspNetCore.Mvc.ViewFeatures.ViewResultExecutor] Executing ViewResult, running view "ClientProperties".
+[2020-01-23T09:22:21.5033733+00:00][INFO][13][Microsoft.AspNetCore.Mvc.ViewFeatures.ViewResultExecutor] Executed ViewResult - view "ClientProperties" executed in 142.1759ms.
+[2020-01-23T09:22:21.5044878+00:00][INFO][13][Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker] Executed action "ITLab.Identity.Admin.Controllers.ConfigurationController.ClientProperties (ITLab.Identity.Admin)" in 1658.3137ms
+[2020-01-23T09:22:21.5056070+00:00][INFO][13][Microsoft.AspNetCore.Routing.EndpointMiddleware] Executed endpoint '"ITLab.Identity.Admin.Controllers.ConfigurationController.ClientProperties (ITLab.Identity.Admin)"'
+[2020-01-23T09:22:21.5077976+00:00][INFO][13][Microsoft.AspNetCore.Hosting.Diagnostics] Request finished in 1773.7761ms 200 text/html; charset=utf-8
+[2020-01-23T09:22:28.3493533+00:00][INFO][13][Microsoft.AspNetCore.Hosting.Diagnostics] Request starting HTTP/1.1 GET http://127.0.0.1.xip.io:9000/Configuration/ClientSecrets/1  
+[2020-01-23T09:22:28.3683044+00:00][INFO][13][Microsoft.AspNetCore.Authorization.DefaultAuthorizationService] Authorization was successful.
+[2020-01-23T09:22:28.3696849+00:00][INFO][13][Microsoft.AspNetCore.Routing.EndpointMiddleware] Executing endpoint '"ITLab.Identity.Admin.Controllers.ConfigurationController.ClientSecrets (ITLab.Identity.Admin)"'
+[2020-01-23T09:22:28.3824185+00:00][INFO][13][Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker] Route matched with "{action = \"ClientSecrets\", controller = \"Configuration\"}". Executing controller action with signature "System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] ClientSecrets(Int32, System.Nullable`1[System.Int32])" on controller "ITLab.Identity.Admin.Controllers.ConfigurationController" ("ITLab.Identity.Admin").
+[2020-01-23T09:22:28.3945855+00:00][INFO][13][Microsoft.EntityFrameworkCore.Infrastructure] Entity Framework Core "3.1.0" initialized '"IdentityServerConfigurationDbContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "MigrationsAssembly=ITLab.Identity.Admin.EntityFramework.SqlServer "
+[2020-01-23T09:22:28.4314218+00:00][INFO][18][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("28"ms) [Parameters=["@__clientId_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(2) [c].[ClientId], [c].[ClientName]
+FROM [Clients] AS [c]
+WHERE [c].[Id] = @__clientId_0"
+[2020-01-23T09:22:28.5858451+00:00][INFO][8][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("38"ms) [Parameters=["@__clientId_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32), @__p_2='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [c].[Id], [c].[ClientId], [c].[Created], [c].[Description], [c].[Expiration], [c].[Type], [c].[Value]
+FROM [ClientSecrets] AS [c]
+INNER JOIN [Clients] AS [c0] ON [c].[ClientId] = [c0].[Id]
+WHERE [c0].[Id] = @__clientId_0
+ORDER BY (SELECT 1)
+OFFSET @__p_1 ROWS FETCH NEXT @__p_2 ROWS ONLY"
+[2020-01-23T09:22:28.6420462+00:00][INFO][13][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("11"ms) [Parameters=["@__clientId_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT COUNT(*)
+FROM [ClientSecrets] AS [c]
+INNER JOIN [Clients] AS [c0] ON [c].[ClientId] = [c0].[Id]
+WHERE [c0].[Id] = @__clientId_0"
+[2020-01-23T09:22:28.7335491+00:00][INFO][13][Microsoft.EntityFrameworkCore.Infrastructure] Entity Framework Core "3.1.0" initialized '"AdminAuditLogDbContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "MigrationsAssembly=ITLab.Identity.Admin.EntityFramework.SqlServer "
+[2020-01-23T09:22:28.7664440+00:00][INFO][21][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("7"ms) [Parameters=["@p0='?' (Size = 4000), @p1='?' (Size = 4000), @p2='?' (DbType = DateTime2), @p3='?' (Size = 4000), @p4='?' (Size = 4000), @p5='?' (Size = 4000), @p6='?' (Size = 4000), @p7='?' (Size = 4000), @p8='?' (Size = 4000), @p9='?' (Size = 4000)"], CommandType='Text', CommandTimeout='30']"
+""SET NOCOUNT ON;
+INSERT INTO [AuditLog] ([Action], [Category], [Created], [Data], [Event], [Source], [SubjectAdditionalData], [SubjectIdentifier], [SubjectName], [SubjectType])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9);
+SELECT [Id]
+FROM [AuditLog]
+WHERE @@ROWCOUNT = 1 AND [Id] = scope_identity();"
+[2020-01-23T09:22:28.8950289+00:00][INFO][21][Microsoft.AspNetCore.Mvc.ViewFeatures.ViewResultExecutor] Executing ViewResult, running view "ClientSecrets".
+[2020-01-23T09:22:29.1200728+00:00][INFO][21][Microsoft.AspNetCore.Mvc.ViewFeatures.ViewResultExecutor] Executed ViewResult - view "ClientSecrets" executed in 231.0116ms.
+[2020-01-23T09:22:29.1217840+00:00][INFO][21][Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker] Executed action "ITLab.Identity.Admin.Controllers.ConfigurationController.ClientSecrets (ITLab.Identity.Admin)" in 738.7876ms
+[2020-01-23T09:22:29.1232539+00:00][INFO][21][Microsoft.AspNetCore.Routing.EndpointMiddleware] Executed endpoint '"ITLab.Identity.Admin.Controllers.ConfigurationController.ClientSecrets (ITLab.Identity.Admin)"'
+[2020-01-23T09:22:29.1286316+00:00][INFO][21][Microsoft.AspNetCore.Hosting.Diagnostics] Request finished in 783.877ms 200 text/html; charset=utf-8
+[2020-01-23T09:22:29.5453290+00:00][INFO][21][Microsoft.AspNetCore.Hosting.Diagnostics] Request starting HTTP/1.1 GET http://127.0.0.1.xip.io:9000/dist/fonts/fontawesome-webfont.woff2?v=4.7.0  
+[2020-01-23T09:22:29.6098315+00:00][INFO][21][Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware] Sending file. Request path: '"/dist/fonts/fontawesome-webfont.woff2"'. Physical path: '"/app/wwwroot/dist/fonts/fontawesome-webfont.woff2"'
+[2020-01-23T09:22:29.6271976+00:00][INFO][21][Microsoft.AspNetCore.Hosting.Diagnostics] Request finished in 81.7329ms 200 font/woff2
+[2020-01-23T09:22:49.2945255+00:00][INFO][8][Microsoft.AspNetCore.Hosting.Diagnostics] Request starting HTTP/1.1 GET http://127.0.0.1.xip.io:9000/Configuration/ApiResources  
+[2020-01-23T09:22:49.3091102+00:00][INFO][8][Microsoft.AspNetCore.Authorization.DefaultAuthorizationService] Authorization was successful.
+[2020-01-23T09:22:49.3124648+00:00][INFO][8][Microsoft.AspNetCore.Routing.EndpointMiddleware] Executing endpoint '"ITLab.Identity.Admin.Controllers.ConfigurationController.ApiResources (ITLab.Identity.Admin)"'
+[2020-01-23T09:22:49.3598317+00:00][INFO][8][Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker] Route matched with "{action = \"ApiResources\", controller = \"Configuration\"}". Executing controller action with signature "System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] ApiResources(System.Nullable`1[System.Int32], System.String)" on controller "ITLab.Identity.Admin.Controllers.ConfigurationController" ("ITLab.Identity.Admin").
+[2020-01-23T09:22:49.3969773+00:00][INFO][8][Microsoft.EntityFrameworkCore.Infrastructure] Entity Framework Core "3.1.0" initialized '"IdentityServerConfigurationDbContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "MigrationsAssembly=ITLab.Identity.Admin.EntityFramework.SqlServer "
+[2020-01-23T09:22:49.4648802+00:00][INFO][22][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("42"ms) [Parameters=["@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [a].[Id], [a].[Created], [a].[Description], [a].[DisplayName], [a].[Enabled], [a].[LastAccessed], [a].[Name], [a].[NonEditable], [a].[Updated]
+FROM [ApiResources] AS [a]
+ORDER BY [a].[Name] DESC
+OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY"
+[2020-01-23T09:22:49.5427510+00:00][INFO][18][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("4"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT COUNT(*)
+FROM [ApiResources] AS [a]"
+[2020-01-23T09:22:50.0260898+00:00][INFO][18][Microsoft.EntityFrameworkCore.Infrastructure] Entity Framework Core "3.1.0" initialized '"AdminAuditLogDbContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "MigrationsAssembly=ITLab.Identity.Admin.EntityFramework.SqlServer "
+[2020-01-23T09:22:50.0609768+00:00][INFO][22][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("23"ms) [Parameters=["@p0='?' (Size = 4000), @p1='?' (Size = 4000), @p2='?' (DbType = DateTime2), @p3='?' (Size = 4000), @p4='?' (Size = 4000), @p5='?' (Size = 4000), @p6='?' (Size = 4000), @p7='?' (Size = 4000), @p8='?' (Size = 4000), @p9='?' (Size = 4000)"], CommandType='Text', CommandTimeout='30']"
+""SET NOCOUNT ON;
+INSERT INTO [AuditLog] ([Action], [Category], [Created], [Data], [Event], [Source], [SubjectAdditionalData], [SubjectIdentifier], [SubjectName], [SubjectType])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9);
+SELECT [Id]
+FROM [AuditLog]
+WHERE @@ROWCOUNT = 1 AND [Id] = scope_identity();"
+[2020-01-23T09:22:50.0866361+00:00][INFO][22][Microsoft.AspNetCore.Mvc.ViewFeatures.ViewResultExecutor] Executing ViewResult, running view "ApiResources".
+[2020-01-23T09:22:50.1332764+00:00][INFO][22][Microsoft.AspNetCore.Mvc.ViewFeatures.ViewResultExecutor] Executed ViewResult - view "ApiResources" executed in 49.0825ms.
+[2020-01-23T09:22:50.1347783+00:00][INFO][22][Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker] Executed action "ITLab.Identity.Admin.Controllers.ConfigurationController.ApiResources (ITLab.Identity.Admin)" in 772.1876ms
+[2020-01-23T09:22:50.1366147+00:00][INFO][22][Microsoft.AspNetCore.Routing.EndpointMiddleware] Executed endpoint '"ITLab.Identity.Admin.Controllers.ConfigurationController.ApiResources (ITLab.Identity.Admin)"'
+[2020-01-23T09:22:50.1415194+00:00][INFO][22][Microsoft.AspNetCore.Hosting.Diagnostics] Request finished in 847.1738ms 200 text/html; charset=utf-8
+[2020-01-23T09:22:52.6887470+00:00][INFO][13][Microsoft.AspNetCore.Hosting.Diagnostics] Request starting HTTP/1.1 GET http://127.0.0.1.xip.io:9000/Configuration/ApiResource/1  
+[2020-01-23T09:22:52.7051522+00:00][INFO][13][Microsoft.AspNetCore.Authorization.DefaultAuthorizationService] Authorization was successful.
+[2020-01-23T09:22:52.7073612+00:00][INFO][13][Microsoft.AspNetCore.Routing.EndpointMiddleware] Executing endpoint '"ITLab.Identity.Admin.Controllers.ConfigurationController.ApiResource (ITLab.Identity.Admin)"'
+[2020-01-23T09:22:52.7424304+00:00][INFO][13][Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker] Route matched with "{action = \"ApiResource\", controller = \"Configuration\"}". Executing controller action with signature "System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] ApiResource(Int32)" on controller "ITLab.Identity.Admin.Controllers.ConfigurationController" ("ITLab.Identity.Admin").
+[2020-01-23T09:22:52.7752155+00:00][INFO][13][Microsoft.EntityFrameworkCore.Infrastructure] Entity Framework Core "3.1.0" initialized '"IdentityServerConfigurationDbContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "MigrationsAssembly=ITLab.Identity.Admin.EntityFramework.SqlServer "
+[2020-01-23T09:22:52.8816456+00:00][INFO][22][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("13"ms) [Parameters=["@__apiResourceId_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [t].[Id], [t].[Created], [t].[Description], [t].[DisplayName], [t].[Enabled], [t].[LastAccessed], [t].[Name], [t].[NonEditable], [t].[Updated], [a0].[Id], [a0].[ApiResourceId], [a0].[Type]
+FROM (
+    SELECT TOP(2) [a].[Id], [a].[Created], [a].[Description], [a].[DisplayName], [a].[Enabled], [a].[LastAccessed], [a].[Name], [a].[NonEditable], [a].[Updated]
+    FROM [ApiResources] AS [a]
+    WHERE [a].[Id] = @__apiResourceId_0
+) AS [t]
+LEFT JOIN [ApiClaims] AS [a0] ON [t].[Id] = [a0].[ApiResourceId]
+ORDER BY [t].[Id], [a0].[Id]"
+[2020-01-23T09:22:53.0429439+00:00][INFO][22][Microsoft.EntityFrameworkCore.Infrastructure] Entity Framework Core "3.1.0" initialized '"AdminAuditLogDbContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "MigrationsAssembly=ITLab.Identity.Admin.EntityFramework.SqlServer "
+[2020-01-23T09:22:53.0636970+00:00][INFO][13][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("5"ms) [Parameters=["@p0='?' (Size = 4000), @p1='?' (Size = 4000), @p2='?' (DbType = DateTime2), @p3='?' (Size = 4000), @p4='?' (Size = 4000), @p5='?' (Size = 4000), @p6='?' (Size = 4000), @p7='?' (Size = 4000), @p8='?' (Size = 4000), @p9='?' (Size = 4000)"], CommandType='Text', CommandTimeout='30']"
+""SET NOCOUNT ON;
+INSERT INTO [AuditLog] ([Action], [Category], [Created], [Data], [Event], [Source], [SubjectAdditionalData], [SubjectIdentifier], [SubjectName], [SubjectType])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9);
+SELECT [Id]
+FROM [AuditLog]
+WHERE @@ROWCOUNT = 1 AND [Id] = scope_identity();"
+[2020-01-23T09:22:53.1294885+00:00][INFO][13][Microsoft.AspNetCore.Mvc.ViewFeatures.ViewResultExecutor] Executing ViewResult, running view "ApiResource".
+[2020-01-23T09:22:53.3092634+00:00][INFO][13][Microsoft.AspNetCore.Mvc.ViewFeatures.ViewResultExecutor] Executed ViewResult - view "ApiResource" executed in 183.8096ms.
+[2020-01-23T09:22:53.3109741+00:00][INFO][13][Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker] Executed action "ITLab.Identity.Admin.Controllers.ConfigurationController.ApiResource (ITLab.Identity.Admin)" in 567.2023ms
+[2020-01-23T09:22:53.3119327+00:00][INFO][13][Microsoft.AspNetCore.Routing.EndpointMiddleware] Executed endpoint '"ITLab.Identity.Admin.Controllers.ConfigurationController.ApiResource (ITLab.Identity.Admin)"'
+[2020-01-23T09:22:53.3133507+00:00][INFO][13][Microsoft.AspNetCore.Hosting.Diagnostics] Request finished in 625.0208ms 200 text/html; charset=utf-8
+[2020-01-23T09:22:53.6611681+00:00][INFO][18][Microsoft.AspNetCore.Hosting.Diagnostics] Request starting HTTP/1.1 GET http://127.0.0.1.xip.io:9000/Configuration/SearchClaims?claim&limit=5  
+[2020-01-23T09:22:53.6773257+00:00][INFO][18][Microsoft.AspNetCore.Authorization.DefaultAuthorizationService] Authorization was successful.
+[2020-01-23T09:22:53.6826325+00:00][INFO][18][Microsoft.AspNetCore.Routing.EndpointMiddleware] Executing endpoint '"ITLab.Identity.Admin.Controllers.ConfigurationController.SearchClaims (ITLab.Identity.Admin)"'
+[2020-01-23T09:22:53.6952081+00:00][INFO][18][Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker] Route matched with "{action = \"SearchClaims\", controller = \"Configuration\"}". Executing controller action with signature "Microsoft.AspNetCore.Mvc.IActionResult SearchClaims(System.String, Int32)" on controller "ITLab.Identity.Admin.Controllers.ConfigurationController" ("ITLab.Identity.Admin").
+[2020-01-23T09:22:53.7048673+00:00][INFO][18][Microsoft.AspNetCore.Mvc.Infrastructure.ObjectResultExecutor] Executing ObjectResult, writing value of type '"System.Collections.Generic.List`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"'.
+[2020-01-23T09:22:53.7071985+00:00][INFO][18][Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker] Executed action "ITLab.Identity.Admin.Controllers.ConfigurationController.SearchClaims (ITLab.Identity.Admin)" in 9.4175ms
+[2020-01-23T09:22:53.7091819+00:00][INFO][18][Microsoft.AspNetCore.Routing.EndpointMiddleware] Executed endpoint '"ITLab.Identity.Admin.Controllers.ConfigurationController.SearchClaims (ITLab.Identity.Admin)"'
+[2020-01-23T09:22:53.7138515+00:00][INFO][18][Microsoft.AspNetCore.Hosting.Diagnostics] Request finished in 52.5475ms 200 application/json; charset=utf-8
+[2020-01-23T09:22:57.9409436+00:00][INFO][22][Microsoft.AspNetCore.Hosting.Diagnostics] Request starting HTTP/1.1 GET http://127.0.0.1.xip.io:9000/Configuration/ApiScopes/1  
+[2020-01-23T09:22:57.9532247+00:00][INFO][22][Microsoft.AspNetCore.Authorization.DefaultAuthorizationService] Authorization was successful.
+[2020-01-23T09:22:57.9673847+00:00][INFO][22][Microsoft.AspNetCore.Routing.EndpointMiddleware] Executing endpoint '"ITLab.Identity.Admin.Controllers.ConfigurationController.ApiScopes (ITLab.Identity.Admin)"'
+[2020-01-23T09:22:58.0157723+00:00][INFO][22][Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker] Route matched with "{action = \"ApiScopes\", controller = \"Configuration\"}". Executing controller action with signature "System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] ApiScopes(Int32, System.Nullable`1[System.Int32], System.Nullable`1[System.Int32])" on controller "ITLab.Identity.Admin.Controllers.ConfigurationController" ("ITLab.Identity.Admin").
+[2020-01-23T09:22:58.0442137+00:00][INFO][22][Microsoft.EntityFrameworkCore.Infrastructure] Entity Framework Core "3.1.0" initialized '"IdentityServerConfigurationDbContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "MigrationsAssembly=ITLab.Identity.Admin.EntityFramework.SqlServer "
+[2020-01-23T09:22:58.0902142+00:00][INFO][8][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("30"ms) [Parameters=["@__apiResourceId_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [t].[Id], [t].[Created], [t].[Description], [t].[DisplayName], [t].[Enabled], [t].[LastAccessed], [t].[Name], [t].[NonEditable], [t].[Updated], [a0].[Id], [a0].[ApiResourceId], [a0].[Type]
+FROM (
+    SELECT TOP(2) [a].[Id], [a].[Created], [a].[Description], [a].[DisplayName], [a].[Enabled], [a].[LastAccessed], [a].[Name], [a].[NonEditable], [a].[Updated]
+    FROM [ApiResources] AS [a]
+    WHERE [a].[Id] = @__apiResourceId_0
+) AS [t]
+LEFT JOIN [ApiClaims] AS [a0] ON [t].[Id] = [a0].[ApiResourceId]
+ORDER BY [t].[Id], [a0].[Id]"
+[2020-01-23T09:22:58.2658933+00:00][INFO][20][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("11"ms) [Parameters=["@__apiResourceId_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32), @__p_2='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [t].[Id], [t].[ApiResourceId], [t].[Description], [t].[DisplayName], [t].[Emphasize], [t].[Name], [t].[Required], [t].[ShowInDiscoveryDocument], [a1].[Id], [a1].[Created], [a1].[Description], [a1].[DisplayName], [a1].[Enabled], [a1].[LastAccessed], [a1].[Name], [a1].[NonEditable], [a1].[Updated]
+FROM (
+    SELECT [a].[Id], [a].[ApiResourceId], [a].[Description], [a].[DisplayName], [a].[Emphasize], [a].[Name], [a].[Required], [a].[ShowInDiscoveryDocument], [a0].[Id] AS [Id0]
+    FROM [ApiScopes] AS [a]
+    INNER JOIN [ApiResources] AS [a0] ON [a].[ApiResourceId] = [a0].[Id]
+    WHERE [a0].[Id] = @__apiResourceId_0
+    ORDER BY [a].[Name] DESC
+    OFFSET @__p_1 ROWS FETCH NEXT @__p_2 ROWS ONLY
+) AS [t]
+INNER JOIN [ApiResources] AS [a1] ON [t].[ApiResourceId] = [a1].[Id]
+ORDER BY [t].[Name] DESC"
+[2020-01-23T09:22:58.3230428+00:00][INFO][20][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("6"ms) [Parameters=["@__apiResourceId_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT COUNT(*)
+FROM [ApiScopes] AS [a]
+INNER JOIN [ApiResources] AS [a0] ON [a].[ApiResourceId] = [a0].[Id]
+WHERE [a0].[Id] = @__apiResourceId_0"
+[2020-01-23T09:22:58.3721553+00:00][INFO][20][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("9"ms) [Parameters=["@__apiResourceId_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(2) [a].[Name]
+FROM [ApiResources] AS [a]
+WHERE [a].[Id] = @__apiResourceId_0"
+[2020-01-23T09:22:58.4012694+00:00][INFO][20][Microsoft.EntityFrameworkCore.Infrastructure] Entity Framework Core "3.1.0" initialized '"AdminAuditLogDbContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "MigrationsAssembly=ITLab.Identity.Admin.EntityFramework.SqlServer "
+[2020-01-23T09:23:00.2681035+00:00][INFO][13][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("7"ms) [Parameters=["@p0='?' (Size = 4000), @p1='?' (Size = 4000), @p2='?' (DbType = DateTime2), @p3='?' (Size = 4000), @p4='?' (Size = 4000), @p5='?' (Size = 4000), @p6='?' (Size = 4000), @p7='?' (Size = 4000), @p8='?' (Size = 4000), @p9='?' (Size = 4000)"], CommandType='Text', CommandTimeout='30']"
+""SET NOCOUNT ON;
+INSERT INTO [AuditLog] ([Action], [Category], [Created], [Data], [Event], [Source], [SubjectAdditionalData], [SubjectIdentifier], [SubjectName], [SubjectType])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9);
+SELECT [Id]
+FROM [AuditLog]
+WHERE @@ROWCOUNT = 1 AND [Id] = scope_identity();"
+[2020-01-23T09:23:00.3053096+00:00][INFO][13][Microsoft.AspNetCore.Mvc.ViewFeatures.ViewResultExecutor] Executing ViewResult, running view "ApiScopes".
+[2020-01-23T09:23:00.5767790+00:00][INFO][13][Microsoft.AspNetCore.Mvc.ViewFeatures.ViewResultExecutor] Executed ViewResult - view "ApiScopes" executed in 274.8367ms.
+[2020-01-23T09:23:00.5797731+00:00][INFO][13][Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker] Executed action "ITLab.Identity.Admin.Controllers.ConfigurationController.ApiScopes (ITLab.Identity.Admin)" in 2562.447ms
+[2020-01-23T09:23:00.5838549+00:00][INFO][13][Microsoft.AspNetCore.Routing.EndpointMiddleware] Executed endpoint '"ITLab.Identity.Admin.Controllers.ConfigurationController.ApiScopes (ITLab.Identity.Admin)"'
+[2020-01-23T09:23:00.5890018+00:00][INFO][13][Microsoft.AspNetCore.Hosting.Diagnostics] Request finished in 2647.8189ms 200 text/html; charset=utf-8
+[2020-01-23T09:23:00.9338856+00:00][INFO][20][Microsoft.AspNetCore.Hosting.Diagnostics] Request starting HTTP/1.1 GET http://127.0.0.1.xip.io:9000/Configuration/SearchClaims?claim&limit=5  
+[2020-01-23T09:23:00.9373045+00:00][INFO][20][Microsoft.AspNetCore.Authorization.DefaultAuthorizationService] Authorization was successful.
+[2020-01-23T09:23:00.9379426+00:00][INFO][20][Microsoft.AspNetCore.Routing.EndpointMiddleware] Executing endpoint '"ITLab.Identity.Admin.Controllers.ConfigurationController.SearchClaims (ITLab.Identity.Admin)"'
+[2020-01-23T09:23:00.9392825+00:00][INFO][20][Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker] Route matched with "{action = \"SearchClaims\", controller = \"Configuration\"}". Executing controller action with signature "Microsoft.AspNetCore.Mvc.IActionResult SearchClaims(System.String, Int32)" on controller "ITLab.Identity.Admin.Controllers.ConfigurationController" ("ITLab.Identity.Admin").
+[2020-01-23T09:23:00.9432265+00:00][INFO][20][Microsoft.AspNetCore.Mvc.Infrastructure.ObjectResultExecutor] Executing ObjectResult, writing value of type '"System.Collections.Generic.List`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"'.
+[2020-01-23T09:23:00.9467252+00:00][INFO][20][Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker] Executed action "ITLab.Identity.Admin.Controllers.ConfigurationController.SearchClaims (ITLab.Identity.Admin)" in 6.6255ms
+[2020-01-23T09:23:00.9473539+00:00][INFO][20][Microsoft.AspNetCore.Routing.EndpointMiddleware] Executed endpoint '"ITLab.Identity.Admin.Controllers.ConfigurationController.SearchClaims (ITLab.Identity.Admin)"'
+[2020-01-23T09:23:00.9479380+00:00][INFO][20][Microsoft.AspNetCore.Hosting.Diagnostics] Request finished in 13.9853ms 200 application/json; charset=utf-8
+[2020-01-23T09:23:06.9274356+00:00][INFO][20][Microsoft.AspNetCore.Hosting.Diagnostics] Request starting HTTP/1.1 POST http://127.0.0.1.xip.io:9000/Home/SetLanguage?returnUrl=~%2FConfiguration%2FApiScopes%2F1 application/x-www-form-urlencoded 236
+[2020-01-23T09:23:06.9580467+00:00][INFO][20][Microsoft.AspNetCore.Authorization.DefaultAuthorizationService] Authorization was successful.
+[2020-01-23T09:23:06.9681020+00:00][INFO][20][Microsoft.AspNetCore.Routing.EndpointMiddleware] Executing endpoint '"ITLab.Identity.Admin.Controllers.HomeController.SetLanguage (ITLab.Identity.Admin)"'
+[2020-01-23T09:23:06.9848053+00:00][INFO][20][Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker] Route matched with "{action = \"SetLanguage\", controller = \"Home\"}". Executing controller action with signature "Microsoft.AspNetCore.Mvc.IActionResult SetLanguage(System.String, System.String)" on controller "ITLab.Identity.Admin.Controllers.HomeController" ("ITLab.Identity.Admin").
+[2020-01-23T09:23:07.0373932+00:00][INFO][20][Microsoft.AspNetCore.Mvc.Infrastructure.LocalRedirectResultExecutor] Executing LocalRedirectResult, redirecting to "/Configuration/ApiScopes/1".
+[2020-01-23T09:23:07.0417835+00:00][INFO][20][Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker] Executed action "ITLab.Identity.Admin.Controllers.HomeController.SetLanguage (ITLab.Identity.Admin)" in 45.9491ms
+[2020-01-23T09:23:07.0444242+00:00][INFO][20][Microsoft.AspNetCore.Routing.EndpointMiddleware] Executed endpoint '"ITLab.Identity.Admin.Controllers.HomeController.SetLanguage (ITLab.Identity.Admin)"'
+[2020-01-23T09:23:07.0541504+00:00][INFO][20][Microsoft.AspNetCore.Hosting.Diagnostics] Request finished in 126.9827ms 302 
+[2020-01-23T09:23:07.1190500+00:00][INFO][13][Microsoft.AspNetCore.Hosting.Diagnostics] Request starting HTTP/1.1 GET http://127.0.0.1.xip.io:9000/Configuration/ApiScopes/1  
+[2020-01-23T09:23:07.1261729+00:00][INFO][13][Microsoft.AspNetCore.Authorization.DefaultAuthorizationService] Authorization was successful.
+[2020-01-23T09:23:07.1322539+00:00][INFO][13][Microsoft.AspNetCore.Routing.EndpointMiddleware] Executing endpoint '"ITLab.Identity.Admin.Controllers.ConfigurationController.ApiScopes (ITLab.Identity.Admin)"'
+[2020-01-23T09:23:07.1349659+00:00][INFO][13][Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker] Route matched with "{action = \"ApiScopes\", controller = \"Configuration\"}". Executing controller action with signature "System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] ApiScopes(Int32, System.Nullable`1[System.Int32], System.Nullable`1[System.Int32])" on controller "ITLab.Identity.Admin.Controllers.ConfigurationController" ("ITLab.Identity.Admin").
+[2020-01-23T09:23:07.1498020+00:00][INFO][13][Microsoft.EntityFrameworkCore.Infrastructure] Entity Framework Core "3.1.0" initialized '"IdentityServerConfigurationDbContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "MigrationsAssembly=ITLab.Identity.Admin.EntityFramework.SqlServer "
+[2020-01-23T09:23:07.1727843+00:00][INFO][22][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("11"ms) [Parameters=["@__apiResourceId_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [t].[Id], [t].[Created], [t].[Description], [t].[DisplayName], [t].[Enabled], [t].[LastAccessed], [t].[Name], [t].[NonEditable], [t].[Updated], [a0].[Id], [a0].[ApiResourceId], [a0].[Type]
+FROM (
+    SELECT TOP(2) [a].[Id], [a].[Created], [a].[Description], [a].[DisplayName], [a].[Enabled], [a].[LastAccessed], [a].[Name], [a].[NonEditable], [a].[Updated]
+    FROM [ApiResources] AS [a]
+    WHERE [a].[Id] = @__apiResourceId_0
+) AS [t]
+LEFT JOIN [ApiClaims] AS [a0] ON [t].[Id] = [a0].[ApiResourceId]
+ORDER BY [t].[Id], [a0].[Id]"
+[2020-01-23T09:23:07.3344933+00:00][INFO][19][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("35"ms) [Parameters=["@__apiResourceId_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32), @__p_2='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [t].[Id], [t].[ApiResourceId], [t].[Description], [t].[DisplayName], [t].[Emphasize], [t].[Name], [t].[Required], [t].[ShowInDiscoveryDocument], [a1].[Id], [a1].[Created], [a1].[Description], [a1].[DisplayName], [a1].[Enabled], [a1].[LastAccessed], [a1].[Name], [a1].[NonEditable], [a1].[Updated]
+FROM (
+    SELECT [a].[Id], [a].[ApiResourceId], [a].[Description], [a].[DisplayName], [a].[Emphasize], [a].[Name], [a].[Required], [a].[ShowInDiscoveryDocument], [a0].[Id] AS [Id0]
+    FROM [ApiScopes] AS [a]
+    INNER JOIN [ApiResources] AS [a0] ON [a].[ApiResourceId] = [a0].[Id]
+    WHERE [a0].[Id] = @__apiResourceId_0
+    ORDER BY [a].[Name] DESC
+    OFFSET @__p_1 ROWS FETCH NEXT @__p_2 ROWS ONLY
+) AS [t]
+INNER JOIN [ApiResources] AS [a1] ON [t].[ApiResourceId] = [a1].[Id]
+ORDER BY [t].[Name] DESC"
+[2020-01-23T09:23:07.3568707+00:00][INFO][8][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("10"ms) [Parameters=["@__apiResourceId_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT COUNT(*)
+FROM [ApiScopes] AS [a]
+INNER JOIN [ApiResources] AS [a0] ON [a].[ApiResourceId] = [a0].[Id]
+WHERE [a0].[Id] = @__apiResourceId_0"
+[2020-01-23T09:23:07.4091964+00:00][INFO][19][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("10"ms) [Parameters=["@__apiResourceId_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(2) [a].[Name]
+FROM [ApiResources] AS [a]
+WHERE [a].[Id] = @__apiResourceId_0"
+[2020-01-23T09:23:07.4430517+00:00][INFO][18][Microsoft.EntityFrameworkCore.Infrastructure] Entity Framework Core "3.1.0" initialized '"AdminAuditLogDbContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "MigrationsAssembly=ITLab.Identity.Admin.EntityFramework.SqlServer "
+[2020-01-23T09:23:07.4694811+00:00][INFO][19][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("9"ms) [Parameters=["@p0='?' (Size = 4000), @p1='?' (Size = 4000), @p2='?' (DbType = DateTime2), @p3='?' (Size = 4000), @p4='?' (Size = 4000), @p5='?' (Size = 4000), @p6='?' (Size = 4000), @p7='?' (Size = 4000), @p8='?' (Size = 4000), @p9='?' (Size = 4000)"], CommandType='Text', CommandTimeout='30']"
+""SET NOCOUNT ON;
+INSERT INTO [AuditLog] ([Action], [Category], [Created], [Data], [Event], [Source], [SubjectAdditionalData], [SubjectIdentifier], [SubjectName], [SubjectType])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9);
+SELECT [Id]
+FROM [AuditLog]
+WHERE @@ROWCOUNT = 1 AND [Id] = scope_identity();"
+[2020-01-23T09:23:07.5361136+00:00][INFO][19][Microsoft.AspNetCore.Mvc.ViewFeatures.ViewResultExecutor] Executing ViewResult, running view "ApiScopes".
+[2020-01-23T09:23:07.6777167+00:00][INFO][19][Microsoft.AspNetCore.Mvc.ViewFeatures.ViewResultExecutor] Executed ViewResult - view "ApiScopes" executed in 146.6819ms.
+[2020-01-23T09:23:07.6804407+00:00][INFO][19][Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker] Executed action "ITLab.Identity.Admin.Controllers.ConfigurationController.ApiScopes (ITLab.Identity.Admin)" in 540.6857ms
+[2020-01-23T09:23:07.6829595+00:00][INFO][19][Microsoft.AspNetCore.Routing.EndpointMiddleware] Executed endpoint '"ITLab.Identity.Admin.Controllers.ConfigurationController.ApiScopes (ITLab.Identity.Admin)"'
+[2020-01-23T09:23:07.6924075+00:00][INFO][19][Microsoft.AspNetCore.Hosting.Diagnostics] Request finished in 573.176ms 200 text/html; charset=utf-8
+[2020-01-23T09:23:08.0090195+00:00][INFO][18][Microsoft.AspNetCore.Hosting.Diagnostics] Request starting HTTP/1.1 GET http://127.0.0.1.xip.io:9000/Configuration/SearchClaims?claim&limit=5  
+[2020-01-23T09:23:08.0124424+00:00][INFO][18][Microsoft.AspNetCore.Authorization.DefaultAuthorizationService] Authorization was successful.
+[2020-01-23T09:23:08.0133156+00:00][INFO][18][Microsoft.AspNetCore.Routing.EndpointMiddleware] Executing endpoint '"ITLab.Identity.Admin.Controllers.ConfigurationController.SearchClaims (ITLab.Identity.Admin)"'
+[2020-01-23T09:23:08.0157408+00:00][INFO][18][Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker] Route matched with "{action = \"SearchClaims\", controller = \"Configuration\"}". Executing controller action with signature "Microsoft.AspNetCore.Mvc.IActionResult SearchClaims(System.String, Int32)" on controller "ITLab.Identity.Admin.Controllers.ConfigurationController" ("ITLab.Identity.Admin").
+[2020-01-23T09:23:08.0200387+00:00][INFO][18][Microsoft.AspNetCore.Mvc.Infrastructure.ObjectResultExecutor] Executing ObjectResult, writing value of type '"System.Collections.Generic.List`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"'.
+[2020-01-23T09:23:08.0228269+00:00][INFO][18][Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker] Executed action "ITLab.Identity.Admin.Controllers.ConfigurationController.SearchClaims (ITLab.Identity.Admin)" in 5.5294ms
+[2020-01-23T09:23:08.0287679+00:00][INFO][18][Microsoft.AspNetCore.Routing.EndpointMiddleware] Executed endpoint '"ITLab.Identity.Admin.Controllers.ConfigurationController.SearchClaims (ITLab.Identity.Admin)"'
+[2020-01-23T09:23:08.0331665+00:00][INFO][18][Microsoft.AspNetCore.Hosting.Diagnostics] Request finished in 23.8334ms 200 application/json; charset=utf-8
+[2020-01-23T09:23:14.1490312+00:00][INFO][18][Microsoft.AspNetCore.Hosting.Diagnostics] Request starting HTTP/1.1 GET http://127.0.0.1.xip.io:9000/Configuration/ApiScopes/1  
+[2020-01-23T09:23:14.1530660+00:00][INFO][18][Microsoft.AspNetCore.Authorization.DefaultAuthorizationService] Authorization was successful.
+[2020-01-23T09:23:14.1539211+00:00][INFO][18][Microsoft.AspNetCore.Routing.EndpointMiddleware] Executing endpoint '"ITLab.Identity.Admin.Controllers.ConfigurationController.ApiScopes (ITLab.Identity.Admin)"'
+[2020-01-23T09:23:14.1557451+00:00][INFO][18][Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker] Route matched with "{action = \"ApiScopes\", controller = \"Configuration\"}". Executing controller action with signature "System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] ApiScopes(Int32, System.Nullable`1[System.Int32], System.Nullable`1[System.Int32])" on controller "ITLab.Identity.Admin.Controllers.ConfigurationController" ("ITLab.Identity.Admin").
+[2020-01-23T09:23:14.1701104+00:00][INFO][18][Microsoft.EntityFrameworkCore.Infrastructure] Entity Framework Core "3.1.0" initialized '"IdentityServerConfigurationDbContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "MigrationsAssembly=ITLab.Identity.Admin.EntityFramework.SqlServer "
+[2020-01-23T09:23:14.2819621+00:00][INFO][22][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("30"ms) [Parameters=["@__apiResourceId_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [t].[Id], [t].[Created], [t].[Description], [t].[DisplayName], [t].[Enabled], [t].[LastAccessed], [t].[Name], [t].[NonEditable], [t].[Updated], [a0].[Id], [a0].[ApiResourceId], [a0].[Type]
+FROM (
+    SELECT TOP(2) [a].[Id], [a].[Created], [a].[Description], [a].[DisplayName], [a].[Enabled], [a].[LastAccessed], [a].[Name], [a].[NonEditable], [a].[Updated]
+    FROM [ApiResources] AS [a]
+    WHERE [a].[Id] = @__apiResourceId_0
+) AS [t]
+LEFT JOIN [ApiClaims] AS [a0] ON [t].[Id] = [a0].[ApiResourceId]
+ORDER BY [t].[Id], [a0].[Id]"
+[2020-01-23T09:23:14.3623254+00:00][INFO][18][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("7"ms) [Parameters=["@__apiResourceId_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32), @__p_2='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [t].[Id], [t].[ApiResourceId], [t].[Description], [t].[DisplayName], [t].[Emphasize], [t].[Name], [t].[Required], [t].[ShowInDiscoveryDocument], [a1].[Id], [a1].[Created], [a1].[Description], [a1].[DisplayName], [a1].[Enabled], [a1].[LastAccessed], [a1].[Name], [a1].[NonEditable], [a1].[Updated]
+FROM (
+    SELECT [a].[Id], [a].[ApiResourceId], [a].[Description], [a].[DisplayName], [a].[Emphasize], [a].[Name], [a].[Required], [a].[ShowInDiscoveryDocument], [a0].[Id] AS [Id0]
+    FROM [ApiScopes] AS [a]
+    INNER JOIN [ApiResources] AS [a0] ON [a].[ApiResourceId] = [a0].[Id]
+    WHERE [a0].[Id] = @__apiResourceId_0
+    ORDER BY [a].[Name] DESC
+    OFFSET @__p_1 ROWS FETCH NEXT @__p_2 ROWS ONLY
+) AS [t]
+INNER JOIN [ApiResources] AS [a1] ON [t].[ApiResourceId] = [a1].[Id]
+ORDER BY [t].[Name] DESC"
+[2020-01-23T09:23:14.4169106+00:00][INFO][20][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("25"ms) [Parameters=["@__apiResourceId_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT COUNT(*)
+FROM [ApiScopes] AS [a]
+INNER JOIN [ApiResources] AS [a0] ON [a].[ApiResourceId] = [a0].[Id]
+WHERE [a0].[Id] = @__apiResourceId_0"
+[2020-01-23T09:23:14.4520212+00:00][INFO][20][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("27"ms) [Parameters=["@__apiResourceId_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(2) [a].[Name]
+FROM [ApiResources] AS [a]
+WHERE [a].[Id] = @__apiResourceId_0"
+[2020-01-23T09:23:14.4839926+00:00][INFO][18][Microsoft.EntityFrameworkCore.Infrastructure] Entity Framework Core "3.1.0" initialized '"AdminAuditLogDbContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "MigrationsAssembly=ITLab.Identity.Admin.EntityFramework.SqlServer "
+[2020-01-23T09:23:14.5503764+00:00][INFO][8][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("28"ms) [Parameters=["@p0='?' (Size = 4000), @p1='?' (Size = 4000), @p2='?' (DbType = DateTime2), @p3='?' (Size = 4000), @p4='?' (Size = 4000), @p5='?' (Size = 4000), @p6='?' (Size = 4000), @p7='?' (Size = 4000), @p8='?' (Size = 4000), @p9='?' (Size = 4000)"], CommandType='Text', CommandTimeout='30']"
+""SET NOCOUNT ON;
+INSERT INTO [AuditLog] ([Action], [Category], [Created], [Data], [Event], [Source], [SubjectAdditionalData], [SubjectIdentifier], [SubjectName], [SubjectType])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9);
+SELECT [Id]
+FROM [AuditLog]
+WHERE @@ROWCOUNT = 1 AND [Id] = scope_identity();"
+[2020-01-23T09:23:14.6305263+00:00][INFO][8][Microsoft.AspNetCore.Mvc.ViewFeatures.ViewResultExecutor] Executing ViewResult, running view "ApiScopes".
+[2020-01-23T09:23:14.6624423+00:00][INFO][8][Microsoft.AspNetCore.Mvc.ViewFeatures.ViewResultExecutor] Executed ViewResult - view "ApiScopes" executed in 30.365ms.
+[2020-01-23T09:23:14.6678887+00:00][INFO][8][Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker] Executed action "ITLab.Identity.Admin.Controllers.ConfigurationController.ApiScopes (ITLab.Identity.Admin)" in 510.4774ms
+[2020-01-23T09:23:14.6709860+00:00][INFO][8][Microsoft.AspNetCore.Routing.EndpointMiddleware] Executed endpoint '"ITLab.Identity.Admin.Controllers.ConfigurationController.ApiScopes (ITLab.Identity.Admin)"'
+[2020-01-23T09:23:14.6764545+00:00][INFO][8][Microsoft.AspNetCore.Hosting.Diagnostics] Request finished in 526.5478ms 200 text/html; charset=utf-8
+[2020-01-23T09:23:19.7022947+00:00][INFO][20][Microsoft.AspNetCore.Hosting.Diagnostics] Request starting HTTP/1.1 GET http://127.0.0.1.xip.io:9000/Configuration/ApiResource/1  
+[2020-01-23T09:23:19.7078583+00:00][INFO][20][Microsoft.AspNetCore.Authorization.DefaultAuthorizationService] Authorization was successful.
+[2020-01-23T09:23:19.7088627+00:00][INFO][20][Microsoft.AspNetCore.Routing.EndpointMiddleware] Executing endpoint '"ITLab.Identity.Admin.Controllers.ConfigurationController.ApiResource (ITLab.Identity.Admin)"'
+[2020-01-23T09:23:19.7113227+00:00][INFO][20][Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker] Route matched with "{action = \"ApiResource\", controller = \"Configuration\"}". Executing controller action with signature "System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] ApiResource(Int32)" on controller "ITLab.Identity.Admin.Controllers.ConfigurationController" ("ITLab.Identity.Admin").
+[2020-01-23T09:23:19.7334180+00:00][INFO][20][Microsoft.EntityFrameworkCore.Infrastructure] Entity Framework Core "3.1.0" initialized '"IdentityServerConfigurationDbContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "MigrationsAssembly=ITLab.Identity.Admin.EntityFramework.SqlServer "
+[2020-01-23T09:23:19.7553260+00:00][INFO][19][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("9"ms) [Parameters=["@__apiResourceId_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [t].[Id], [t].[Created], [t].[Description], [t].[DisplayName], [t].[Enabled], [t].[LastAccessed], [t].[Name], [t].[NonEditable], [t].[Updated], [a0].[Id], [a0].[ApiResourceId], [a0].[Type]
+FROM (
+    SELECT TOP(2) [a].[Id], [a].[Created], [a].[Description], [a].[DisplayName], [a].[Enabled], [a].[LastAccessed], [a].[Name], [a].[NonEditable], [a].[Updated]
+    FROM [ApiResources] AS [a]
+    WHERE [a].[Id] = @__apiResourceId_0
+) AS [t]
+LEFT JOIN [ApiClaims] AS [a0] ON [t].[Id] = [a0].[ApiResourceId]
+ORDER BY [t].[Id], [a0].[Id]"
+[2020-01-23T09:23:19.7876316+00:00][INFO][20][Microsoft.EntityFrameworkCore.Infrastructure] Entity Framework Core "3.1.0" initialized '"AdminAuditLogDbContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "MigrationsAssembly=ITLab.Identity.Admin.EntityFramework.SqlServer "
+[2020-01-23T09:23:19.8420381+00:00][INFO][18][Microsoft.EntityFrameworkCore.Database.Command] Executed DbCommand ("8"ms) [Parameters=["@p0='?' (Size = 4000), @p1='?' (Size = 4000), @p2='?' (DbType = DateTime2), @p3='?' (Size = 4000), @p4='?' (Size = 4000), @p5='?' (Size = 4000), @p6='?' (Size = 4000), @p7='?' (Size = 4000), @p8='?' (Size = 4000), @p9='?' (Size = 4000)"], CommandType='Text', CommandTimeout='30']"
+""SET NOCOUNT ON;
+INSERT INTO [AuditLog] ([Action], [Category], [Created], [Data], [Event], [Source], [SubjectAdditionalData], [SubjectIdentifier], [SubjectName], [SubjectType])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9);
+SELECT [Id]
+FROM [AuditLog]
+WHERE @@ROWCOUNT = 1 AND [Id] = scope_identity();"
+[2020-01-23T09:23:19.9948581+00:00][INFO][18][Microsoft.AspNetCore.Mvc.ViewFeatures.ViewResultExecutor] Executing ViewResult, running view "ApiResource".
+[2020-01-23T09:23:20.1325101+00:00][INFO][18][Microsoft.AspNetCore.Mvc.ViewFeatures.ViewResultExecutor] Executed ViewResult - view "ApiResource" executed in 152.9227ms.
+[2020-01-23T09:23:20.1361607+00:00][INFO][18][Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker] Executed action "ITLab.Identity.Admin.Controllers.ConfigurationController.ApiResource (ITLab.Identity.Admin)" in 420.3849ms
+[2020-01-23T09:23:20.1401422+00:00][INFO][18][Microsoft.AspNetCore.Routing.EndpointMiddleware] Executed endpoint '"ITLab.Identity.Admin.Controllers.ConfigurationController.ApiResource (ITLab.Identity.Admin)"'
+[2020-01-23T09:23:20.1523484+00:00][INFO][18][Microsoft.AspNetCore.Hosting.Diagnostics] Request finished in 449.741ms 200 text/html; charset=utf-8
+[2020-01-23T09:23:23.8198571+00:00][INFO][22][Microsoft.AspNetCore.Hosting.Diagnostics] Request starting HTTP/1.1 GET http://127.0.0.1.xip.io:9000/Configuration/SearchClaims?claim  
+[2020-01-23T09:23:23.8277934+00:00][INFO][22][Microsoft.AspNetCore.Authorization.DefaultAuthorizationService] Authorization was successful.
+[2020-01-23T09:23:23.8354278+00:00][INFO][22][Microsoft.AspNetCore.Routing.EndpointMiddleware] Executing endpoint '"ITLab.Identity.Admin.Controllers.ConfigurationController.SearchClaims (ITLab.Identity.Admin)"'
+[2020-01-23T09:23:23.8403771+00:00][INFO][22][Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker] Route matched with "{action = \"SearchClaims\", controller = \"Configuration\"}". Executing controller action with signature "Microsoft.AspNetCore.Mvc.IActionResult SearchClaims(System.String, Int32)" on controller "ITLab.Identity.Admin.Controllers.ConfigurationController" ("ITLab.Identity.Admin").
+[2020-01-23T09:23:23.8511407+00:00][INFO][22][Microsoft.AspNetCore.Mvc.Infrastructure.ObjectResultExec

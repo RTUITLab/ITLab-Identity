@@ -1,0 +1,25 @@
+﻿{
+  "IdentityData": {
+    "Roles": [
+      {
+        "Name": "MyRole"
+      }
+    ],
+    "Users": [
+      {
+        "Username": "admin",
+        "Password": "PaSSword1243",
+        "Email": "admin@skoruba.com",
+        "Roles": [
+          "MyRole"
+        ],
+        "Claims": [
+          {
+            "Type": "name",
+            "Value": "admin"
+          }
+        ]
+      }
+    ]
+  }
+}
