@@ -9,6 +9,7 @@ COPY ["src/ITLab.Identity.Admin.EntityFramework.Shared/ITLab.Identity.Admin.Enti
 COPY ["src/ITLab.Identity.Admin.EntityFramework.SqlServer/ITLab.Identity.Admin.EntityFramework.SqlServer.csproj", "src/ITLab.Identity.Admin.EntityFramework.SqlServer/"]
 COPY ["src/ITLab.Identity.Admin.EntityFramework.PostgreSQL/ITLab.Identity.Admin.EntityFramework.PostgreSQL.csproj", "src/ITLab.Identity.Admin.EntityFramework.PostgreSQL/"]
 COPY ["src/ITLab.Identity.Admin.EntityFramework.MySql/ITLab.Identity.Admin.EntityFramework.MySql.csproj", "src/ITLab.Identity.Admin.EntityFramework.MySql/"]
+COPY ["nuget.config", "nuget.config"]
 RUN dotnet restore "src/ITLab.Identity.Admin.Api/ITLab.Identity.Admin.Api.csproj"
 COPY . .
 WORKDIR "/src/src/ITLab.Identity.Admin.Api"
