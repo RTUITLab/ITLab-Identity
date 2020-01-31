@@ -26,9 +26,38 @@ stages:
       displayName: Build an image
       inputs:
         containerRegistry: 'rtuitlab connection by admin'
-        repository: 'rtuitlab/itlab-identity2-$(Build.SourceBranchName)'
+        repository: 'rtuitlab/itlab-identity-admin-api-$(Build.SourceBranchName)'
         command: 'buildAndPush'
         Dockerfile: '$(Build.SourcesDirectory)/src/ITLab.Identity.Admin.Api/Dockerfile'
+        buildContext: '$(Build.SourcesDirectory)'
+        tags: |
+          $(tag)
+          latest
+  - job: BuildAdmin
+    displayName: Build Admin
+    steps:
+    - task: Docker@2
+      displayName: Build an image
+      inputs:
+        containerRegistry: 'rtuitlab connection by admin'
+        repository: 'rtuitlab/itlab-identity-admin-$(Build.SourceBranchName)'
+        command: 'buildAndPush'
+        Dockerfile: '$(Build.SourcesDirectory)/src/ITLab.Identity.Admin/Dockerfile'
+        buildContext: '$(Build.SourcesDirectory)'
+        tags: |
+          $(tag)
+          latest
+
+  - job: BuildIdentity
+    displayName: Build Identity
+    steps:
+    - task: Docker@2
+      displayName: Build an image
+      inputs:
+        containerRegistry: 'rtuitlab connection by admin'
+        repository: 'rtuitlab/itlab-identity-identity-$(Build.SourceBranchName)'
+        command: 'buildAndPush'
+        Dockerfile: '$(Build.SourcesDirectory)/src/ITLab.Identity.STS.Identity/Dockerfile'
         buildContext: '$(Build.SourcesDirectory)'
         tags: |
           $(tag)
