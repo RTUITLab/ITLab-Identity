@@ -338,8 +338,12 @@ ASALocalRun/
 
 # BeatPulse healthcheck temp database
 healthchecksdb
+
+
 src/ITLab.Identity.Admin/Logs/
 
 src/ITLab.Identity.Admin.Api/Logs/
+
+!src/ITLab.Identity.Admin/Views/Log
 
 src/ITLab.Identity.STS.Identity/Logs/
