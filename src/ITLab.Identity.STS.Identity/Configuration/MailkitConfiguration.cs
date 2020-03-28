@@ -1,6 +1,6 @@
 namespace ITLab.Identity.STS.Identity.Configuration
 {
-    public class SmtpConfiguration
+    public class MailkitConfiguration
     {
         public string Host { get; set; }
         public string Login { get; set; }

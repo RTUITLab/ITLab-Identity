@@ -107,7 +107,7 @@ namespace ITLab.Identity.STS.Identity.Helpers
         /// <param name="configuration"></param>
         public static void AddEmailSenders(this IServiceCollection services, IConfiguration configuration)
         {
-            var smtpConfiguration = configuration.GetSection(nameof(SmtpConfiguration)).Get<SmtpConfiguration>();
+            var mailkitConfiguration = configuration.GetSection(nameof(MailkitConfiguration)).Get<MailkitConfiguration>();
             var sendGridConfiguration = configuration.GetSection(nameof(SendgridConfiguration)).Get<SendgridConfiguration>();
 
             if (sendGridConfiguration != null && !string.IsNullOrWhiteSpace(sendGridConfiguration.ApiKey))
@@ -116,10 +116,10 @@ namespace ITLab.Identity.STS.Identity.Helpers
                 services.AddSingleton(sendGridConfiguration);
                 services.AddTransient<IEmailSender, SendgridEmailSender>();
             }
-            else if (smtpConfiguration != null && !string.IsNullOrWhiteSpace(smtpConfiguration.Host))
+            else if (mailkitConfiguration != null && !string.IsNullOrWhiteSpace(mailkitConfiguration.Host))
             {
-                services.AddSingleton(smtpConfiguration);
-                services.AddTransient<IEmailSender, SmtpEmailSender>();
+                services.AddSingleton(mailkitConfiguration);
+                services.AddTransient<IEmailSender, MailKitEmailSender>();
             }
             else
             {
