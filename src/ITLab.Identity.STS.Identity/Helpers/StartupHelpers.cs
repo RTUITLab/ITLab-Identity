@@ -27,6 +27,7 @@ using ITLab.Identity.Admin.EntityFramework.PostgreSQL.Extensions;
 using ITLab.Identity.Admin.EntityFramework.Shared.Configuration;
 using ITLab.Identity.Admin.EntityFramework.SqlServer.Extensions;
 using Skoruba.IdentityServer4.Admin.EntityFramework.Helpers;
+using RTUITLab.EmailService.Client;
 
 namespace ITLab.Identity.STS.Identity.Helpers
 {
@@ -107,24 +108,9 @@ namespace ITLab.Identity.STS.Identity.Helpers
         /// <param name="configuration"></param>
         public static void AddEmailSenders(this IServiceCollection services, IConfiguration configuration)
         {
-            var mailkitConfiguration = configuration.GetSection(nameof(MailkitConfiguration)).Get<MailkitConfiguration>();
-            var sendGridConfiguration = configuration.GetSection(nameof(SendgridConfiguration)).Get<SendgridConfiguration>();
+            services.AddEmailSender(configuration.GetSection(nameof(EmailSenderOptions)).Get<EmailSenderOptions>());
 
-            if (sendGridConfiguration != null && !string.IsNullOrWhiteSpace(sendGridConfiguration.ApiKey))
-            {
-                services.AddSingleton<ISendGridClient>(_ => new SendGridClient(sendGridConfiguration.ApiKey));
-                services.AddSingleton(sendGridConfiguration);
-                services.AddTransient<IEmailSender, SendgridEmailSender>();
-            }
-            else if (mailkitConfiguration != null && !string.IsNullOrWhiteSpace(mailkitConfiguration.Host))
-            {
-                services.AddSingleton(mailkitConfiguration);
-                services.AddTransient<IEmailSender, MailKitEmailSender>();
-            }
-            else
-            {
-                services.AddSingleton<IEmailSender, EmailSender>();
-            }
+            services.AddTransient<Microsoft.AspNetCore.Identity.UI.Services.IEmailSender, RTUITLabEmailSender>();
         }
 
         /// <summary>
