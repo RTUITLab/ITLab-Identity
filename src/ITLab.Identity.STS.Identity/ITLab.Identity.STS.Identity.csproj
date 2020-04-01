@@ -31,7 +31,7 @@
         <PackageReference Include="IdentityServer4.AspNetIdentity" Version="3.1.0" />
         <PackageReference Include="IdentityServer4.EntityFramework" Version="3.1.0" />
         <PackageReference Include="NWebsec.AspNetCore.Middleware" Version="3.0.0" />
-        <PackageReference Include="RTUITLab.EmailService.Client" Version="1.0.0" />
+        <PackageReference Include="RTUITLab.EmailService.Client" Version="1.0.2057" />
         <PackageReference Include="Sendgrid" Version="9.12.5" />
         <PackageReference Include="Serilog" Version="2.9.0" />
         <PackageReference Include="Serilog.Enrichers.Thread" Version="3.1.0" />
