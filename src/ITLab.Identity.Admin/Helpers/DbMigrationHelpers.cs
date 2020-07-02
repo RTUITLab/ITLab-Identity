@@ -27,7 +27,7 @@ namespace ITLab.Identity.Admin.Helpers
             where TIdentityDbContext : DbContext
             where TPersistedGrantDbContext : DbContext, IAdminPersistedGrantDbContext
             where TLogDbContext : DbContext, IAdminLogDbContext
-            where TAuditLogDbContext: DbContext, IAuditLoggingDbContext<AuditLog>
+            where TAuditLogDbContext : DbContext, IAuditLoggingDbContext<AuditLog>
             where TUser : IdentityUser<Guid>, new()
             where TRole : IdentityRole<Guid>, new()
         {
@@ -44,7 +44,7 @@ namespace ITLab.Identity.Admin.Helpers
             where TPersistedGrantDbContext : DbContext
             where TConfigurationDbContext : DbContext
             where TLogDbContext : DbContext
-            where TAuditLogDbContext: DbContext
+            where TAuditLogDbContext : DbContext
         {
             using (var scope = services.GetRequiredService<IServiceScopeFactory>().CreateScope())
             {
@@ -190,24 +190,31 @@ namespace ITLab.Identity.Admin.Helpers
                 await context.SaveChangesAsync();
             }
 
-            if (!context.Clients.Any())
+
+            foreach (var kvp in identityServerDataConfiguration.Clients)
             {
-                foreach (var client in identityServerDataConfiguration.Clients)
+                var client = kvp.Value;
+                client.ClientId = kvp.Key;
+
+                var existingClient = await context.Clients.AnyAsync(cl => cl.ClientId == client.ClientId);
+                if (existingClient)
                 {
-                    foreach (var secret in client.ClientSecrets)
-                    {
-                        secret.Value = secret.Value.ToSha256();
-                    }
-
-                    client.Claims = client.ClientClaims
-                        .Select(c => new System.Security.Claims.Claim(c.Type, c.Value))
-                        .ToList();
-
-                    await context.Clients.AddAsync(client.ToEntity());
+                    continue;
                 }
 
-                await context.SaveChangesAsync();
+                foreach (var secret in client.ClientSecrets)
+                {
+                    secret.Value = secret.Value.ToSha256();
+                }
+
+                client.Claims = client.ClientClaims
+                    .Select(c => new System.Security.Claims.Claim(c.Type, c.Value))
+                    .ToList();
+
+                await context.Clients.AddAsync(client.ToEntity());
             }
+
+            await context.SaveChangesAsync();
         }
     }
 }

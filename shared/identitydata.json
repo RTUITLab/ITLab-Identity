@@ -2,16 +2,16 @@
   "IdentityData": {
     "Roles": [
       {
-        "Name": "MyRole"
+        "Name": "Administrator"
       }
     ],
     "Users": [
       {
         "Username": "admin",
         "Password": "Pa$$word1243",
-        "Email": "admin@skoruba.com",
+        "Email": "admin@rtuitlab.dev",
         "Roles": [
-          "MyRole"
+          "Administrator"
         ],
         "Claims": [
           {

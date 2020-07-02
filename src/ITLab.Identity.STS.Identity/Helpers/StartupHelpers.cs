@@ -108,9 +108,15 @@ namespace ITLab.Identity.STS.Identity.Helpers
         /// <param name="configuration"></param>
         public static void AddEmailSenders(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddEmailSender(configuration.GetSection(nameof(EmailSenderOptions)).Get<EmailSenderOptions>());
-
-            services.AddTransient<Microsoft.AspNetCore.Identity.UI.Services.IEmailSender, RTUITLabEmailSender>();
+            if (configuration.GetValue<bool>("USE_LOGGER_EMAIL_SENDER"))
+            {
+                services.AddTransient<Microsoft.AspNetCore.Identity.UI.Services.IEmailSender, LoggerEmailSender>();
+            }
+            else
+            {
+                services.AddEmailSender(configuration.GetSection(nameof(EmailSenderOptions)).Get<EmailSenderOptions>());
+                services.AddTransient<Microsoft.AspNetCore.Identity.UI.Services.IEmailSender, RTUITLabEmailSender>();
+            }
         }
 
         /// <summary>
@@ -128,7 +134,7 @@ namespace ITLab.Identity.STS.Identity.Helpers
             where TConfigurationDbContext : DbContext, IAdminConfigurationDbContext
         {
             var databaseProvider = configuration.GetSection(nameof(DatabaseProviderConfiguration)).Get<DatabaseProviderConfiguration>();
-            
+
             var identityConnectionString = configuration.GetConnectionString(ConfigurationConsts.IdentityDbConnectionStringKey);
             var configurationConnectionString = configuration.GetConnectionString(ConfigurationConsts.ConfigurationDbConnectionStringKey);
             var persistedGrantsConnectionString = configuration.GetConnectionString(ConfigurationConsts.PersistedGrantDbConnectionStringKey);
@@ -337,9 +343,9 @@ namespace ITLab.Identity.STS.Identity.Helpers
             where TIdentityDbContext : DbContext
         {
             var configurationDbConnectionString = configuration.GetConnectionString(ConfigurationConsts.ConfigurationDbConnectionStringKey);
-            var persistedGrantsDbConnectionString = configuration.GetConnectionString(ConfigurationConsts.PersistedGrantDbConnectionStringKey);            
+            var persistedGrantsDbConnectionString = configuration.GetConnectionString(ConfigurationConsts.PersistedGrantDbConnectionStringKey);
             var identityDbConnectionString = configuration.GetConnectionString(ConfigurationConsts.IdentityDbConnectionStringKey);
-            
+
             var healthChecksBuilder = services.AddHealthChecks()
                 .AddDbContextCheck<TConfigurationDbContext>("ConfigurationDbContext")
                 .AddDbContextCheck<TPersistedGrantDbContext>("PersistedGrantsDbContext")
