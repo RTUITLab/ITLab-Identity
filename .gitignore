@@ -348,6 +348,8 @@ src/ITLab.Identity.Admin.Api/Logs/
 
 src/ITLab.Identity.STS.Identity/Logs/
 
-src/ITLab.Identity.STS.Identity/deploy/
+src/ITLab.Identity.STS.Identity/deploy/Identity-build
 
 tools/
+
+src/ITLab.Identity.Admin/deploy/Admin-build

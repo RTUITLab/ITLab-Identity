@@ -23,7 +23,7 @@ namespace ITLab.Identity.Admin
             Log.Logger = new LoggerConfiguration()
                 .ReadFrom.Configuration(Configuration)
                 .CreateLogger();
-
+                Microsoft.IdentityModel.Logging.IdentityModelEventSource.ShowPII = true;
             try
             {
                 var seed = args.Any(x => x == SeedArgs);
