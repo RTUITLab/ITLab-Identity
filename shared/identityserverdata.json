@@ -76,52 +76,6 @@
           }
         ]
       }
-    ],
-    "Clients": [
-      {
-        "ClientId": "MyClientId",
-        "ClientName": "MyClientId",
-        "ClientUri": "http://localhost:9000",
-        "AllowedGrantTypes": [
-          "hybrid"
-        ],
-        "ClientSecrets": [
-          {
-            "Value": "MyClientSecret"
-          }
-        ],
-        "RedirectUris": [
-          "http://localhost:9000/signin-oidc"
-        ],
-        "FrontChannelLogoutUri": "http://localhost:9000/signout-oidc",
-        "PostLogoutRedirectUris": [
-          "http://localhost:9000/signout-callback-oidc"
-        ],
-        "AllowedCorsOrigins": [
-          "http://localhost:9000"
-        ],
-        "AllowedScopes": [
-          "openid",
-          "email",
-          "profile",
-          "roles"
-        ]
-      },
-      {
-        "ClientId": "MyClientId_api_swaggerui",
-        "ClientName": "MyClientId_api_swaggerui",
-        "AllowedGrantTypes": [
-          "implicit"
-        ],
-        "RedirectUris": [
-          "http://localhost:5001/swagger/oauth2-redirect.html"
-        ],
-        "AllowedScopes": [
-          "MyClientId_api"
-        ],
-        "AllowAccessTokensViaBrowser": true
-
-      }
     ]
   }
 }

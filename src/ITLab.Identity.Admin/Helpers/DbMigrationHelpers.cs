@@ -100,30 +100,29 @@ namespace ITLab.Identity.Admin.Helpers
             where TUser : IdentityUser<Guid>, new()
             where TRole : IdentityRole<Guid>, new()
         {
-            if (!await roleManager.Roles.AnyAsync())
+
+            // adding roles from seed
+            foreach (var r in identityDataConfiguration.Roles)
             {
-                // adding roles from seed
-                foreach (var r in identityDataConfiguration.Roles)
+                if (!await roleManager.RoleExistsAsync(r.Name))
                 {
-                    if (!await roleManager.RoleExistsAsync(r.Name))
+                    var role = new TRole
                     {
-                        var role = new TRole
-                        {
-                            Name = r.Name
-                        };
+                        Name = r.Name
+                    };
 
-                        var result = await roleManager.CreateAsync(role);
+                    var result = await roleManager.CreateAsync(role);
 
-                        if (result.Succeeded)
+                    if (result.Succeeded)
+                    {
+                        foreach (var claim in r.Claims)
                         {
-                            foreach (var claim in r.Claims)
-                            {
-                                await roleManager.AddClaimAsync(role, new System.Security.Claims.Claim(claim.Type, claim.Value));
-                            }
+                            await roleManager.AddClaimAsync(role, new System.Security.Claims.Claim(claim.Type, claim.Value));
                         }
                     }
                 }
             }
+
 
             if (!await userManager.Users.AnyAsync())
             {
@@ -189,15 +188,19 @@ namespace ITLab.Identity.Admin.Helpers
 
                 await context.SaveChangesAsync();
             }
-
+            var clients = await context.Clients.ToListAsync();
 
             foreach (var kvp in identityServerDataConfiguration.Clients)
             {
                 var client = kvp.Value;
+                var grants = client.AllowedGrantTypes;
                 client.ClientId = kvp.Key;
 
-                var existingClient = await context.Clients.AnyAsync(cl => cl.ClientId == client.ClientId);
-                if (existingClient)
+
+                var clientExists = await context.Clients
+                    .AnyAsync(cl => cl.ClientId == client.ClientId);
+
+                if (clientExists)
                 {
                     continue;
                 }
@@ -210,8 +213,8 @@ namespace ITLab.Identity.Admin.Helpers
                 client.Claims = client.ClientClaims
                     .Select(c => new System.Security.Claims.Claim(c.Type, c.Value))
                     .ToList();
-
                 await context.Clients.AddAsync(client.ToEntity());
+
             }
 
             await context.SaveChangesAsync();
