@@ -4,7 +4,7 @@ services:
   itlab.identity.admin:
     image: ${DOCKER_REGISTRY-}skoruba-identityserver4-admin
     ports:
-      - 9000:80
+      - 5504:80
     build:
       context: .
       dockerfile: src/ITLab.Identity.Admin/Dockerfile
@@ -16,16 +16,10 @@ services:
       - "ConnectionStrings__IdentityDbConnection=User ID=postgres;Password=password;Server=db;Port=5432;Database=itlab-identity-db;Integrated Security=true;"
       - "ConnectionStrings__AdminLogDbConnection=User ID=postgres;Password=password;Server=db;Port=5432;Database=itlab-identity-db;Integrated Security=true;"
       - "ConnectionStrings__AdminAuditLogDbConnection=User ID=postgres;Password=password;Server=db;Port=5432;Database=itlab-identity-db;Integrated Security=true;"
-      - "AdminConfiguration__IdentityAdminBaseUrl=http://127.0.0.1.xip.io:9000"
-      - "AdminConfiguration__IdentityAdminRedirectUri=http://127.0.0.1.xip.io:9000/signin-oidc"
-      - "AdminConfiguration__IdentityServerBaseUrl=http://127.0.0.1.xip.io"
+      - "AdminConfiguration__IdentityAdminBaseUrl=http://127.0.0.1.xip.io:5504"
+      - "AdminConfiguration__IdentityAdminRedirectUri=http://127.0.0.1.xip.io:5504/signin-oidc"
+      - "AdminConfiguration__IdentityServerBaseUrl=http://127.0.0.1.xip.io:5501"
       - "AdminConfiguration__RequireHttpsMetadata=false"
-      - "IdentityServerData__Clients__0__ClientUri=http://127.0.0.1.xip.io:9000"
-      - "IdentityServerData__Clients__0__RedirectUris__0=http://127.0.0.1.xip.io:9000/signin-oidc"
-      - "IdentityServerData__Clients__0__FrontChannelLogoutUri=http://127.0.0.1.xip.io:9000/signin-oidc"
-      - "IdentityServerData__Clients__0__PostLogoutRedirectUris__0=http://127.0.0.1.xip.io:9000/signout-callback-oidc"
-      - "IdentityServerData__Clients__0__AllowedCorsOrigins__0=http://127.0.0.1.xip.io:9000"
-      - "IdentityServerData__Clients__1__RedirectUris__0=http://127.0.0.1.xip.io:5000/swagger/oauth2-redirect.html"
       - "Serilog__WriteTo__1__Args__connectionString=User ID=postgres;Password=password;Server=db;Port=5432;Database=itlab-identity-db;Integrated Security=true;"
     command: dotnet ITLab.Identity.Admin.dll /seed
     depends_on:
@@ -33,8 +27,7 @@ services:
       - itlab.identity.sts.identity
     volumes:
       - "./shared/serilog.json:/app/serilog.json"
-      - "./shared/identitydata.json:/app/identitydata.json"
-      - "./shared/identityserverdata.json:/app/identityserverdata.json"
+
 
   itlab.identity.admin.api:
     image: ${DOCKER_REGISTRY-}skoruba-identityserver4-admin-api
@@ -46,7 +39,7 @@ services:
     environment:
       - "AdminApiConfiguration__RequireHttpsMetadata=false"
       - "AdminApiConfiguration__ApiBaseUrl=http://127.0.0.1.xip.io:5000"
-      - "AdminApiConfiguration__IdentityServerBaseUrl=http://127.0.0.1.xip.io"
+      - "AdminApiConfiguration__IdentityServerBaseUrl=http://127.0.0.1.xip.io:5501"
       - "ConnectionStrings__ConfigurationDbConnection=User ID=postgres;Password=password;Server=db;Port=5432;Database=itlab-identity-db;Integrated Security=true;"
       - "ConnectionStrings__PersistedGrantDbConnection=User ID=postgres;Password=password;Server=db;Port=5432;Database=itlab-identity-db;Integrated Security=true;"
       - "ConnectionStrings__IdentityDbConnection=User ID=postgres;Password=password;Server=db;Port=5432;Database=itlab-identity-db;Integrated Security=true;"
@@ -59,17 +52,18 @@ services:
   itlab.identity.sts.identity:
     image: ${DOCKER_REGISTRY-}skoruba-identityserver4-sts-identity
     ports:
-      - 80:80
+      - 5501:5501
     build:
       context: .
       dockerfile: src/ITLab.Identity.STS.Identity/Dockerfile
     container_name: skoruba-identityserver4-sts-identity
     environment:
+      - ASPNETCORE_URLS=http://*:5501
       - ASPNETCORE_ENVIRONMENT=Development
       - "ConnectionStrings__ConfigurationDbConnection=User ID=postgres;Password=password;Server=db;Port=5432;Database=itlab-identity-db;Integrated Security=true;"
       - "ConnectionStrings__PersistedGrantDbConnection=User ID=postgres;Password=password;Server=db;Port=5432;Database=itlab-identity-db;Integrated Security=true;"
       - "ConnectionStrings__IdentityDbConnection=User ID=postgres;Password=password;Server=db;Port=5432;Database=itlab-identity-db;Integrated Security=true;"
-      - "AdminConfiguration__IdentityAdminBaseUrl=http://127.0.0.1.xip.io:9000"
+      - "AdminConfiguration__IdentityAdminBaseUrl=http://127.0.0.1.xip.io:5504"
     depends_on:
       - db
     volumes:

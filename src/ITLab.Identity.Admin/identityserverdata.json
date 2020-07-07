@@ -63,16 +63,28 @@
     ],
     "ApiResources": [
       {
-        "Name": "MyClientId_api",
+        "Name": "itlab",
+        "DisplayName": "ITLab manage api",
         "Scopes": [
           {
-            "Name": "MyClientId_api",
-            "DisplayName": "MyClientId_api",
-            "Required": true,
-            "UserClaims": [
-              "role",
-              "name"
-            ]
+            "Name": "itlab.salary",
+            "DisplayName": "Salary API",
+            "Required": true
+          },
+          {
+            "Name": "itlab.reports",
+            "DisplayName": "Reports API",
+            "Required": true
+          },
+          {
+            "Name": "itlab.projects",
+            "DisplayName": "Projects API",
+            "Required": true
+          },
+          {
+            "Name": "itlab.events",
+            "DisplayName": "ITLab events and equipment api",
+            "Required": true
           }
         ]
       }
@@ -80,14 +92,30 @@
     "Clients": {
       "AdminUI": {
         "ClientName": "Admin UI client",
-        "AllowedGrantTypes": [
-          "hybrid"
-        ],
         "AllowedScopes": [
           "openid",
           "email",
           "profile",
           "roles"
+        ],
+        "AllowedGrantTypes": [
+          "hybrid"
+        ]
+      },
+      "itlab_spa": {
+        "ClientName": "ITLab SPA Site",
+        "RequireClientSecret": false,
+        "AllowedScopes": [
+          "itlab.events",
+          "itlab.projects",
+          "itlab.salary",
+          "itlab.reports",
+          "openid",
+          "profile",
+          "roles"
+        ],
+        "AllowedGrantTypes": [
+          "authorization_code"
         ]
       }
     }

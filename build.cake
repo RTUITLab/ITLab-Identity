@@ -11,6 +11,7 @@ var adminProject = "./src/ITLab.Identity.Admin/ITLab.Identity.Admin.csproj";
 Setup(ctx =>
 {
    CleanDirectory(identityPublishDir);
+   CleanDirectory(adminPublishDir);
 });
 
 Teardown(ctx =>
