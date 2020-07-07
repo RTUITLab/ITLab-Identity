@@ -12,16 +12,12 @@ using Skoruba.AuditLogging.EntityFramework.Entities;
 using ITLab.Identity.Admin.Configuration;
 using ITLab.Identity.Admin.Configuration.Interfaces;
 using Skoruba.IdentityServer4.Admin.EntityFramework.Interfaces;
+using Models.People;
 
 namespace ITLab.Identity.Admin.Helpers
 {
     public static class DbMigrationHelpers
     {
-        /// <summary>
-        /// Generate migrations before running this method, you can use these steps bellow:
-        /// https://github.com/skoruba/IdentityServer4.Admin#ef-core--data-access
-        /// </summary>
-        /// <param name="host"></param>      
         public static async Task EnsureSeedData<TIdentityServerDbContext, TIdentityDbContext, TPersistedGrantDbContext, TLogDbContext, TAuditLogDbContext, TUser, TRole>(IHost host)
             where TIdentityServerDbContext : DbContext, IAdminConfigurationDbContext
             where TIdentityDbContext : DbContext
@@ -129,12 +125,14 @@ namespace ITLab.Identity.Admin.Helpers
                 // adding users from seed
                 foreach (var user in identityDataConfiguration.Users)
                 {
-                    var identityUser = new TUser
+                    var identityUser = new User
                     {
                         UserName = user.Username,
                         Email = user.Email,
+                        FirstName = user.FirstName,
+                        LastName = user.LastName,
                         EmailConfirmed = true
-                    };
+                    } as TUser;
 
                     // if there is no password we create user without password
                     // user can reset password later, because accounts have EmailConfirmed set to true

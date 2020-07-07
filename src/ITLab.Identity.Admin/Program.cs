@@ -23,7 +23,7 @@ namespace ITLab.Identity.Admin
             Log.Logger = new LoggerConfiguration()
                 .ReadFrom.Configuration(Configuration)
                 .CreateLogger();
-                Microsoft.IdentityModel.Logging.IdentityModelEventSource.ShowPII = true;
+            Microsoft.IdentityModel.Logging.IdentityModelEventSource.ShowPII = true;
             try
             {
                 var seed = args.Any(x => x == SeedArgs);
@@ -35,10 +35,23 @@ namespace ITLab.Identity.Admin
                 // await DbMigrationHelpers.EnsureSeedData<IdentityServerConfigurationDbContext, AdminIdentityDbContext, IdentityServerPersistedGrantDbContext, AdminLogDbContext, AdminAuditLogDbContext, UserIdentity, UserIdentityRole>(host);
                 if (seed)
                 {
-                    await DbMigrationHelpers
-                        .EnsureSeedData<IdentityServerConfigurationDbContext, DataBaseContext,
-                            IdentityServerPersistedGrantDbContext, AdminLogDbContext, AdminAuditLogDbContext,
-                            User, Role>(host);
+                    for (int i = 0; i < 10; i++)
+                    {
+                        try
+                        {
+                            await DbMigrationHelpers
+                                .EnsureSeedData<IdentityServerConfigurationDbContext, DataBaseContext,
+                                    IdentityServerPersistedGrantDbContext, AdminLogDbContext, AdminAuditLogDbContext,
+                                    User, Role>(host);
+                            break;
+                        }
+                        catch (Exception ex)
+                        {
+                            Log.Warning(ex, $"Can't apply migration on try {i}");
+                            await Task.Delay(TimeSpan.FromSeconds(5));
+                        }
+
+                    }
                 }
 
                 host.Run();

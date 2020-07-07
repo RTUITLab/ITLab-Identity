@@ -3,15 +3,53 @@
     "Roles": [
       {
         "Name": "Administrator"
+      },
+      {
+        "Name": "CanEditEquipment"
+      },
+      {
+        "Name": "CanEditEquipmentOwner"
+      },
+      {
+        "Name": "CanEditEquipmentType"
+      },
+      {
+        "Name": "CanEditRoles"
+      },
+      {
+        "Name": "CanEditEvent"
+      },
+      {
+        "Name": "CanEditEventType"
+      },
+      {
+        "Name": "CanInviteToSystem"
+      },
+      {
+        "Name": "CanDeleteEventRole"
+      },
+      {
+        "Name": "CanEditUserPropertyTypes"
       }
     ],
     "Users": [
       {
         "Username": "admin",
         "Password": "Pa$$word1243",
+        "FirstName": "Administrator",
+        "LastName": "AdministratorLN",
         "Email": "admin@rtuitlab.dev",
         "Roles": [
-          "Administrator"
+          "Administrator",
+          "CanEditEquipment",
+          "CanEditEquipmentOwner",
+          "CanEditEquipmentType",
+          "CanEditRoles",
+          "CanEditEvent",
+          "CanEditEventType",
+          "CanInviteToSystem",
+          "CanDeleteEventRole",
+          "CanEditUserPropertyTypes"
         ],
         "Claims": [
           {

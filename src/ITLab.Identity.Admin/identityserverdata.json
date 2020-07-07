@@ -65,6 +65,9 @@
       {
         "Name": "itlab",
         "DisplayName": "ITLab manage api",
+        "UserClaims": [
+          "role"
+        ],
         "Scopes": [
           {
             "Name": "itlab.salary",
