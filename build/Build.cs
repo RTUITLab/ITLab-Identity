@@ -22,7 +22,7 @@ class Build : NukeBuild
     ///   - Microsoft VisualStudio     https://nuke.build/visualstudio
     ///   - Microsoft VSCode           https://nuke.build/vscode
 
-    public static int Main () => Execute<Build>(x => x.PublishIdentity);
+    public static int Main () => Execute<Build>(x => x.PublishAll);
 
     [Parameter("Configuration to build - Default is 'Debug' (local) or 'Release' (server)")]
     readonly Configuration Configuration = IsLocalBuild ? Configuration.Debug : Configuration.Release;
@@ -32,6 +32,7 @@ class Build : NukeBuild
     AbsolutePath SourceDirectory => RootDirectory / "src";
 
     AbsolutePath deployIdentityPath = RootDirectory / "deploy" / "identity" / "Identity-build";
+    AbsolutePath deployAdminPath = RootDirectory / "deploy" / "admin" / "Admin-build";
 
     Target Clean => _ => _
         .Before(Restore)
@@ -39,6 +40,7 @@ class Build : NukeBuild
         {
             SourceDirectory.GlobDirectories("**/bin", "**/obj").ForEach(DeleteDirectory);
             EnsureCleanDirectory(deployIdentityPath);
+            EnsureCleanDirectory(deployAdminPath);
         });
 
     Target Restore => _ => _
@@ -65,5 +67,19 @@ class Build : NukeBuild
                 .SetOutput(deployIdentityPath)
                 .SetConfiguration(Configuration)
                 .EnableNoRestore());
+        });
+    Target PublishAdmin => _ => _
+        .DependsOn(Compile, Clean)
+        .Executes(() => {
+            DotNetPublish(s => s
+                .SetProject(Solution.GetProject("ITLab.Identity.Admin"))
+                .SetOutput(deployAdminPath)
+                .SetConfiguration(Configuration)
+                .EnableNoRestore());
+        });
+
+    Target PublishAll => _ => _
+        .DependsOn(PublishIdentity, PublishAdmin)
+        .Executes(() => {
         });
 }
