@@ -31,8 +31,7 @@ namespace ITLab.Identity.Admin
 
                 var host = CreateHostBuilder(args).Build();
                 seed = true;
-                // Uncomment this to seed upon startup, alternatively pass in `dotnet run /seed` to seed using CLI
-                // await DbMigrationHelpers.EnsureSeedData<IdentityServerConfigurationDbContext, AdminIdentityDbContext, IdentityServerPersistedGrantDbContext, AdminLogDbContext, AdminAuditLogDbContext, UserIdentity, UserIdentityRole>(host);
+                
                 if (seed)
                 {
                     for (int i = 0; i < 10; i++)

@@ -1,25 +1,16 @@
 version: '3.4'
 
 services:
-  itlab.identity.admin:
+  identity:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-    ports:
-      - "80"
-    volumes:
-      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
-  itlab.identity.admin.api:
+      - AdminConfiguration__IdentityAdminBaseUrl=http://127.0.0.1.xip.io:5502
+    networks:
+      default:
+        aliases:
+          - 127.0.0.1.xip.io
+  identity-admin:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-    ports:
-      - "80"
-    volumes:
-      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
-
-  itlab.identity.sts.identity:
-    environment:
-      - ASPNETCORE_ENVIRONMENT=Development
-    ports:
-      - "80"
-    volumes:
-      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+      - AdminConfiguration__IdentityAdminRedirectUri=http://127.0.0.1.xip.io:5502/signin-oidc
+      - AdminConfiguration__IdentityServerBaseUrl=http://127.0.0.1.xip.io:5501

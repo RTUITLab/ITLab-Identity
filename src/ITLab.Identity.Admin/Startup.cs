@@ -109,7 +109,7 @@ namespace ITLab.Identity.Admin
                 endpoint.MapHealthChecks("/health", new HealthCheckOptions
                 {
                     ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
-                });                
+                });
             });
         }
 

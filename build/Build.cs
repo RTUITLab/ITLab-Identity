@@ -38,7 +38,6 @@ class Build : NukeBuild
         .Before(Restore)
         .Executes(() =>
         {
-            SourceDirectory.GlobDirectories("**/bin", "**/obj").ForEach(DeleteDirectory);
             EnsureCleanDirectory(deployIdentityPath);
             EnsureCleanDirectory(deployAdminPath);
         });
