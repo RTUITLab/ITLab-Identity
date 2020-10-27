@@ -2,6 +2,7 @@ version: '3.4'
 
 services:
   identity:
+    restart: on-failure
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - AdminConfiguration__IdentityAdminBaseUrl=http://127.0.0.1.xip.io:5502
@@ -10,6 +11,7 @@ services:
         aliases:
           - 127.0.0.1.xip.io
   identity-admin:
+    restart: on-failure
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - AdminConfiguration__IdentityAdminRedirectUri=http://127.0.0.1.xip.io:5502/signin-oidc
