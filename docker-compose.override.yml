@@ -2,6 +2,7 @@ version: '3.4'
 
 services:
   identity:
+    build: ${BACK_IDENTITY_CONTEXT:-.}/deploy/admin
     restart: on-failure
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
@@ -11,6 +12,7 @@ services:
         aliases:
           - 127.0.0.1.xip.io
   identity-admin:
+    build: ${BACK_IDENTITY_CONTEXT:-.}/deploy/admin
     restart: on-failure
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
