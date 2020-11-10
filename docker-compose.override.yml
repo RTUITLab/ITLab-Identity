@@ -2,7 +2,7 @@ version: '3.4'
 
 services:
   identity:
-    build: ${BACK_IDENTITY_CONTEXT:-.}/deploy/admin
+    build: ${BACK_IDENTITY_CONTEXT:-.}/deploy/identity
     restart: on-failure
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
