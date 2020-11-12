@@ -1,0 +1,30 @@
+version: '3.4'
+
+services:
+  identity:
+    environment:
+      - ConnectionStrings__ConfigurationDbConnection=${ITLAB_IDENTITY_DB?Place identity db connection string}
+      - ConnectionStrings__PersistedGrantDbConnection=${ITLAB_IDENTITY_DB?Place identity db connection string}
+      - ConnectionStrings__IdentityDbConnection=${ITLAB_USERS_AND_EVENTS_DB?Place users and events db connection string}
+      - AdminConfiguration__IdentityAdminBaseUrl=${ITLAB_IDENTITY_ADMIN_URL?Place identity admin url}
+      - RegisterConfiguration__Enabled=false
+      - USE_LOGGER_EMAIL_SENDER=false
+      - EmailSenderOptions__BaseAddress=${ITLAB_EMAIL_SENDER_BASE_ADDRESS?Place email sender base address}
+      - EmailSenderOptions__Key=${ITLAB_EMAIL_SENDER_ACCESS_KEY?Place email sender api key}
+      - PublicOrigin=${ITLAB_IDENTITY_ISSUER?Place identity issuer}
+  identity-admin:
+    environment:
+      - ConnectionStrings__ConfigurationDbConnection=${ITLAB_IDENTITY_DB?Place identity db connection string}
+      - ConnectionStrings__PersistedGrantDbConnection=${ITLAB_IDENTITY_DB?Place identity db connection string}
+      - ConnectionStrings__IdentityDbConnection=${ITLAB_USERS_AND_EVENTS_DB?Place users and events db connection string}
+      - ConnectionStrings__AdminLogDbConnection=${ITLAB_IDENTITY_DB?Place identity db connection string}
+      - ConnectionStrings__AdminAuditLogDbConnection=${ITLAB_IDENTITY_DB?Place identity db connection string}
+      - AdminConfiguration__ClientSecret=${ITLAB_IDENTITY_ADMIN_CLIENT_SECRET?Place identity admin auth client secret ITLAB_IDENTITY_ADMIN_CLIENT_SECRET}
+      - AdminConfiguration__IdentityAdminRedirectUri=${ITLAB_IDENTITY_ADMIN_URL?Place identity admin url}/signin-oidc
+      - AdminConfiguration__IdentityServerBaseUrl=${ITLAB_IDENTITY_ISSUER?Place identity issuer}
+      - IdentityServerData__Clients__AdminUI__ClientUri=${ITLAB_IDENTITY_ADMIN_URL?Place identity admin url}
+      - IdentityServerData__Clients__AdminUI__ClientSecrets__0__Value=${ITLAB_IDENTITY_ADMIN_CLIENT_SECRET?Place identity admin auth client secret ITLAB_IDENTITY_ADMIN_CLIENT_SECRET}
+      - IdentityServerData__Clients__AdminUI__RedirectUris__0=${ITLAB_IDENTITY_ADMIN_URL?Place identity admin url}/signin-oidc
+      - IdentityServerData__Clients__AdminUI__FrontChannelLogoutUri=${ITLAB_IDENTITY_ADMIN_URL?Place identity admin url}/signout-oidc
+      - IdentityServerData__Clients__AdminUI__PostLogoutRedirectUris__0=${ITLAB_IDENTITY_ADMIN_URL?Place identity admin url}/signout-callback-oidc
+      - IdentityServerData__Clients__AdminUI__AllowedCorsOrigins__0=${ITLAB_IDENTITY_ADMIN_URL?Place identity admin url}
