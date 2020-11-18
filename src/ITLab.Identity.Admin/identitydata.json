@@ -55,6 +55,18 @@
           {
             "Type": "name",
             "Value": "admin"
+          },
+          {
+            "Type": "itlab",
+            "Value": "user"
+          },
+          {
+            "Type": "itlab",
+            "Value": "reports.admin"
+          },
+          {
+            "Type": "itlab",
+            "Value": "salary.admin"
           }
         ]
       }
