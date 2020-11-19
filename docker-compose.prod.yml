@@ -28,3 +28,4 @@ services:
       - IdentityServerData__Clients__AdminUI__FrontChannelLogoutUri=${ITLAB_IDENTITY_ADMIN_URL?Place identity admin url}/signout-oidc
       - IdentityServerData__Clients__AdminUI__PostLogoutRedirectUris__0=${ITLAB_IDENTITY_ADMIN_URL?Place identity admin url}/signout-callback-oidc
       - IdentityServerData__Clients__AdminUI__AllowedCorsOrigins__0=${ITLAB_IDENTITY_ADMIN_URL?Place identity admin url}
+      - IdentityServerData__Clients__itlab_salary__ClientSecrets__0__Value=${ITLAB_SALARY_CLIENT_SECRET?Place salary client secret ITLAB_SALARY_CLIENT_SECRET}

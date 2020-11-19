@@ -18,3 +18,4 @@ services:
       - ASPNETCORE_ENVIRONMENT=Development
       - AdminConfiguration__IdentityAdminRedirectUri=http://127.0.0.1.xip.io:5502/signin-oidc
       - AdminConfiguration__IdentityServerBaseUrl=http://127.0.0.1.xip.io:5501
+      - IdentityServerData__Clients__itlab_salary__ClientSecrets__0__Value=itlab_salary_secret
