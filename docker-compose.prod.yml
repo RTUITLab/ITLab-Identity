@@ -10,7 +10,7 @@ services:
       - RegisterConfiguration__Enabled=false
       - USE_LOGGER_EMAIL_SENDER=false
       - EmailSenderOptions__BaseAddress=${ITLAB_EMAIL_SENDER_BASE_ADDRESS?Place email sender base address}
-      - EmailSenderOptions__Key=${ITLAB_EMAIL_SENDER_ACCESS_KEY?Place email sender api key}
+      - EmailSenderOptions__Key=${ITLAB_EMAIL_SENDER_ACCESS_KEY?Place email sender api key ITLAB_EMAIL_SENDER_ACCESS_KEY}
       - PublicOrigin=${ITLAB_IDENTITY_ISSUER?Place identity issuer}
   identity-admin:
     environment:
@@ -29,3 +29,7 @@ services:
       - IdentityServerData__Clients__AdminUI__PostLogoutRedirectUris__0=${ITLAB_IDENTITY_ADMIN_URL?Place identity admin url}/signout-callback-oidc
       - IdentityServerData__Clients__AdminUI__AllowedCorsOrigins__0=${ITLAB_IDENTITY_ADMIN_URL?Place identity admin url}
       - IdentityServerData__Clients__itlab_salary__ClientSecrets__0__Value=${ITLAB_SALARY_CLIENT_SECRET?Place salary client secret ITLAB_SALARY_CLIENT_SECRET}
+      - IdentityServerData__Clients__itlab_spa__RedirectUris__0=${ITLAB_IDENTITY_SPA_LOGIN_REDIRECT?Place spa redirect uri ITLAB_IDENTITY_SPA_LOGIN_REDIRECT}
+      - IdentityServerData__Clients__itlab_spa__RedirectUris__1=${ITLAB_IDENTITY_SPA_SILENT_LOGIN_REDIRECT?Place spa silent redirect uri ITLAB_IDENTITY_SPA_SILENT_LOGIN_REDIRECT}
+      - IdentityServerData__Clients__itlab_spa__PostLogoutRedirectUris__0=${ITLAB_IDENTITY_SPA_LOGOUT_REDIRECT?Place spa silent logout redirect uri ITLAB_IDENTITY_SPA_LOGOUT_REDIRECT}
+      - IdentityServerData__Clients__itlab_spa__AllowedCorsOrigins__0=${ITLAB_IDENTITY_SPA_ALLOWED_ORIGIN?Place spa allowed origin ITLAB_IDENTITY_SPA_ALLOWED_ORIGIN}
