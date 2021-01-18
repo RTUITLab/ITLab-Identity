@@ -13,6 +13,7 @@ using ITLab.Identity.Admin.Configuration;
 using ITLab.Identity.Admin.Configuration.Interfaces;
 using Skoruba.IdentityServer4.Admin.EntityFramework.Interfaces;
 using Models.People;
+using Microsoft.Extensions.Logging;
 
 namespace ITLab.Identity.Admin.Helpers
 {
@@ -82,8 +83,9 @@ namespace ITLab.Identity.Admin.Helpers
                 var userManager = scope.ServiceProvider.GetRequiredService<UserManager<TUser>>();
                 var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<TRole>>();
                 var rootConfiguration = scope.ServiceProvider.GetRequiredService<IRootConfiguration>();
+                var logger = scope.ServiceProvider.GetRequiredService<ILoggerFactory>().CreateLogger(nameof(DbMigrationHelpers));
 
-                await EnsureSeedIdentityServerData(context, rootConfiguration.IdentityServerDataConfiguration);
+                await EnsureSeedIdentityServerData(context, rootConfiguration.IdentityServerDataConfiguration, logger);
                 await EnsureSeedIdentityData(userManager, roleManager, rootConfiguration.IdentityDataConfiguration);
             }
         }
@@ -159,7 +161,7 @@ namespace ITLab.Identity.Admin.Helpers
         /// <summary>
         /// Generate default clients, identity and api resources
         /// </summary>
-        private static async Task EnsureSeedIdentityServerData<TIdentityServerDbContext>(TIdentityServerDbContext context, IdentityServerDataConfiguration identityServerDataConfiguration)
+        private static async Task EnsureSeedIdentityServerData<TIdentityServerDbContext>(TIdentityServerDbContext context, IdentityServerDataConfiguration identityServerDataConfiguration, ILogger logger)
             where TIdentityServerDbContext : DbContext, IAdminConfigurationDbContext
         {
             if (!context.IdentityResources.Any())
@@ -200,6 +202,7 @@ namespace ITLab.Identity.Admin.Helpers
 
                 if (clientExists)
                 {
+                    logger.LogInformation($"Client {client.ClientId} already exists, skip");
                     continue;
                 }
 
@@ -212,7 +215,6 @@ namespace ITLab.Identity.Admin.Helpers
                     .Select(c => new System.Security.Claims.Claim(c.Type, c.Value))
                     .ToList();
                 await context.Clients.AddAsync(client.ToEntity());
-
             }
 
             await context.SaveChangesAsync();

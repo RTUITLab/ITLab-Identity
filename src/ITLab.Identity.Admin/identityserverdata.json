@@ -134,6 +134,30 @@
           "client_credentials",
           "password"
         ]
+      },
+      "itlab_mobile_app": {
+        "ClientName": "ITLab mobile app",
+        "RequireClientSecret": false,
+        "RequirePkce": true,
+        "AllowPlainTextPkce": true,
+        "AllowAccessTokensViaBrowser": true,
+        "RequireConsent": false,
+        "AllowedScopes": [
+          "roles",
+          "openid",
+          "itlab.projects",
+          "itlab.reports",
+          "itlab.salary",
+          "profile",
+          "itlab.events"
+        ],
+        "RedirectUris": [
+          "ru.rtuitlab.itlab:/oauth2redirect"
+        ],
+        "AllowedGrantTypes": [
+          "authorization_code",
+          "ru.rtuitlab.itlab:/oauth2redirect/logout"
+        ]
       }
     }
   }
