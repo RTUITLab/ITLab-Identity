@@ -59,7 +59,7 @@ stages:
         tags: |
           $(tag)
           latest
-- stage: Restart services
+- stage: RestartServices
   condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
   jobs:
   - deployment: DeployAdmin
