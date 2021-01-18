@@ -1,6 +1,5 @@
 trigger:
 - master
-- develop
 
 pool:
   vmImage: 'ubuntu-latest'
@@ -24,7 +23,7 @@ stages:
       displayName: Build an image
       inputs:
         containerRegistry: 'rtuitlab connection by admin'
-        repository: 'rtuitlab/itlab-identity-admin-api-$(Build.SourceBranchName)'
+        repository: 'rtuitlab/itlab-identity-admin-api'
         command: 'buildAndPush'
         Dockerfile: '$(Build.SourcesDirectory)/src/ITLab.Identity.Admin.Api/Dockerfile'
         buildContext: '$(Build.SourcesDirectory)'
@@ -38,7 +37,7 @@ stages:
       displayName: Build an image
       inputs:
         containerRegistry: 'rtuitlab connection by admin'
-        repository: 'rtuitlab/itlab-identity-admin-$(Build.SourceBranchName)'
+        repository: 'rtuitlab/itlab-identity-admin'
         command: 'buildAndPush'
         Dockerfile: '$(Build.SourcesDirectory)/src/ITLab.Identity.Admin/Dockerfile'
         buildContext: '$(Build.SourcesDirectory)'
@@ -53,10 +52,43 @@ stages:
       displayName: Build an image
       inputs:
         containerRegistry: 'rtuitlab connection by admin'
-        repository: 'rtuitlab/itlab-identity-identity-$(Build.SourceBranchName)'
+        repository: 'rtuitlab/itlab-identity'
         command: 'buildAndPush'
         Dockerfile: '$(Build.SourcesDirectory)/src/ITLab.Identity.STS.Identity/Dockerfile'
         buildContext: '$(Build.SourcesDirectory)'
         tags: |
           $(tag)
           latest
+- stage: Restart services
+  condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
+  jobs:
+  - deployment: DeployAdmin
+    pool:
+      vmImage: 'ubuntu-latest'
+    environment: 'production'
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+            - download: none
+            - task: SSH@0
+              inputs:
+                sshEndpoint: 'swarm manager'
+                runOptions: 'commands'
+                commands: 'docker service update --image rtuitlab/itlab-identity-admin:$(Build.BuildId) itlab_identity-admin'
+                readyTimeout: '20000'
+  - deployment: DeployIdentity
+    pool:
+      vmImage: 'ubuntu-latest'
+    environment: 'production'
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+            - download: none
+            - task: SSH@0
+              inputs:
+                sshEndpoint: 'swarm manager'
+                runOptions: 'commands'
+                commands: 'docker service update --image rtuitlab/itlab-identity:$(Build.BuildId) itlab_identity'
+                readyTimeout: '20000'
