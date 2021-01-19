@@ -140,6 +140,7 @@
         "RequireClientSecret": false,
         "RequirePkce": true,
         "AllowPlainTextPkce": true,
+        "AllowOfflineAccess": true,
         "AllowAccessTokensViaBrowser": true,
         "RequireConsent": false,
         "AllowedScopes": [
