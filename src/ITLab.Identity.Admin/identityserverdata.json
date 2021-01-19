@@ -140,7 +140,6 @@
         "RequireClientSecret": false,
         "RequirePkce": true,
         "AllowPlainTextPkce": true,
-        "AllowOfflineAccess": true,
         "AllowAccessTokensViaBrowser": true,
         "RequireConsent": false,
         "AllowedScopes": [
@@ -150,7 +149,8 @@
           "itlab.reports",
           "itlab.salary",
           "profile",
-          "itlab.events"
+          "itlab.events",
+          "offline_access"
         ],
         "RedirectUris": [
           "ru.rtuitlab.itlab:/oauth2redirect"
