@@ -1,5 +1,6 @@
 trigger:
 - master
+- develop
 
 pool:
   vmImage: 'ubuntu-latest'
@@ -10,7 +11,30 @@ resources:
 - repo: self
 
 variables:
-  tag: '$(Build.BuildId)'
+  ${{ if notIn(variables['Build.SourceBranchName'], 'master', 'develop') }}:
+    buildImage: false
+    deployService: false
+    deployEnvironment: 'no'
+    imageTags: 'no'
+    serviceName: 'no'
+  ${{ if eq(variables['Build.SourceBranchName'], 'develop') }}:
+    buildImage: true
+    deployService: true
+    deployEnvironment: development
+    imageTags: |
+      $(Build.BuildId)
+      develop
+    serviceName: itlab_identity-develop
+    serviceNameAdmin: itlab_identity-develop-admin
+  ${{ if eq(variables['Build.SourceBranchName'], 'master') }}:
+    buildImage: true
+    deployService: true
+    deployEnvironment: production
+    imageTags: |
+      $(Build.BuildId)
+      latest
+    serviceName: itlab_identity
+    serviceNameAdmin: itlab_identity-admin
 
 stages:
 - stage: Build
@@ -27,9 +51,7 @@ stages:
         command: 'buildAndPush'
         Dockerfile: '$(Build.SourcesDirectory)/src/ITLab.Identity.Admin.Api/Dockerfile'
         buildContext: '$(Build.SourcesDirectory)'
-        tags: |
-          $(tag)
-          latest
+        tags: ${{variables.imageTags}}
   - job: BuildAdmin
     displayName: Build Admin
     steps:
@@ -41,9 +63,7 @@ stages:
         command: 'buildAndPush'
         Dockerfile: '$(Build.SourcesDirectory)/src/ITLab.Identity.Admin/Dockerfile'
         buildContext: '$(Build.SourcesDirectory)'
-        tags: |
-          $(tag)
-          latest
+        tags: ${{variables.imageTags}}
 
   - job: BuildIdentity
     displayName: Build Identity
@@ -56,16 +76,14 @@ stages:
         command: 'buildAndPush'
         Dockerfile: '$(Build.SourcesDirectory)/src/ITLab.Identity.STS.Identity/Dockerfile'
         buildContext: '$(Build.SourcesDirectory)'
-        tags: |
-          $(tag)
-          latest
+        tags: ${{variables.imageTags}}
 - stage: RestartServices
-  condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
+  condition: and(succeeded(), ${{variables.deployService}})
   jobs:
   - deployment: DeployAdmin
     pool:
       vmImage: 'ubuntu-latest'
-    environment: 'production'
+    environment: ${{variables.deployEnvironment}}
     strategy:
       runOnce:
         deploy:
@@ -75,12 +93,12 @@ stages:
               inputs:
                 sshEndpoint: 'swarm manager'
                 runOptions: 'commands'
-                commands: 'docker service update --image rtuitlab/itlab-identity-admin:$(Build.BuildId) itlab_identity-admin'
+                commands: 'docker service update --image rtuitlab/itlab-identity-admin:$(Build.BuildId) ${{variables.serviceNameAdmin}}'
                 readyTimeout: '20000'
   - deployment: DeployIdentity
     pool:
       vmImage: 'ubuntu-latest'
-    environment: 'production'
+    environment: ${{variables.deployEnvironment}}
     strategy:
       runOnce:
         deploy:
@@ -90,5 +108,5 @@ stages:
               inputs:
                 sshEndpoint: 'swarm manager'
                 runOptions: 'commands'
-                commands: 'docker service update --image rtuitlab/itlab-identity:$(Build.BuildId) itlab_identity'
+                commands: 'docker service update --image rtuitlab/itlab-identity:$(Build.BuildId) ${{variables.serviceName}}'
                 readyTimeout: '20000'

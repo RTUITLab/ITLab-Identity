@@ -392,7 +392,8 @@ namespace ITLab.Identity.Admin.Helpers
                         options.TokenValidationParameters = new TokenValidationParameters
                         {
                             NameClaimType = adminConfiguration.TokenValidationClaimName,
-                            RoleClaimType = adminConfiguration.TokenValidationClaimRole
+                            RoleClaimType = adminConfiguration.TokenValidationClaimRole,
+                            ValidateLifetime = true
                         };
 
                         options.Events = new OpenIdConnectEvents
