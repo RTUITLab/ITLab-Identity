@@ -15,3 +15,5 @@ services:
       options:
         max-size: "200k"
         max-file: "10"
+    environment:
+      - ASPNETCORE_URLS=http://*:5502
