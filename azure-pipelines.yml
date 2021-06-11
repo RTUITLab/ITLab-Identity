@@ -44,7 +44,7 @@ stages:
     displayName: Build Admin Api
     steps:
     - task: Docker@2
-      displayName: Build an image
+      displayName: Build admin api image for docker hub
       inputs:
         containerRegistry: 'rtuitlab connection by admin'
         repository: 'rtuitlab/itlab-identity-admin-api'
@@ -52,13 +52,32 @@ stages:
         Dockerfile: '$(Build.SourcesDirectory)/src/ITLab.Identity.Admin.Api/Dockerfile'
         buildContext: '$(Build.SourcesDirectory)'
         tags: ${{variables.imageTags}}
+    - task: Docker@2
+      displayName: Build admin api image for private docker registry
+      inputs:
+        containerRegistry: 'private rtuitlab registry'
+        repository: 'rtuitlab/itlab-identity-admin-api'
+        command: 'buildAndPush'
+        Dockerfile: '$(Build.SourcesDirectory)/src/ITLab.Identity.Admin.Api/Dockerfile'
+        buildContext: '$(Build.SourcesDirectory)'
+        tags: ${{variables.imageTags}}
+
   - job: BuildAdmin
     displayName: Build Admin
     steps:
     - task: Docker@2
-      displayName: Build an image
+      displayName: Build admin image for docker hub
       inputs:
         containerRegistry: 'rtuitlab connection by admin'
+        repository: 'rtuitlab/itlab-identity-admin'
+        command: 'buildAndPush'
+        Dockerfile: '$(Build.SourcesDirectory)/src/ITLab.Identity.Admin/Dockerfile'
+        buildContext: '$(Build.SourcesDirectory)'
+        tags: ${{variables.imageTags}}
+    - task: Docker@2
+      displayName: Build admin image for private docker registry
+      inputs:
+        containerRegistry: 'private rtuitlab registry'
         repository: 'rtuitlab/itlab-identity-admin'
         command: 'buildAndPush'
         Dockerfile: '$(Build.SourcesDirectory)/src/ITLab.Identity.Admin/Dockerfile'
@@ -69,9 +88,18 @@ stages:
     displayName: Build Identity
     steps:
     - task: Docker@2
-      displayName: Build an image
+      displayName: Build identity image for docker hub
       inputs:
         containerRegistry: 'rtuitlab connection by admin'
+        repository: 'rtuitlab/itlab-identity'
+        command: 'buildAndPush'
+        Dockerfile: '$(Build.SourcesDirectory)/src/ITLab.Identity.STS.Identity/Dockerfile'
+        buildContext: '$(Build.SourcesDirectory)'
+        tags: ${{variables.imageTags}}
+    - task: Docker@2
+      displayName: Build identity image for private docker registry
+      inputs:
+        containerRegistry: 'private rtuitlab registry'
         repository: 'rtuitlab/itlab-identity'
         command: 'buildAndPush'
         Dockerfile: '$(Build.SourcesDirectory)/src/ITLab.Identity.STS.Identity/Dockerfile'
@@ -93,7 +121,7 @@ stages:
               inputs:
                 sshEndpoint: 'swarm manager'
                 runOptions: 'commands'
-                commands: 'docker service update --image rtuitlab/itlab-identity-admin:$(Build.BuildId) ${{variables.serviceNameAdmin}}'
+                commands: 'docker service update --image registry.rtuitlab.dev/rtuitlab/itlab-identity-admin:$(Build.BuildId) ${{variables.serviceNameAdmin}}'
                 readyTimeout: '20000'
   - deployment: DeployIdentity
     pool:
@@ -108,5 +136,5 @@ stages:
               inputs:
                 sshEndpoint: 'swarm manager'
                 runOptions: 'commands'
-                commands: 'docker service update --image rtuitlab/itlab-identity:$(Build.BuildId) ${{variables.serviceName}}'
+                commands: 'docker service update --image registry.rtuitlab.dev/rtuitlab/itlab-identity:$(Build.BuildId) ${{variables.serviceName}}'
                 readyTimeout: '20000'
