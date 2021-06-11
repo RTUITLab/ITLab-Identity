@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   identity:
-    image: rtuitlab/itlab-identity
+    image: rtuitlab/itlab-identity:${SERVICE_VERSION:-latest}
     logging:
       driver: "json-file"
       options:

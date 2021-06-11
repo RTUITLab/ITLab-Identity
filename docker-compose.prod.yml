@@ -2,6 +2,7 @@ version: '3.4'
 
 services:
   identity:
+    image: registry.rtuitlab.dev/rtuitlab/itlab-identity:${SERVICE_VERSION:-latest}
     environment:
       - ConnectionStrings__ConfigurationDbConnection=${ITLAB_IDENTITY_DB?Place identity db connection string ITLAB_IDENTITY_DB}
       - ConnectionStrings__PersistedGrantDbConnection=${ITLAB_IDENTITY_DB?Place identity db connection string ITLAB_IDENTITY_DB}
@@ -13,6 +14,7 @@ services:
       - EmailSenderOptions__Key=${ITLAB_EMAIL_SENDER_ACCESS_KEY?Place email sender api key ITLAB_EMAIL_SENDER_ACCESS_KEY}
       - PublicOrigin=${ITLAB_IDENTITY_ISSUER?Place identity issuer ITLAB_IDENTITY_ISSUER}
   identity-admin:
+    image: registry.rtuitlab.dev/rtuitlab/itlab-identity-admin:${SERVICE_VERSION:-latest}
     environment:
       - ConnectionStrings__ConfigurationDbConnection=${ITLAB_IDENTITY_DB?Place identity db connection string ITLAB_IDENTITY_DB}
       - ConnectionStrings__PersistedGrantDbConnection=${ITLAB_IDENTITY_DB?Place identity db connection string ITLAB_IDENTITY_DB}
