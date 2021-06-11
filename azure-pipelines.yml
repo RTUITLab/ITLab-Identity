@@ -24,8 +24,8 @@ variables:
     imageTags: |
       $(Build.BuildId)
       develop
-    serviceName: itlab_identity-develop
-    serviceNameAdmin: itlab_identity-develop-admin
+    serviceName: itlab-develop_identity
+    serviceNameAdmin: itlab-develop_identity-admin
   ${{ if eq(variables['Build.SourceBranchName'], 'master') }}:
     buildImage: true
     deployService: true
@@ -121,7 +121,7 @@ stages:
               inputs:
                 sshEndpoint: 'swarm manager'
                 runOptions: 'commands'
-                commands: 'docker service update --image registry.rtuitlab.dev/rtuitlab/itlab-identity-admin:$(Build.BuildId) ${{variables.serviceNameAdmin}}'
+                commands: 'docker service update --image registry.rtuitlab.dev/rtuitlab/itlab-identity-admin:$(Build.BuildId) ${{variables.serviceNameAdmin}} --with-registry-auth'
                 readyTimeout: '20000'
   - deployment: DeployIdentity
     pool:
@@ -136,5 +136,5 @@ stages:
               inputs:
                 sshEndpoint: 'swarm manager'
                 runOptions: 'commands'
-                commands: 'docker service update --image registry.rtuitlab.dev/rtuitlab/itlab-identity:$(Build.BuildId) ${{variables.serviceName}}'
+                commands: 'docker service update --image registry.rtuitlab.dev/rtuitlab/itlab-identity:$(Build.BuildId) ${{variables.serviceName}} --with-registry-auth'
                 readyTimeout: '20000'
